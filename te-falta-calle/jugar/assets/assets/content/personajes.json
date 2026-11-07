@@ -1,0 +1,227 @@
+{
+  "personajes": {
+    "abuela": {
+      "n": "Abuela Carmen",
+      "tag": "Suave",
+      "t": 1,
+      "welcome": [
+        "Pasa, mi vida, que el café está recién colado.",
+        "Ay, qué bueno verte. ¿Ya comiste?",
+        "Siéntate, mijo, y a ver qué tanto sabes."
+      ],
+      "correct": [
+        "¡Esa es mi muchacha! Toma tu bendición.",
+        "Ay, qué orgullo. Le prendo una vela al santo.",
+        "Eso, mijo. Te mereces un cafecito con queso.",
+        "Bendito sea, ¡cómo sabes!"
+      ],
+      "wrong": [
+        "Ay, mijo, y yo que te di de comer.",
+        "Cuando yo tenía tu edad eso se aprendía en la cuna.",
+        "Respira, mi vida, y vuelve a intentar.",
+        "Esa no era, pero no te me achicopales."
+      ],
+      "hint": [
+        "Toma, mi cielo, un empujoncito de abuela.",
+        "Pero qué flojito, ¡yo te ayudo!"
+      ],
+      "ad": [
+        "Mientras ves el anuncio me tomo un cafecito.",
+        "Ay, anuncios, como las novelas de las tres."
+      ],
+      "streak": [
+        "¡Ya van {n} seguidas! Vas a hacer llorar a tu abuela."
+      ],
+      "ask": [
+        "Mi cielo, a mí me suena la {L}.",
+        "Ay, mijo, yo me iría por la {L}, pero no me jures.",
+        "Mi abuela decía que la {L}. Y mi abuela nunca fallaba."
+      ],
+      "trivia_wrong": [
+        "No importa, mi vida. Ahora ya lo sabes.",
+        "Anótalo en la libretica, mijo."
+      ]
+    },
+    "chuy": {
+      "n": "Compadre Chuy",
+      "tag": "Refranero",
+      "t": 2,
+      "welcome": [
+        "Buenas, compadre. Se ve buen pasto por aquí.",
+        "Ajá, vamos a ver si usted sabe hablar como la gente.",
+        "Más bueno el día que burro en potrero."
+      ],
+      "correct": [
+        "¡Ajá, compadre! Más derecho que picada de llanero.",
+        "Esa palabra la montó como potro bueno.",
+        "Eso es tener cacumen. Le doy un abrazo de sabana.",
+        "Más acertado que gallo de pelea."
+      ],
+      "wrong": [
+        "Se le escapó el ternero, compadre. Enlácelo de nuevo.",
+        "Eso está más perdido que burro en el Metro.",
+        "No se me ponga bravo, que al mejor caballo se le va un paso.",
+        "Ni así, compadre. Pero la sabana es larga."
+      ],
+      "hint": [
+        "Toma, compadre, que el que da a tiempo da dos veces.",
+        "Una ayudita no le quita lo macho."
+      ],
+      "ad": [
+        "Mientras pasa el anuncio me amarro la cobija.",
+        "Anuncio corto, compadre, como siesta de llanero."
+      ],
+      "streak": [
+        "{n} seguidas. Usted ya es capataz de esta hacienda."
+      ],
+      "ask": [
+        "Compadre, yo le apostaría a la {L}.",
+        "Esa {L} huele a respuesta buena.",
+        "Por la sabana se comenta que es la {L}."
+      ],
+      "trivia_wrong": [
+        "Compadre, eso se aprende como el ordeño: repitiendo.",
+        "Ni modo. El que no sabe, pregunta."
+      ]
+    },
+    "yeico": {
+      "n": "Chamo Yeico",
+      "tag": "Nivel calle",
+      "t": 3,
+      "welcome": [
+        "¡Epa, mi llave! Hoy vamos a cuadrar unas buenas.",
+        "Qué fue, hermano. Tranquilo que esto es pura sabrosura.",
+        "Dale pues, a demostrar quién tiene calle."
+      ],
+      "correct": [
+        "¡Vacilón, hermano! Tienes más calle que el Metro.",
+        "Eso, mi llave. Arrasaste.",
+        "Brutal. Hasta el vecino lo escuchó.",
+        "¡Esa es la que es! Te lo mereces."
+      ],
+      "wrong": [
+        "Epa, ese no fue. Te me fuiste en blanco.",
+        "Calma, mi pana, que eso lo fallan hasta en Maracaibo.",
+        "Casi, casi. Pero no.",
+        "Uff, esa dolió. Intenta otra vez."
+      ],
+      "hint": [
+        "Toma tu pista, pero no le cuentes a nadie.",
+        "Está bien, te tiro un cable."
+      ],
+      "ad": [
+        "Mientras sale el anuncio reviso el celular.",
+        "Un anuncio y seguimos, hermano."
+      ],
+      "streak": [
+        "¡{n} seguidas! Estás encendido, mi llave."
+      ],
+      "ask": [
+        "Hermano, yo tiro la {L}.",
+        "Mi llave, la {L}, pero no me cobres si falla.",
+        "Pana, la {L}. Confía en el proceso."
+      ],
+      "trivia_wrong": [
+        "Uff, esa te la sabías, mi llave. Mentira, no.",
+        "Tranquilo, hermano, ya quedó en el disco duro."
+      ]
+    },
+    "loro": {
+      "n": "Lorenzo el Loro",
+      "tag": "Presentador",
+      "t": 2,
+      "correct": [
+        "¡Eso! Ese sí tiene calle.",
+        "Cuack, perdón, ¡correcto!",
+        "Ese pico no miente: acertó."
+      ],
+      "win": [
+        "Ganó {w}. Lorenzo lo anota en el cuaderno.",
+        "{w} se lleva la calle esta noche."
+      ],
+      "tie": [
+        "Empate. Hay que repartir las galletas."
+      ],
+      "wrong": [
+        "¡Te falta calle!!",
+        "¡Te falta calle, mi pana!",
+        "Ajá… ¡te falta calle!!",
+        "Cuack. ¡Te falta calle!!",
+        "¡Uy! Te falta calle, chamo.",
+        "¡Pero te falta calle!!",
+        "¡Te falta calle, ve!",
+        "Ni con mapa: ¡te falta calle!!"
+      ],
+      "peek": [
+        "Piénsalo bien…",
+        "¿Seguro, seguro?",
+        "Yo ya me sé esa.",
+        "Aquí te espero, turista.",
+        "Tic, tac… cuack.",
+        "No me mires a mí."
+      ],
+      "family": [
+        "¡Pásale el teléfono al otro equipo!",
+        "Sin trampa, que yo estoy mirando.",
+        "Abuelos contra chamos. ¡Que empiece el bochinche!"
+      ]
+    }
+  },
+  "paradas_mapa": [
+    {
+      "n": "Caracas",
+      "t": "Aquí el tráfico se llama despelote.",
+      "region": "caracas"
+    },
+    {
+      "n": "Maracay",
+      "t": "Parada obligatoria para una buena cachapa.",
+      "region": "caracas"
+    },
+    {
+      "n": "Valencia",
+      "t": "Ciudad de industria y de mucha rochela.",
+      "region": "caracas"
+    },
+    {
+      "n": "Barquisimeto",
+      "t": "La ciudad musical. Aquí se canta hasta en el bus.",
+      "region": "caracas"
+    },
+    {
+      "n": "Maracaibo",
+      "t": "Calor de verdad y gaita en diciembre.",
+      "region": "maracaibo"
+    },
+    {
+      "n": "Mérida",
+      "t": "Teleférico, frío y chocolate caliente.",
+      "region": "merida"
+    },
+    {
+      "n": "Barinas",
+      "t": "Llano abierto. El compadre Chuy te espera.",
+      "region": "llano"
+    },
+    {
+      "n": "Ciudad Bolívar",
+      "t": "Puente Angostura y mucho río.",
+      "region": "llano"
+    },
+    {
+      "n": "Canaima",
+      "t": "Aquí cae el Salto Ángel. Cuidado con el paraguas.",
+      "region": "canaima"
+    },
+    {
+      "n": "Margarita",
+      "t": "Playa, empanadas y siesta sin remordimientos.",
+      "region": "playa"
+    },
+    {
+      "n": "Los Roques",
+      "t": "Mar turquesa. Llegaste al final del viaje.",
+      "region": "playa"
+    }
+  ]
+}

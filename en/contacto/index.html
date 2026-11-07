@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contact · Visual Rocket Flyer Games</title>
+<meta name="description" content="Write to us for support, ideas or partnerships. Visual Rocket Flyer Games.">
+<link rel="canonical" href="https://visualrocketflyer.com/en/contacto/">
+<meta name="theme-color" content="#04060f">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Visual Rocket Flyer Games">
+<meta property="og:title" content="Contact · Visual Rocket Flyer Games">
+<meta property="og:description" content="Write to us for support, ideas or partnerships. Visual Rocket Flyer Games.">
+<meta property="og:url" content="https://visualrocketflyer.com/en/contacto/">
+<meta property="og:image" content="https://visualrocketflyer.com/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="alternate" hreflang="es" href="https://visualrocketflyer.com/contacto/">
+<link rel="alternate" hreflang="pt" href="https://visualrocketflyer.com/pt/contacto/">
+<link rel="alternate" hreflang="en" href="https://visualrocketflyer.com/en/contacto/">
+<link rel="alternate" hreflang="x-default" href="https://visualrocketflyer.com/contacto/">
+<meta property="og:locale" content="en_US">
+<script>(function(){try{var cur="en",p="/contacto/",s=localStorage.getItem("vrf_lang"),want=s;if(!want){var ls=navigator.languages||[navigator.language||"es"];want="en";for(var i=0;i<ls.length;i++){var c=String(ls[i]).slice(0,2).toLowerCase();if(c==="es"||c==="pt"||c==="en"){want=c;break;}}}if(want!==cur&&(want==="es"||want==="pt"||want==="en"))location.replace((want==="es"?"":"/"+want)+p+location.hash);}catch(e){}})();</script>
+
+</head>
+<body>
+<div class="nebula"></div>
+<canvas id="space" aria-hidden="true"></canvas>
+<div class="aliens" aria-hidden="true"></div>
+<div class="cursor-glow" aria-hidden="true"></div>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/en/" aria-label="Visual Rocket Flyer Games, home">
+      <img src="/img/logo-mark.png" alt="" width="30" height="47">
+      <span>VISUAL <b>ROCKET</b><small>FLYER GAMES</small></span>
+    </a>
+    <button class="menu-btn" aria-label="Menu" aria-expanded="false">☰</button>
+    <ul><li><a href="/en/">Home</a></li><li><a href="/en/te-falta-calle/">Te falta calle</a></li><li><a href="/en/#juegos">Games</a></li><li><a href="/en/iphone/">iPhone</a></li><li><a href="/en/nosotros/">About</a></li><li><a href="/en/contacto/" class=on>Contact</a></li></ul>
+    <div class="lang" role="navigation" aria-label="Language"><a href="/contacto/" hreflang="es" lang="es" data-lang="es">ES</a><a href="/pt/contacto/" hreflang="pt" lang="pt" data-lang="pt">PT</a><a href="/en/contacto/" hreflang="en" lang="en" data-lang="en" class=on aria-current=true>EN</a></div>
+    <a class="btn sm cta" href="/te-falta-calle/jugar/"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.9l10.4-6.5a1 1 0 0 0 0-1.8L9.5 4.6A1 1 0 0 0 8 5.5z"/></svg> Play now</a>
+  </div>
+</header>
+<main>
+
+<section class="page-hero"><div class="wrap">
+  <div class="eyebrow">Contact</div>
+  <h1>Let's talk, <span class="grad">friend</span></h1>
+  <p>Found a bug, have a game idea or want to work with us? Write to us.</p>
+</div></section>
+<section style="padding-top:20px"><div class="wrap" style="max-width:760px">
+  <div class="panel prose reveal" style="padding:34px">
+    <form class="form" id="contact">
+      <div><label for="n">Your name</label><input id="n" name="n" autocomplete="name"></div>
+      <div><label for="j">Game (optional)</label><input id="j" name="j" placeholder="Te falta calle, Llanero…"></div>
+      <div><label for="m">Message</label><textarea id="m" name="m" rows="5" required></textarea></div>
+      <button class="btn" type="submit">Send by email</button>
+    </form>
+    <p class="muted" style="margin-top:18px">The button opens your email app with the message ready. You can also write directly to <a href="mailto:visualrocketflyer@gmail.com">visualrocketflyer@gmail.com</a>. We usually reply within 1 to 3 days.</p>
+  </div>
+</div></section>
+<script>
+document.getElementById('contact').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var n = this.n.value.trim(), j = this.j.value.trim(), m = this.m.value.trim();
+  var subject = /*i18n*/'Contact from the website' + (j ? ' · ' + j : '');
+  var body = m + (n ? '\n\n— ' + n : '');
+  location.href = 'mailto:visualrocketflyer@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+});
+</script>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <img class="logo" src="/img/logo-full.png" alt="Visual Rocket Flyer" width="180" height="168" loading="lazy">
+        <p class="muted">Games made with Venezuelan flavor, out-of-this-world tech and lots of love. From Latin America to the world.</p>
+      </div>
+      <div><h4>Games</h4><ul>
+        <li><a href="/en/te-falta-calle/">Te falta calle!!</a></li>
+        <li><a href="/en/llanero-adventure/">Llanero Adventure</a></li>
+        <li><a href="/en/wobble-rescue/">Wobble Rescue</a></li>
+        <li><a href="/en/retrucoo/">RETRUCOO!</a></li>
+      </ul></div>
+      <div><h4>Help</h4><ul>
+        <li><a href="/en/iphone/">Play on iPhone</a></li>
+        <li><a href="/en/contacto/">Contact &amp; support</a></li>
+        <li><a href="/en/nosotros/">About</a></li>
+      </ul></div>
+      <div><h4>Legal</h4><ul>
+        <li><a href="/en/privacidad/">Privacy policy</a></li>
+        <li><a href="/en/terminos/">Terms of use</a></li>
+        <li><a href="/app-ads.txt">app-ads.txt</a></li>
+      </ul></div>
+    </div>
+    <div class="copy"><span>© <span id="year">2026</span> Visual Rocket Flyer Games. All rights reserved.</span><span>Google Play is a trademark of Google LLC.</span></div>
+  </div>
+</footer>
+<script src="/assets/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,1314 @@
+[
+ {
+  "id": "T001",
+  "categoria": "Geografía",
+  "epoca": "atemporal",
+  "dificultad": 1,
+  "pregunta": "¿Cuál es el río más importante de Venezuela?",
+  "opciones_correcta_primero": [
+   "Orinoco",
+   "Caroní",
+   "Apure",
+   "Arauca"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T002",
+  "categoria": "Geografía",
+  "epoca": "atemporal",
+  "dificultad": 1,
+  "pregunta": "¿Cuál es la capital del estado Zulia?",
+  "opciones_correcta_primero": [
+   "Maracaibo",
+   "Cabimas",
+   "Coro",
+   "Valera"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T003",
+  "categoria": "Geografía",
+  "epoca": "atemporal",
+  "dificultad": 1,
+  "pregunta": "¿En qué estado está el Salto Ángel?",
+  "opciones_correcta_primero": [
+   "Bolívar",
+   "Amazonas",
+   "Apure",
+   "Delta Amacuro"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T004",
+  "categoria": "Geografía",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿Cuántos estados tiene Venezuela?",
+  "opciones_correcta_primero": [
+   "23",
+   "21",
+   "25",
+   "27"
+  ],
+  "confianza": "alta",
+  "nota": "Además del Distrito Capital y las dependencias federales.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T005",
+  "categoria": "Geografía",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿Cuál es el pico más alto de Venezuela?",
+  "opciones_correcta_primero": [
+   "Pico Bolívar",
+   "Pico Humboldt",
+   "Roraima",
+   "Pico Bonpland"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T006",
+  "categoria": "Geografía",
+  "epoca": "atemporal",
+  "dificultad": 1,
+  "pregunta": "¿Cuál es la isla más grande de Venezuela?",
+  "opciones_correcta_primero": [
+   "Margarita",
+   "Coche",
+   "La Tortuga",
+   "Cubagua"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T007",
+  "categoria": "Geografía",
+  "epoca": "atemporal",
+  "dificultad": 1,
+  "pregunta": "¿Cómo se llama el gran lago del occidente de Venezuela?",
+  "opciones_correcta_primero": [
+   "Lago de Maracaibo",
+   "Lago de Valencia",
+   "Laguna de Tacarigua",
+   "Embalse Guri"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T008",
+  "categoria": "Geografía",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿Qué ciudad se conoce como la Ciudad Musical?",
+  "opciones_correcta_primero": [
+   "Barquisimeto",
+   "Mérida",
+   "Valencia",
+   "Maracay"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T009",
+  "categoria": "Geografía",
+  "epoca": "atemporal",
+  "dificultad": 1,
+  "pregunta": "¿Qué país limita con Venezuela por el este?",
+  "opciones_correcta_primero": [
+   "Guyana",
+   "Colombia",
+   "Brasil",
+   "Surinam"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T010",
+  "categoria": "Geografía",
+  "epoca": "atemporal",
+  "dificultad": 1,
+  "pregunta": "¿Qué país limita con Venezuela por el sur?",
+  "opciones_correcta_primero": [
+   "Brasil",
+   "Perú",
+   "Guyana",
+   "Ecuador"
+  ],
+  "confianza": "alta",
+  "nota": "También limita con Colombia por el oeste y suroeste.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T011",
+  "categoria": "Geografía",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿Cuál es la capital del estado Carabobo?",
+  "opciones_correcta_primero": [
+   "Valencia",
+   "Maracay",
+   "Puerto Cabello",
+   "San Carlos"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T012",
+  "categoria": "Geografía",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿Cuál es la capital del estado Apure?",
+  "opciones_correcta_primero": [
+   "San Fernando de Apure",
+   "Guasdualito",
+   "Achaguas",
+   "Biruaca"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T013",
+  "categoria": "Geografía",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿Cuál es la capital del estado Táchira?",
+  "opciones_correcta_primero": [
+   "San Cristóbal",
+   "Rubio",
+   "Táriba",
+   "Colón"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T014",
+  "categoria": "Geografía",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿Cuál es la capital del estado Falcón?",
+  "opciones_correcta_primero": [
+   "Coro",
+   "Punto Fijo",
+   "Tucacas",
+   "Churuguara"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T015",
+  "categoria": "Geografía",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿Cuál es la capital del estado Monagas?",
+  "opciones_correcta_primero": [
+   "Maturín",
+   "Punta de Mata",
+   "Caripe",
+   "Temblador"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T016",
+  "categoria": "Geografía",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿Cuál es la capital del estado Sucre?",
+  "opciones_correcta_primero": [
+   "Cumaná",
+   "Carúpano",
+   "Güiria",
+   "Cariaco"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T017",
+  "categoria": "Geografía",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿Cuál es la capital del estado Anzoátegui?",
+  "opciones_correcta_primero": [
+   "Barcelona",
+   "Puerto La Cruz",
+   "El Tigre",
+   "Anaco"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T018",
+  "categoria": "Geografía",
+  "epoca": "atemporal",
+  "dificultad": 1,
+  "pregunta": "¿En qué parque nacional está el Salto Ángel?",
+  "opciones_correcta_primero": [
+   "Canaima",
+   "Morrocoy",
+   "El Ávila",
+   "Henri Pittier"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T020",
+  "categoria": "Ciencia",
+  "epoca": "atemporal",
+  "dificultad": 1,
+  "pregunta": "¿Qué gas necesitamos para respirar?",
+  "opciones_correcta_primero": [
+   "Oxígeno",
+   "Nitrógeno",
+   "Hidrógeno",
+   "Helio"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T021",
+  "categoria": "Ciencia",
+  "epoca": "atemporal",
+  "dificultad": 1,
+  "pregunta": "¿Cuál es el planeta rojo?",
+  "opciones_correcta_primero": [
+   "Marte",
+   "Venus",
+   "Júpiter",
+   "Mercurio"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T022",
+  "categoria": "Ciencia",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿Cuántos huesos tiene un adulto?",
+  "opciones_correcta_primero": [
+   "206",
+   "150",
+   "300",
+   "180"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T023",
+  "categoria": "Ciencia",
+  "epoca": "atemporal",
+  "dificultad": 1,
+  "pregunta": "¿Cuál es el animal más grande del mundo?",
+  "opciones_correcta_primero": [
+   "Ballena azul",
+   "Elefante",
+   "Tiburón ballena",
+   "Jirafa"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T024",
+  "categoria": "Ciencia",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿Cuál es el símbolo químico del oro?",
+  "opciones_correcta_primero": [
+   "Au",
+   "Ag",
+   "Or",
+   "Go"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T025",
+  "categoria": "Ciencia",
+  "epoca": "atemporal",
+  "dificultad": 1,
+  "pregunta": "¿Qué planeta tiene anillos muy visibles?",
+  "opciones_correcta_primero": [
+   "Saturno",
+   "Marte",
+   "Venus",
+   "Mercurio"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T026",
+  "categoria": "Ciencia",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿Cómo se llama el proceso con que las plantas fabrican su alimento?",
+  "opciones_correcta_primero": [
+   "Fotosíntesis",
+   "Respiración",
+   "Digestión",
+   "Evaporación"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T027",
+  "categoria": "Ciencia",
+  "epoca": "atemporal",
+  "dificultad": 1,
+  "pregunta": "¿Cuál es el hueso más largo del cuerpo humano?",
+  "opciones_correcta_primero": [
+   "Fémur",
+   "Húmero",
+   "Tibia",
+   "Costilla"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T028",
+  "categoria": "Ciencia",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿Qué órgano filtra la sangre y produce la orina?",
+  "opciones_correcta_primero": [
+   "Riñón",
+   "Hígado",
+   "Páncreas",
+   "Bazo"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T029",
+  "categoria": "Ciencia",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿Qué capa de la atmósfera nos protege de los rayos ultravioleta?",
+  "opciones_correcta_primero": [
+   "Ozono",
+   "Troposfera",
+   "Ionosfera",
+   "Exosfera"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T030",
+  "categoria": "Ciencia",
+  "epoca": "atemporal",
+  "dificultad": 1,
+  "pregunta": "¿Cuál es el ave nacional de Venezuela?",
+  "opciones_correcta_primero": [
+   "Turpial",
+   "Guacamaya",
+   "Cardenalito",
+   "Paují"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T031",
+  "categoria": "Ciencia",
+  "epoca": "atemporal",
+  "dificultad": 1,
+  "pregunta": "¿Cuál es el árbol nacional de Venezuela?",
+  "opciones_correcta_primero": [
+   "Araguaney",
+   "Samán",
+   "Mango",
+   "Ceiba"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T032",
+  "categoria": "Ciencia",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿Cuál es la flor nacional de Venezuela?",
+  "opciones_correcta_primero": [
+   "Orquídea",
+   "Rosa",
+   "Girasol",
+   "Flor de Mayo"
+  ],
+  "confianza": "alta",
+  "nota": "La Cattleya mossiae.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T033",
+  "categoria": "Ciencia",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿Qué venezolano desarrolló avances importantes contra la lepra y ganó un Premio Príncipe de Asturias?",
+  "opciones_correcta_primero": [
+   "Jacinto Convit",
+   "José Gregorio Hernández",
+   "Humberto Fernández-Morán",
+   "Luis Razetti"
+  ],
+  "confianza": "alta",
+  "nota": "Verificar año del premio: 1987.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T034",
+  "categoria": "Ciencia",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿Qué médico venezolano fue beatificado en 2021?",
+  "opciones_correcta_primero": [
+   "José Gregorio Hernández",
+   "Jacinto Convit",
+   "Luis Razetti",
+   "Vicente Salias"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T035",
+  "categoria": "Ciencia",
+  "epoca": "atemporal",
+  "dificultad": 3,
+  "pregunta": "¿Qué científico venezolano inventó el bisturí de diamante?",
+  "opciones_correcta_primero": [
+   "Humberto Fernández-Morán",
+   "Jacinto Convit",
+   "Rafael Rangel",
+   "Luis Daniel Beauperthuy"
+  ],
+  "confianza": "media",
+  "nota": "Verificar.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T036",
+  "categoria": "Ciencia",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿Qué planta peluda crece en los páramos de Mérida?",
+  "opciones_correcta_primero": [
+   "Frailejón",
+   "Orquídea",
+   "Cardón",
+   "Araguaney"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T037",
+  "categoria": "Ciencia",
+  "epoca": "atemporal",
+  "dificultad": 1,
+  "pregunta": "¿Cuál es el roedor más grande del mundo, común en el Llano?",
+  "opciones_correcta_primero": [
+   "Chigüire",
+   "Lapa",
+   "Cachicamo",
+   "Rabipelado"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T038",
+  "categoria": "Cultura",
+  "epoca": "atemporal",
+  "dificultad": 1,
+  "pregunta": "¿Quién es conocido como el Libertador?",
+  "opciones_correcta_primero": [
+   "Simón Bolívar",
+   "Francisco de Miranda",
+   "Antonio José de Sucre",
+   "José Antonio Páez"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T039",
+  "categoria": "Cultura",
+  "epoca": "atemporal",
+  "dificultad": 1,
+  "pregunta": "¿Cuál es el plato nacional de Venezuela?",
+  "opciones_correcta_primero": [
+   "Pabellón criollo",
+   "Hallaca",
+   "Arepa",
+   "Cachapa"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T040",
+  "categoria": "Cultura",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿En qué fecha se firmó el Acta de Independencia?",
+  "opciones_correcta_primero": [
+   "5 de julio de 1811",
+   "19 de abril de 1810",
+   "24 de junio de 1821",
+   "12 de febrero de 1814"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T041",
+  "categoria": "Cultura",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿En qué fecha fue la Batalla de Carabobo?",
+  "opciones_correcta_primero": [
+   "24 de junio de 1821",
+   "5 de julio de 1811",
+   "19 de abril de 1810",
+   "2 de diciembre de 1830"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T042",
+  "categoria": "Cultura",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿Quién escribió la novela Doña Bárbara?",
+  "opciones_correcta_primero": [
+   "Rómulo Gallegos",
+   "Arturo Uslar Pietri",
+   "Miguel Otero Silva",
+   "Teresa de la Parra"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T043",
+  "categoria": "Cultura",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿Quién escribió la novela Ifigenia?",
+  "opciones_correcta_primero": [
+   "Teresa de la Parra",
+   "Rómulo Gallegos",
+   "Andrés Eloy Blanco",
+   "Miguel Otero Silva"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T044",
+  "categoria": "Cultura",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿Quién compuso el vals Alma Llanera?",
+  "opciones_correcta_primero": [
+   "Pedro Elías Gutiérrez",
+   "Simón Díaz",
+   "Aldemaro Romero",
+   "Juan Vicente Torrealba"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T045",
+  "categoria": "Cultura",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿Quién compuso Caballo Viejo?",
+  "opciones_correcta_primero": [
+   "Simón Díaz",
+   "Alirio Díaz",
+   "Ilan Chester",
+   "Reynaldo Armas"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T046",
+  "categoria": "Cultura",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿Quién fundó el Sistema Nacional de Orquestas?",
+  "opciones_correcta_primero": [
+   "José Antonio Abreu",
+   "Gustavo Dudamel",
+   "Gerry Weil",
+   "Inocente Carreño"
+  ],
+  "confianza": "alta",
+  "nota": "Verificar: fundado en 1975.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T047",
+  "categoria": "Cultura",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿Qué artista cinético venezolano creó la Esfera Caracas?",
+  "opciones_correcta_primero": [
+   "Jesús Soto",
+   "Carlos Cruz-Diez",
+   "Armando Reverón",
+   "Alejandro Otero"
+  ],
+  "confianza": "alta",
+  "nota": "Verificar atribución: Soto.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T048",
+  "categoria": "Cultura",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿Qué pintor venezolano vivió y trabajó en El Castillete de Macuto?",
+  "opciones_correcta_primero": [
+   "Armando Reverón",
+   "Jesús Soto",
+   "Arturo Michelena",
+   "Tito Salas"
+  ],
+  "confianza": "media",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T049",
+  "categoria": "Cultura",
+  "epoca": "atemporal",
+  "dificultad": 1,
+  "pregunta": "¿Cuál es el instrumento nacional de Venezuela?",
+  "opciones_correcta_primero": [
+   "Cuatro",
+   "Arpa",
+   "Maracas",
+   "Bandola"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T050",
+  "categoria": "Cultura",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿Cuántas estrellas tiene la bandera de Venezuela?",
+  "opciones_correcta_primero": [
+   "8",
+   "7",
+   "9",
+   "6"
+  ],
+  "confianza": "alta",
+  "nota": "Desde 2006.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T051",
+  "categoria": "Cultura",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿Cómo se llama el Himno Nacional de Venezuela?",
+  "opciones_correcta_primero": [
+   "Gloria al Bravo Pueblo",
+   "Alma Llanera",
+   "Venezuela",
+   "Mi Patria Querida"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T052",
+  "categoria": "Cultura",
+  "epoca": "atemporal",
+  "dificultad": 2,
+  "pregunta": "¿Qué danza llanera se baila con zapateo y arpa?",
+  "opciones_correcta_primero": [
+   "Joropo",
+   "Merengue",
+   "Calipso",
+   "Tamunangue"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T053",
+  "categoria": "Deportes",
+  "epoca": "2000s",
+  "dificultad": 2,
+  "pregunta": "¿Qué lanzador venezolano ganó el premio Cy Young de la Liga Americana en 2004?",
+  "opciones_correcta_primero": [
+   "Johan Santana",
+   "Félix Hernández",
+   "Carlos Zambrano",
+   "Freddy García"
+  ],
+  "confianza": "alta",
+  "nota": "Verificar.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T054",
+  "categoria": "Deportes",
+  "epoca": "2010s",
+  "dificultad": 2,
+  "pregunta": "¿Qué venezolano ganó la Triple Corona del bateo en 2012?",
+  "opciones_correcta_primero": [
+   "Miguel Cabrera",
+   "Magglio Ordóñez",
+   "Salvador Pérez",
+   "Carlos González"
+  ],
+  "confianza": "alta",
+  "nota": "Verificar.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T055",
+  "categoria": "Deportes",
+  "epoca": "2020s",
+  "dificultad": 2,
+  "pregunta": "¿Qué venezolano fue MVP de la Liga Nacional en 2023?",
+  "opciones_correcta_primero": [
+   "Ronald Acuña Jr.",
+   "José Altuve",
+   "Salvador Pérez",
+   "Eugenio Suárez"
+  ],
+  "confianza": "alta",
+  "nota": "Verificar.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T056",
+  "categoria": "Deportes",
+  "epoca": "2010s",
+  "dificultad": 2,
+  "pregunta": "¿Qué venezolano fue MVP de la Serie Mundial de 2015?",
+  "opciones_correcta_primero": [
+   "Salvador Pérez",
+   "Miguel Cabrera",
+   "Pablo Sandoval",
+   "José Altuve"
+  ],
+  "confianza": "alta",
+  "nota": "Verificar.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T057",
+  "categoria": "Deportes",
+  "epoca": "2010s",
+  "dificultad": 2,
+  "pregunta": "¿Qué lanzador venezolano ganó el Cy Young de la Liga Americana en 2010?",
+  "opciones_correcta_primero": [
+   "Félix Hernández",
+   "Johan Santana",
+   "Francisco Rodríguez",
+   "Aníbal Sánchez"
+  ],
+  "confianza": "alta",
+  "nota": "Verificar.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T058",
+  "categoria": "Deportes",
+  "epoca": "2020s",
+  "dificultad": 2,
+  "pregunta": "¿En qué año Yulimar Rojas ganó el oro olímpico en triple salto?",
+  "opciones_correcta_primero": [
+   "2021",
+   "2016",
+   "2019",
+   "2024"
+  ],
+  "confianza": "alta",
+  "nota": "Juegos de Tokio, celebrados en 2021.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T059",
+  "categoria": "Deportes",
+  "epoca": "2010s",
+  "dificultad": 2,
+  "pregunta": "¿Contra qué selección perdió la Vinotinto la final del Mundial Sub-20 de 2017?",
+  "opciones_correcta_primero": [
+   "Inglaterra",
+   "Brasil",
+   "Uruguay",
+   "Alemania"
+  ],
+  "confianza": "alta",
+  "nota": "Verificar.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T060",
+  "categoria": "Deportes",
+  "epoca": "1960s",
+  "dificultad": 3,
+  "pregunta": "¿Quién fue el primer venezolano en ganar una medalla de oro olímpica?",
+  "opciones_correcta_primero": [
+   "Francisco Rodríguez",
+   "Rafael Vidal",
+   "Pedro Pérez",
+   "Daniel Dubois"
+  ],
+  "confianza": "alta",
+  "nota": "Boxeo, México 1968.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T061",
+  "categoria": "Deportes",
+  "epoca": "1980s",
+  "dificultad": 3,
+  "pregunta": "¿En qué deporte ganó Rafael Vidal la medalla de bronce olímpica de 1984?",
+  "opciones_correcta_primero": [
+   "Natación",
+   "Boxeo",
+   "Judo",
+   "Atletismo"
+  ],
+  "confianza": "media",
+  "nota": "Verificar.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T062",
+  "categoria": "Deportes",
+  "epoca": "1980s",
+  "dificultad": 3,
+  "pregunta": "¿Quién fue el primer venezolano en el Salón de la Fama del Béisbol?",
+  "opciones_correcta_primero": [
+   "Luis Aparicio",
+   "Omar Vizquel",
+   "Andrés Galarraga",
+   "Dave Concepción"
+  ],
+  "confianza": "alta",
+  "nota": "Verificar año: 1984.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T063",
+  "categoria": "Deportes",
+  "epoca": "1990s",
+  "dificultad": 2,
+  "pregunta": "¿Qué apodo tiene el pelotero venezolano Andrés Galarraga?",
+  "opciones_correcta_primero": [
+   "El Gato",
+   "El Tigre",
+   "El Zurdo",
+   "El Caballo"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T064",
+  "categoria": "Deportes",
+  "epoca": "1990s",
+  "dificultad": 2,
+  "pregunta": "¿Qué apodo tiene el campocorto venezolano Omar Vizquel?",
+  "opciones_correcta_primero": [
+   "El Mago",
+   "El Gato",
+   "El Zurdo",
+   "El Rey"
+  ],
+  "confianza": "alta",
+  "nota": "Verificar.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T065",
+  "categoria": "Deportes",
+  "epoca": "2000s",
+  "dificultad": 3,
+  "pregunta": "¿Qué venezolano ganó el título de bateo de la Liga Americana en 2007?",
+  "opciones_correcta_primero": [
+   "Magglio Ordóñez",
+   "Carlos Guillén",
+   "Víctor Martínez",
+   "Bobby Abreu"
+  ],
+  "confianza": "media",
+  "nota": "Verificar.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T066",
+  "categoria": "Deportes",
+  "epoca": "2010s",
+  "dificultad": 3,
+  "pregunta": "¿Qué piloto venezolano ganó un Gran Premio de Fórmula 1 en 2012?",
+  "opciones_correcta_primero": [
+   "Pastor Maldonado",
+   "Rubens Barrichello",
+   "Bruno Senna",
+   "Pedro de la Rosa"
+  ],
+  "confianza": "media",
+  "nota": "GP de España.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T067",
+  "categoria": "Deportes",
+  "epoca": "2020s",
+  "dificultad": 3,
+  "pregunta": "¿Contra qué selección perdió la Vinotinto en los cuartos de la Copa América 2024?",
+  "opciones_correcta_primero": [
+   "Canadá",
+   "Argentina",
+   "Ecuador",
+   "México"
+  ],
+  "confianza": "baja",
+  "nota": "Verificar resultado y rival.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T068",
+  "categoria": "Deportes",
+  "epoca": "2010s",
+  "dificultad": 3,
+  "pregunta": "¿Qué selección venezolana ganó el Campeonato FIBA Américas de 2015?",
+  "opciones_correcta_primero": [
+   "Baloncesto masculino",
+   "Voleibol",
+   "Béisbol",
+   "Fútbol"
+  ],
+  "confianza": "media",
+  "nota": "Verificar.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T069",
+  "categoria": "Farándula",
+  "epoca": "1990s",
+  "dificultad": 2,
+  "pregunta": "¿Qué venezolana ganó Miss Universo en 1996?",
+  "opciones_correcta_primero": [
+   "Alicia Machado",
+   "Dayana Mendoza",
+   "Irene Sáez",
+   "Bárbara Palacios"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T070",
+  "categoria": "Farándula",
+  "epoca": "2000s",
+  "dificultad": 2,
+  "pregunta": "¿Qué venezolana ganó Miss Universo en 2008?",
+  "opciones_correcta_primero": [
+   "Dayana Mendoza",
+   "Stefanía Fernández",
+   "Alicia Machado",
+   "Bárbara Palacios"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T071",
+  "categoria": "Farándula",
+  "epoca": "1980s",
+  "dificultad": 2,
+  "pregunta": "¿Quién ganó Miss Universo en 1981?",
+  "opciones_correcta_primero": [
+   "Irene Sáez",
+   "Maritza Sayalero",
+   "Bárbara Palacios",
+   "Susana Duijm"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T072",
+  "categoria": "Farándula",
+  "epoca": "2000s",
+  "dificultad": 2,
+  "pregunta": "¿Quién ganó Miss Universo en 2009?",
+  "opciones_correcta_primero": [
+   "Stefanía Fernández",
+   "Dayana Mendoza",
+   "Alicia Machado",
+   "Irene Sáez"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T073",
+  "categoria": "Farándula",
+  "epoca": "1990s",
+  "dificultad": 2,
+  "pregunta": "¿Qué actriz protagonizó la telenovela Kassandra?",
+  "opciones_correcta_primero": [
+   "Coraima Torres",
+   "Jeannette Rodríguez",
+   "Gaby Espino",
+   "Daniela Alvarado"
+  ],
+  "confianza": "alta",
+  "nota": "",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T074",
+  "categoria": "Farándula",
+  "epoca": "1980s",
+  "dificultad": 2,
+  "pregunta": "¿Qué actriz protagonizó la telenovela Cristal?",
+  "opciones_correcta_primero": [
+   "Jeannette Rodríguez",
+   "Mimí Lazo",
+   "Coraima Torres",
+   "Maite Delgado"
+  ],
+  "confianza": "alta",
+  "nota": "Verificar.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T075",
+  "categoria": "Farándula",
+  "epoca": "1990s",
+  "dificultad": 2,
+  "pregunta": "¿Qué telenovela de RCTV se emitió a inicios de los 90 y retrató la vida en Caracas?",
+  "opciones_correcta_primero": [
+   "Por estas calles",
+   "Kassandra",
+   "Cristal",
+   "Pasionaria"
+  ],
+  "confianza": "alta",
+  "nota": "Verificar.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T076",
+  "categoria": "Farándula",
+  "epoca": "1990s",
+  "dificultad": 2,
+  "pregunta": "¿Quién canta Tú de qué vas?",
+  "opciones_correcta_primero": [
+   "Franco De Vita",
+   "Ricardo Montaner",
+   "Guillermo Dávila",
+   "Ilan Chester"
+  ],
+  "confianza": "alta",
+  "nota": "Verificar título.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T077",
+  "categoria": "Farándula",
+  "epoca": "1980s",
+  "dificultad": 2,
+  "pregunta": "¿A qué cantante se le dice El Sonero del Mundo?",
+  "opciones_correcta_primero": [
+   "Óscar D'León",
+   "Willie Colón",
+   "Rubén Blades",
+   "Cheo Feliciano"
+  ],
+  "confianza": "alta",
+  "nota": "Verificar.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T078",
+  "categoria": "Farándula",
+  "epoca": "2010s",
+  "dificultad": 2,
+  "pregunta": "¿Qué dúo venezolano canta Andas en mi cabeza?",
+  "opciones_correcta_primero": [
+   "Chino y Nacho",
+   "Mau y Ricky",
+   "Servando y Florentino",
+   "Los Amigos Invisibles"
+  ],
+  "confianza": "alta",
+  "nota": "Verificar.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T079",
+  "categoria": "Farándula",
+  "epoca": "2000s",
+  "dificultad": 3,
+  "pregunta": "¿Qué grupo venezolano es conocido por el éxito Superstar?",
+  "opciones_correcta_primero": [
+   "Los Amigos Invisibles",
+   "Caramelos de Cianuro",
+   "Zapato 3",
+   "Los Mesoneros"
+  ],
+  "confianza": "media",
+  "nota": "Verificar.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T080",
+  "categoria": "Farándula",
+  "epoca": "2020s",
+  "dificultad": 3,
+  "pregunta": "¿Qué director venezolano fue nombrado director musical de la Filarmónica de Nueva York?",
+  "opciones_correcta_primero": [
+   "Gustavo Dudamel",
+   "Alfredo Rugeles",
+   "Christian Vásquez",
+   "Diego Matheuz"
+  ],
+  "confianza": "baja",
+  "nota": "Verificar fecha: anuncio reciente.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T081",
+  "categoria": "Farándula",
+  "epoca": "1990s",
+  "dificultad": 2,
+  "pregunta": "¿Cómo se llama el programa humorístico de Emilio Lovera?",
+  "opciones_correcta_primero": [
+   "Radio Rochela",
+   "Qué Locura",
+   "Super Sábado Sensacional",
+   "Sábado Gigante"
+  ],
+  "confianza": "alta",
+  "nota": "Verificar si fue Emilio Lovera u otro elenco.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T082",
+  "categoria": "Farándula",
+  "epoca": "1970s",
+  "dificultad": 2,
+  "pregunta": "¿Qué programa de variedades dominó los sábados con humor y concursos en los 70 y 80?",
+  "opciones_correcta_primero": [
+   "Radio Rochela",
+   "Venevisión Shows",
+   "La Zaranda",
+   "El Gordo y el Flaco"
+  ],
+  "confianza": "alta",
+  "nota": "Verificar.",
+  "validada_por": "Gustavo"
+ },
+ {
+  "id": "T083",
+  "categoria": "Farándula",
+  "epoca": "2010s",
+  "dificultad": 3,
+  "pregunta": "¿Qué venezolana ganó el Miss Mundo en 2011?",
+  "opciones_correcta_primero": [
+   "Ivian Sarcos",
+   "Dayana Mendoza",
+   "Stefanía Fernández",
+   "Mariángel Villasmil"
+  ],
+  "confianza": "media",
+  "nota": "Verificar.",
+  "validada_por": "Gustavo"
+ }
+]

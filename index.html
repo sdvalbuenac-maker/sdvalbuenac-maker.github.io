@@ -2,28 +2,218 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Visual Rocket Flyer</title>
-<style>
-  body { margin: 0; font-family: system-ui, sans-serif; background: #f5f7fb; color: #1d2433; }
-  main { max-width: 640px; margin: 0 auto; padding: 48px 20px; }
-  h1 { margin: 0 0 8px; }
-  p { color: #4a5568; line-height: 1.5; }
-  ul { padding: 0; list-style: none; }
-  li { background: #fff; border-radius: 12px; padding: 14px 16px; margin: 10px 0; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
-  a { color: #1d4fd8; }
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Visual Rocket Flyer Games · Juegos con sabor venezolano</title>
+<meta name="description" content="Juegos gratis para Android, iPhone y navegador: Te falta calle!!, Llanero Adventure, Wobble Rescue y RETRUCOO!. Hechos con sabor venezolano por Visual Rocket Flyer.">
+<link rel="canonical" href="https://visualrocketflyer.com/">
+<meta name="theme-color" content="#04060f">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Visual Rocket Flyer Games">
+<meta property="og:title" content="Visual Rocket Flyer Games · Juegos con sabor venezolano">
+<meta property="og:description" content="Juegos gratis para Android, iPhone y navegador: Te falta calle!!, Llanero Adventure, Wobble Rescue y RETRUCOO!. Hechos con sabor venezolano por Visual Rocket Flyer.">
+<meta property="og:url" content="https://visualrocketflyer.com/">
+<meta property="og:image" content="https://visualrocketflyer.com/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="/img/favicon.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="alternate" hreflang="es" href="https://visualrocketflyer.com/">
+<link rel="alternate" hreflang="pt" href="https://visualrocketflyer.com/pt/">
+<link rel="alternate" hreflang="en" href="https://visualrocketflyer.com/en/">
+<link rel="alternate" hreflang="x-default" href="https://visualrocketflyer.com/">
+<meta property="og:locale" content="es_419">
+<script>(function(){try{var cur="es",p="/",s=localStorage.getItem("vrf_lang"),want=s;if(!want){var ls=navigator.languages||[navigator.language||"es"];want="en";for(var i=0;i<ls.length;i++){var c=String(ls[i]).slice(0,2).toLowerCase();if(c==="es"||c==="pt"||c==="en"){want=c;break;}}}if(want!==cur&&(want==="es"||want==="pt"||want==="en"))location.replace((want==="es"?"":"/"+want)+p+location.hash);}catch(e){}})();</script>
+
 </head>
 <body>
+<div class="nebula"></div>
+<canvas id="space" aria-hidden="true"></canvas>
+<div class="aliens" aria-hidden="true"></div>
+<div class="cursor-glow" aria-hidden="true"></div>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Visual Rocket Flyer Games, inicio">
+      <img src="/img/logo-mark.png" alt="" width="30" height="47">
+      <span>VISUAL <b>ROCKET</b><small>FLYER GAMES</small></span>
+    </a>
+    <button class="menu-btn" aria-label="Menú" aria-expanded="false">☰</button>
+    <ul><li><a href="/" class=on>Inicio</a></li><li><a href="/te-falta-calle/">Te falta calle</a></li><li><a href="/#juegos">Juegos</a></li><li><a href="/iphone/">iPhone</a></li><li><a href="/nosotros/">Nosotros</a></li><li><a href="/contacto/">Contacto</a></li></ul>
+    <div class="lang" role="navigation" aria-label="Idioma"><a href="/" hreflang="es" lang="es" data-lang="es" class=on aria-current=true>ES</a><a href="/pt/" hreflang="pt" lang="pt" data-lang="pt">PT</a><a href="/en/" hreflang="en" lang="en" data-lang="en">EN</a></div>
+    <a class="btn sm cta" href="/te-falta-calle/jugar/"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.9l10.4-6.5a1 1 0 0 0 0-1.8L9.5 4.6A1 1 0 0 0 8 5.5z"/></svg> Jugar ahora</a>
+  </div>
+</header>
 <main>
-  <h1>Visual Rocket Flyer</h1>
-  <p>Juegos para Android hechos con cariño venezolano.</p>
-  <ul>
-    <li><a href="https://play.google.com/store/apps/details?id=com.visualrocketflyer.llaneroadventure">Llanero Adventure</a></li>
-    <li><a href="https://play.google.com/store/apps/details?id=com.tefaltacalle.app">Te falta calle!!</a></li>
-    <li><a href="https://play.google.com/store/apps/details?id=com.visualrocketflyer.wobblerescue">Wobble Rescue</a></li>
-  </ul>
-  <p>Contacto: <a href="mailto:sdvalbuenac@gmail.com">sdvalbuenac@gmail.com</a></p>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="reveal in">
+      <img class="hero-logo" src="/img/logo-mark.png" alt="" width="74" height="116">
+      <div class="eyebrow">Visual Rocket Flyer Games</div>
+      <h1>Juegos que <span class="grad">despegan</span><br>con sabor <span class="typed" data-words='["venezolano","latino","caribeño","galáctico"]'>venezolano</span></h1>
+      <p class="lead">Creamos juegos para Android, iPhone y navegador: jerga venezolana, aventuras por el llano, puzles de física y el truco de siempre. Gratis, divertidos y hechos con mucho cariño.</p>
+      <div class="actions">
+        <a class="btn" href="/te-falta-calle/jugar/"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.9l10.4-6.5a1 1 0 0 0 0-1.8L9.5 4.6A1 1 0 0 0 8 5.5z"/></svg> Jugar Te falta calle</a>
+        <a class="btn ghost" href="#juegos">Ver todos los juegos</a>
+      </div>
+    </div>
+    <div class="stage reveal d2">
+      <div class="ring"></div><div class="ring r2"></div>
+      <div class="holo"><img src="/img/alien-hero.webp" alt="El alien de Visual Rocket Flyer en la playa con su laptop" width="900" height="1600" fetchpriority="high"></div>
+      <div class="orbit">
+        <a href="/te-falta-calle/" aria-label="Te falta calle"><img src="/img/juegos/tfc-icon.webp" alt=""></a>
+        <a href="/llanero-adventure/" aria-label="Llanero Adventure"><img src="/img/juegos/llanero-icon.webp" alt=""></a>
+        <a href="/wobble-rescue/" aria-label="Wobble Rescue"><img src="/img/juegos/wobble-icon.webp" alt=""></a>
+        <a href="/retrucoo/" aria-label="RETRUCOO"><img src="/img/juegos/retrucoo-icon.webp" alt=""></a>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint" aria-hidden="true"></div>
+</section>
+
+<div class="wrap">
+  <div class="stats">
+    <div class="stat panel reveal"><b data-count="4">4</b><span>juegos en la flota</span></div>
+    <div class="stat panel reveal d1"><b data-count="360" data-suffix="+">360+</b><span>palabras venezolanas</span></div>
+    <div class="stat panel reveal d2"><b data-count="120">120</b><span>niveles de física</span></div>
+    <div class="stat panel reveal d3"><b data-count="15">15</b><span>destinos de Venezuela</span></div>
+  </div>
+</div>
+
+<section id="destacado">
+  <div class="wrap">
+    <div class="sec-head reveal"><div class="eyebrow">Juego destacado</div><h2>Juega <span class="grad">ahora mismo</span>, sin descargar nada</h2>
+      <p class="muted">Te falta calle!! funciona en tu navegador y en iPhone. Si tienes Android, descárgalo gratis en Google Play.</p></div>
+    <div class="featured panel reveal">
+      <div class="media"><video src="/img/juegos/tfc-fiesta.mp4" poster="/img/juegos/tfc-1.webp" autoplay muted loop playsinline preload="metadata"></video></div>
+      <div class="body">
+        <span class="tag live">En línea · Android · iPhone · Web</span>
+        <div class="title"><img src="/img/juegos/tfc-icon.webp" alt="" width="72" height="72"><h2 style="margin:0">Te falta calle!!</h2></div>
+        <p class="muted">¿Sabes cómo se dice "problema" en venezolano? ¿Y "fiesta"? Si dudaste… ¡te falta calle! Escribe la palabra letra por letra, sube de nivel con la Abuela Carmen, el Compadre Chuy y el Chamo Yeico, y gánate tu cédula de calle.</p>
+        <ul class="feat"><li>Más de 360 palabras y trivias</li><li>Recorre Venezuela en el mapa</li><li>Fiestas de calle animadas</li><li>Modo familia: abuela vs. nieto</li><li>Comparte y gana monedas</li><li>Tu progreso se guarda</li></ul>
+        <div class="actions"><a class="btn" href="/te-falta-calle/jugar/"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.9l10.4-6.5a1 1 0 0 0 0-1.8L9.5 4.6A1 1 0 0 0 8 5.5z"/></svg> Jugar en el navegador</a><a class="play-badge" href="https://play.google.com/store/apps/details?id=com.tefaltacalle.app" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34a853" d="M3.6 1.8 13.4 12 3.6 22.2c-.4-.2-.6-.6-.6-1.1V2.9c0-.5.2-.9.6-1.1z"/><path fill="#fbbc04" d="m16.8 8.6-3.4 3.4 3.4 3.4 3.9-2.2c.8-.5.8-1.7 0-2.2z"/><path fill="#4285f4" d="M3.6 1.8c.3-.2.8-.2 1.2 0l12 6.8-3.4 3.4z"/><path fill="#ea4335" d="M13.4 12l3.4 3.4-12 6.8c-.4.2-.9.2-1.2 0z"/></svg><span><small>Disponible en</small><b>Google Play</b></span></a></div>
+        <p class="ios-only muted" style="margin-top:16px">📱 ¿Estás en iPhone? <a href="/iphone/">Mira cómo dejarlo en tu pantalla de inicio</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="juegos">
+  <div class="wrap">
+    <div class="sec-head reveal"><div class="eyebrow">La flota</div><h2>Nuestros <span class="grad">juegos</span></h2><p class="muted">Cada lanzamiento sube un poquito más alto. Estos son los juegos que ya vuelan y los que están por despegar.</p></div>
+    
+<div class="games">
+  <article class="card panel reveal">
+    <div class="shine"></div>
+    <div class="cover"><img src="/img/juegos/tfc-feature.webp" alt="Te falta calle!!" loading="lazy" width="1024" height="500"></div>
+    <div class="body">
+      <div class="head"><img src="/img/juegos/tfc-icon.webp" alt="" width="66" height="66"><span class="tag live">Disponible</span></div>
+      <h3>Te falta calle!!</h3>
+      <p>El juego de jerga venezolana: adivina cómo se dice en Venezuela, recorre el país y celebra con fiestas de calle.</p>
+      <div class="actions"><a class="btn sm" href="/te-falta-calle/jugar/"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.9l10.4-6.5a1 1 0 0 0 0-1.8L9.5 4.6A1 1 0 0 0 8 5.5z"/></svg> Jugar</a><a class="btn sm ghost" href="/te-falta-calle/">Ver más</a></div>
+    </div>
+  </article>
+  <article class="card panel reveal d1">
+    <div class="shine"></div>
+    <div class="cover"><img src="/img/juegos/llanero-escenario.webp" alt="Llanero Adventure" loading="lazy" width="1400" height="600"></div>
+    <div class="body">
+      <div class="head"><img src="/img/juegos/llanero-icon.webp" alt="" width="66" height="66"><span class="tag live">Android</span></div>
+      <h3>Llanero Adventure</h3>
+      <p>Plataformas por 15 destinos de Venezuela: mangos, arepas, chicha, bonus en moto y un conjunto llanero que te canta la victoria.</p>
+      <div class="actions"><a class="btn sm" href="https://play.google.com/store/apps/details?id=com.visualrocketflyer.llaneroadventure" target="_blank" rel="noopener">Google Play</a><a class="btn sm ghost" href="/llanero-adventure/">Ver más</a></div>
+    </div>
+  </article>
+  <article class="card panel soon reveal d2">
+    <div class="shine"></div><div class="soon-stamp">PRÓXIMAMENTE</div>
+    <div class="cover"><img src="/img/juegos/wobble-feature.webp" alt="Wobble Rescue" loading="lazy" width="1024" height="500"></div>
+    <div class="body">
+      <div class="head"><img src="/img/juegos/wobble-icon.webp" alt="" width="66" height="66"><span class="tag soon">Muy pronto</span></div>
+      <h3>Wobble Rescue</h3>
+      <p>Puzles de física con 120 niveles en 8 mundos. Ayuda a Bloop a rescatar a los Wobblies del villano Gruñubarrón.</p>
+      <div class="actions"><a class="btn sm ghost" href="/wobble-rescue/">Conocer el juego</a></div>
+    </div>
+  </article>
+  <article class="card panel soon reveal d3" style="grid-column: 1 / -1">
+    <div class="shine"></div><div class="soon-stamp">EM BREVE</div>
+    <div class="cover" style="aspect-ratio: 1024/300"><img src="/img/juegos/retrucoo-feature.webp" alt="RETRUCOO!" loading="lazy" width="1024" height="500" style="object-position: 50% 40%"></div>
+    <div class="body">
+      <div class="head"><img src="/img/juegos/retrucoo-icon.webp" alt="" width="66" height="66"><span class="tag soon">Próximamente · Em breve</span></div>
+      <h3>RETRUCOO!</h3>
+      <p>El truco venezolano de toda la vida, con vira, perico y perica, flor y envido. Juega contra compadres con voz y carácter, o en línea con tus panas.</p>
+      <div class="actions"><a class="btn sm ghost" href="/retrucoo/">Conocer el juego</a></div>
+    </div>
+  </article>
+</div>
+  </div>
+</section>
+
+<section id="iphone">
+  <div class="wrap">
+    <div class="sec-head reveal"><div class="eyebrow">Usuarios de iPhone</div><h2>Tu iPhone también <span class="grad">tiene calle</span></h2><p class="muted">Instala Te falta calle!! como una app en tres pasos. Sin App Store, gratis y con tu progreso guardado.</p></div>
+    <div class="steps">
+      <div class="step panel reveal"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z" fill="currentColor"/></svg></div><h3>Abre en Safari</h3><p class="muted">Entra a la página del juego desde Safari y toca <b>Jugar</b>.</p></div>
+      <div class="step panel reveal d1"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 8 5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg></div><h3>Toca Compartir</h3><p class="muted">Es el cuadrito con la flecha hacia arriba, en la barra de Safari.</p></div>
+      <div class="step panel reveal d2"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M12 8v8M8 12h8"/></svg></div><h3>Agregar a inicio</h3><p class="muted">Elige <b>"Agregar a pantalla de inicio"</b>. ¡Listo! Ya tienes el ícono como una app.</p></div>
+    </div>
+    <p style="text-align:center;margin-top:30px"><a class="btn ghost" href="/iphone/"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9-1.7 0-3.3 1-4.2 2.6-1.8 3.1-.5 7.7 1.3 10.2.8 1.2 1.8 2.6 3.1 2.6 1.2-.1 1.7-.8 3.2-.8s1.9.8 3.2.8c1.3 0 2.2-1.2 3-2.5 1-1.4 1.3-2.7 1.4-2.8-.1 0-2.6-1-2.7-4.2zM13.9 4.9c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1 .1 2.1-.6 2.8-1.4z"/></svg> Guía completa para iPhone</a></p>
+  </div>
+</section>
+
+<section id="equipo">
+  <div class="wrap team">
+    <div class="crew reveal"><div class="portal"><img src="/img/alien-equipo.webp" alt="El fundador de Visual Rocket Flyer y su alien trabajando en la playa" loading="lazy" width="1100" height="1100"></div><div class="crew-alien a1" data-alien="wave"></div><div class="crew-alien a2" data-alien="visor"></div><img class="crew-badge" src="/img/logo-mark.png" alt="" width="60" height="94"><span class="spark s1"></span><span class="spark s2"></span><span class="spark s3"></span></div>
+    <div class="reveal d1">
+      <div class="eyebrow">Tripulación</div>
+      <h2>Un humano, un alien y <span class="grad">muchas ideas</span></h2>
+      <p class="muted">Visual Rocket Flyer nació con una misión sencilla: hacer juegos que se sientan como en casa. Juegos con nuestra jerga, nuestra música y nuestras costumbres, pero con la calidad y la tecnología de cualquier estudio grande.</p>
+      <p class="muted">Nuestro alien, la mascota de la marca, vino de otra galaxia, se enamoró del Caribe y se quedó programando con un papelón con limón en la mano. Desde entonces cada juego lleva un poquito de los dos mundos.</p>
+      <a class="btn ghost" href="/nosotros/">Conoce la historia</a>
+    </div>
+  </div>
+</section>
+
+<section style="padding-bottom:140px">
+  <div class="wrap">
+    <div class="panel reveal" style="padding:44px;text-align:center;position:relative;overflow:hidden">
+      <div class="eyebrow">Únete a la tripulación</div>
+      <h2>¿Listo para <span class="grad">despegar</span>?</h2>
+      <p class="muted" style="max-width:620px;margin:0 auto 24px">Síguenos para ver los próximos juegos antes que nadie, participar en las pruebas y decirnos qué quieres jugar.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap"><a class="btn" href="/te-falta-calle/jugar/"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.9l10.4-6.5a1 1 0 0 0 0-1.8L9.5 4.6A1 1 0 0 0 8 5.5z"/></svg> Jugar ahora</a><a class="btn ghost" href="https://www.tiktok.com/@sdvalbuena" target="_blank" rel="noopener">Síguenos en TikTok</a></div>
+      <div class="peek" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
 </main>
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <img class="logo" src="/img/logo-full.png" alt="Visual Rocket Flyer" width="180" height="168" loading="lazy">
+        <p class="muted">Juegos hechos con sabor venezolano, tecnología de otro planeta y mucho cariño. Desde Latinoamérica para el mundo.</p>
+      </div>
+      <div><h4>Juegos</h4><ul>
+        <li><a href="/te-falta-calle/">Te falta calle!!</a></li>
+        <li><a href="/llanero-adventure/">Llanero Adventure</a></li>
+        <li><a href="/wobble-rescue/">Wobble Rescue</a></li>
+        <li><a href="/retrucoo/">RETRUCOO!</a></li>
+      </ul></div>
+      <div><h4>Ayuda</h4><ul>
+        <li><a href="/iphone/">Jugar en iPhone</a></li>
+        <li><a href="/contacto/">Contacto y soporte</a></li>
+        <li><a href="/nosotros/">Nosotros</a></li>
+      </ul></div>
+      <div><h4>Legal</h4><ul>
+        <li><a href="/privacidad/">Política de privacidad</a></li>
+        <li><a href="/terminos/">Términos de uso</a></li>
+        <li><a href="/app-ads.txt">app-ads.txt</a></li>
+      </ul></div>
+    </div>
+    <div class="copy"><span>© <span id="year">2026</span> Visual Rocket Flyer Games. Todos los derechos reservados.</span><span>Google Play es una marca de Google LLC.</span></div>
+  </div>
+</footer>
+<script src="/assets/site.js" defer></script>
 </body>
 </html>
