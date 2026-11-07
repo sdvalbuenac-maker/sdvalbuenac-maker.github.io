@@ -42,6 +42,30 @@
     window.VRF_ADSENSE_CLIENT = '';
   </script>
   <script src="vrf_ads.js"></script>
+  <script>
+    // Audio en celulares: el motor de audio del navegador (AudioContext) nace
+    // dormido y sólo despierta dentro de un toque. Se registran todos y se
+    // despiertan en cada gesto. En iPhone además se pide sonar aunque el
+    // teléfono esté en silencio, como cualquier juego.
+    (function () {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      var ctxs = [];
+      if (AC) {
+        var Wrapped = function () { var c = Reflect.construct(AC, arguments, Wrapped); ctxs.push(c); return c; };
+        Wrapped.prototype = AC.prototype;
+        Object.setPrototypeOf(Wrapped, AC);
+        window.AudioContext = Wrapped;
+        if (window.webkitAudioContext) window.webkitAudioContext = Wrapped;
+      }
+      function wake() {
+        try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}
+        for (var i = 0; i < ctxs.length; i++) {
+          if (ctxs[i].state !== 'running') ctxs[i].resume().catch(function () {});
+        }
+      }
+      ['touchend', 'pointerup', 'click', 'keydown'].forEach(function (ev) { window.addEventListener(ev, wake, true); });
+    })();
+  </script>
 </head>
 <body>
   <div id="game"></div>
