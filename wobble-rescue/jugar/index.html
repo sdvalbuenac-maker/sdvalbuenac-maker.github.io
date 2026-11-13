@@ -1,0 +1,2017 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Wobble Rescue · Jugar</title>
+<meta name="description" content="Wobble Rescue: 120 puzles de física en 8 mundos. Juega gratis en el navegador o en iPhone.">
+<meta name="theme-color" content="#2a3557">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Wobble Rescue">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icons/favicon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap">
+<script>
+  // Publicador de AdSense: queda vacío hasta que Google apruebe el sitio (ver PUBLICAR.md).
+  window.VRF_ADSENSE_CLIENT = '';
+</script>
+<script src="vrf_ads.js"></script>
+</head>
+<body>
+<div id="vrf-loader"><img src="icons/icon-512.png" alt="Wobble Rescue"><div class="bar"><i></i></div><small>Visual Rocket Flyer Games</small></div>
+
+<style>
+  /* Pantalla de juego vertical a sangre: marco 9:16 centrado, HUD encima del canvas. Aspecto único (cielo de día). */
+  :root {
+    --sky: #8ccbf0;
+    --frame-bg: #2a3557;
+    --panel: rgba(22, 30, 62, 0.92);
+    --go: #3fb54a;
+    --go-dark: #2a8a33;
+    --blue: #2f7ee0;
+    --blue-dark: #1f5cad;
+    --gold: #ffcf3a;
+    --locked: #4a5480;
+    --display: "Baloo 2", "Trebuchet MS", system-ui, sans-serif;
+    color-scheme: dark;
+  }
+  [hidden] { display: none !important; }
+  html, body { height: 100%; }
+  body {
+    background: var(--frame-bg);
+    color: #fff;
+    font-family: var(--display);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 12px;
+    box-sizing: border-box;
+    overflow: hidden;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  .stage {
+    position: relative;
+    height: 100%;
+    max-height: 920px;
+    aspect-ratio: 9 / 16;
+    max-width: 100%;
+    border-radius: 22px;
+    overflow: hidden;
+    background: var(--sky);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+  }
+  canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+  canvas.can-grab { cursor: grab; }
+  canvas.grabbing { cursor: grabbing; }
+
+  .hud-top {
+    position: absolute; inset: 0 0 auto 0;
+    display: flex; justify-content: space-between; align-items: center; gap: 8px;
+    padding: 14px 14px 0;
+    pointer-events: none;
+  }
+  .pill {
+    background: var(--panel);
+    border-radius: 999px;
+    padding: 4px 18px;
+    font-weight: 700;
+    font-size: clamp(15px, 2.4vh, 22px);
+    display: flex; flex-direction: column; align-items: center; line-height: 1.15;
+    min-width: 0;
+  }
+  .pill small { font-weight: 500; font-size: 0.62em; opacity: 0.85; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; }
+  button {
+    font-family: var(--display);
+    font-weight: 800;
+    color: #fff;
+    border: 0;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: transform 0.08s ease;
+  }
+  button:active { transform: translateY(3px); }
+  button:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+  .btn-round {
+    width: clamp(44px, 6.4vh, 58px); height: clamp(44px, 6.4vh, 58px);
+    border-radius: 50%;
+    background: var(--blue);
+    box-shadow: 0 5px 0 var(--blue-dark);
+    display: grid; place-items: center;
+    flex: none;
+  }
+  .btn-round svg { width: 55%; height: 55%; }
+  .hud-hint {
+    position: absolute; inset: 0 0 auto 0; top: clamp(70px, 10vh, 96px);
+    display: flex; justify-content: center; padding: 0 16px;
+    pointer-events: none;
+  }
+  .hint {
+    background: var(--panel);
+    border-radius: 14px;
+    padding: 6px 14px;
+    font-weight: 500;
+    font-size: clamp(13px, 2vh, 18px);
+    text-align: center;
+  }
+  .hud-bottom {
+    position: absolute; inset: auto 0 0 0;
+    display: flex; justify-content: center;
+    padding: 0 16px 22px;
+    pointer-events: none;
+  }
+  .btn-go {
+    background: var(--go);
+    box-shadow: 0 7px 0 var(--go-dark);
+    border-radius: 999px;
+    font-size: clamp(22px, 3.6vh, 34px);
+    padding: 6px 46px 4px;
+  }
+  .btn-alt {
+    background: var(--blue);
+    box-shadow: 0 6px 0 var(--blue-dark);
+    border-radius: 999px;
+    font-size: clamp(16px, 2.4vh, 22px);
+    padding: 4px 24px 2px;
+  }
+  .overlay {
+    position: absolute; inset: 0;
+    display: grid; place-items: center;
+    background: rgba(20, 26, 50, 0.45);
+  }
+  .card {
+    background: var(--panel);
+    border-radius: 22px;
+    padding: 22px 24px 24px;
+    width: min(84%, 360px);
+    text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    animation: pop 0.35s cubic-bezier(.2, 1.6, .4, 1);
+  }
+  .card h2 { margin: 0; font-size: clamp(28px, 4.6vh, 42px); font-weight: 800; line-height: 1.05; text-wrap: balance; }
+  .card p { margin: 0; font-weight: 500; font-size: clamp(14px, 2vh, 18px); opacity: 0.9; }
+  .stars { display: flex; gap: 6px; margin: 2px 0 6px; }
+  .stars svg { width: clamp(34px, 5vh, 46px); height: auto; }
+  .card .btn-go { font-size: clamp(18px, 2.8vh, 26px); padding: 6px 30px 4px; margin-top: 6px; }
+  .card-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; align-items: center; }
+  .levels { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; width: 100%; margin: 8px 0 4px; }
+  .lvl {
+    aspect-ratio: 1; border-radius: 14px;
+    background: var(--blue); box-shadow: 0 5px 0 var(--blue-dark);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+    font-size: clamp(17px, 2.6vh, 24px); line-height: 1;
+  }
+  .lvl .mini { display: flex; gap: 0; }
+  .lvl .mini svg { width: 11px; height: 11px; }
+  .lvl[disabled] { background: var(--locked); box-shadow: 0 5px 0 #353d63; cursor: default; opacity: 0.8; }
+  .badge {
+    position: absolute; right: 14px; bottom: 14px;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+    background: rgba(0,0,0,0.25); padding: 2px 8px; border-radius: 6px; pointer-events: none;
+  }
+  .btn-hint {
+    position: absolute; left: 16px; bottom: 26px;
+    background: var(--gold); box-shadow: 0 5px 0 #c9930f; color: #5a3d00;
+  }
+  .toast {
+    position: absolute; left: 16px; right: 16px; bottom: clamp(96px, 14vh, 130px);
+    background: var(--panel); border-radius: 14px; padding: 8px 14px;
+    text-align: center; font-weight: 500; font-size: clamp(13px, 2vh, 17px);
+  }
+  .ad-screen {
+    position: absolute; inset: 0; background: #0b0f1d;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+    padding: 24px; text-align: center;
+  }
+  .ad-screen h2 { margin: 0; font-size: clamp(26px, 4.4vh, 40px); }
+  .ad-screen p { margin: 0; opacity: 0.8; font-weight: 500; }
+  .ad-tag { position: absolute; top: 14px; left: 14px; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; background: #ffcf3a; color: #3a2a00; padding: 2px 8px; border-radius: 6px; }
+  .ad-screen .btn-alt { margin-top: 10px; min-width: 180px; }
+  .picker-head { display: flex; align-items: center; gap: 10px; }
+  .picker-head .btn-round { width: 40px; height: 40px; font-size: 16px; }
+  .picker-head .btn-round:disabled { opacity: 0.35; cursor: default; }
+  .star-count { display: inline-flex; align-items: center; gap: 4px; font-size: 0.75em; margin-top: 1px; }
+  .star-count svg { width: 1.1em; height: 1.1em; }
+  .star-pop { display: inline-block; transform: scale(0); animation: star-pop 0.4s cubic-bezier(.2, 1.8, .4, 1) forwards; }
+  @keyframes star-pop { to { transform: scale(1); } }
+  .banner {
+    position: absolute; left: 50%; top: 32%; transform: translate(-50%, -50%);
+    background: var(--panel); border-radius: 20px; padding: 14px 34px 12px;
+    display: flex; flex-direction: column; align-items: center; pointer-events: none;
+    animation: banner 1.8s ease forwards;
+  }
+  .banner strong { font-size: clamp(30px, 5vh, 46px); font-weight: 800; line-height: 1.1; }
+  .banner span { font-size: clamp(15px, 2.3vh, 21px); font-weight: 500; opacity: 0.9; }
+  @keyframes banner {
+    0% { opacity: 0; transform: translate(-50%, -160%); }
+    18% { opacity: 1; transform: translate(-50%, -50%); }
+    78% { opacity: 1; transform: translate(-50%, -50%); }
+    100% { opacity: 0; transform: translate(-50%, -260%); }
+  }
+  @keyframes pop { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .overlay.finale { background: transparent; place-items: end center; padding-bottom: 6vh; }
+
+  html, body { overscroll-behavior: none; background: var(--frame-bg); }
+  body { height: 100vh; height: 100dvh; padding-top: max(12px, env(safe-area-inset-top)); padding-bottom: max(12px, env(safe-area-inset-bottom)); margin: 0;
+    background: radial-gradient(1200px 700px at 50% 0%, #3b4c86 0%, #1c2442 65%) fixed, #1c2442; }
+  button, a { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+  .badge { display: none !important; }
+  /* Celular: el juego ocupa toda la pantalla (la cámara del motor se adapta a cualquier proporción). */
+  @media (max-width: 700px), (pointer: coarse) and (max-height: 540px) {
+    body { padding: 0; }
+    .stage { height: 100%; width: 100%; max-height: none; max-width: none; aspect-ratio: auto; border-radius: 0; box-shadow: none; }
+    .hud-top { padding-top: calc(10px + env(safe-area-inset-top)); }
+    .hud-hint { top: calc(clamp(70px, 10vh, 96px) + env(safe-area-inset-top)); }
+    .hud-bottom { padding-bottom: calc(18px + env(safe-area-inset-bottom)); }
+    .btn-hint { bottom: calc(22px + env(safe-area-inset-bottom)); }
+    .toast { bottom: calc(clamp(96px, 14vh, 130px) + env(safe-area-inset-bottom)); }
+  }
+  #vrf-loader { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px;
+    background: radial-gradient(circle at 50% 35%, #3b4c86 0%, #1c2442 70%); color: #fff; font-family: system-ui, sans-serif; z-index: 50; transition: opacity .4s; }
+  #vrf-loader img { width: 132px; height: 132px; border-radius: 30px; box-shadow: 0 0 0 4px #ffcf3a, 0 18px 50px rgba(255,207,58,.25); animation: vrf-b 1.4s ease-in-out infinite; }
+  #vrf-loader .bar { width: 180px; height: 8px; border-radius: 8px; background: rgba(255,255,255,.12); overflow: hidden; }
+  #vrf-loader .bar i { display: block; height: 100%; width: 40%; border-radius: 8px; background: linear-gradient(90deg, #ffcf3a, #2f7ee0, #3fb54a); animation: vrf-l 1.1s ease-in-out infinite; }
+  #vrf-loader small { opacity: .6; letter-spacing: .12em; font-size: 11px; text-transform: uppercase; }
+  @keyframes vrf-b { 50% { transform: translateY(-8px) scale(1.03); } }
+  @keyframes vrf-l { 0% { transform: translateX(-100%); } 100% { transform: translateX(260%); } }
+  .overlay.title { background: linear-gradient(180deg, rgba(20,26,50,.25), rgba(20,26,50,.65)); }
+  .stage.titling .hud-top, .stage.titling .hud-hint, .stage.titling .hud-bottom, .stage.titling .btn-hint, .stage.titling .banner { visibility: hidden; }
+  .title-card { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; padding: 0 22px; animation: pop .45s cubic-bezier(.2, 1.6, .4, 1); }
+  .title-card img.bloop { width: clamp(120px, 26vh, 210px); height: auto; filter: drop-shadow(0 12px 18px rgba(0,0,0,.35)); animation: vrf-b 2.2s ease-in-out infinite; }
+  .title-card h1 { margin: 0; font-size: clamp(44px, 8.4vh, 74px); line-height: .9; font-weight: 800; color: #fff;
+    text-shadow: 0 5px 0 #1f5cad, 0 10px 24px rgba(0,0,0,.35); letter-spacing: .01em; }
+  .title-card h1 b { display: block; color: var(--gold); text-shadow: 0 5px 0 #c9930f, 0 10px 24px rgba(0,0,0,.35); }
+  .title-card p { margin: 4px 0 8px; font-weight: 600; font-size: clamp(15px, 2.3vh, 20px); background: var(--panel); border-radius: 14px; padding: 6px 14px; max-width: 340px; }
+  .title-card .btn-go { font-size: clamp(26px, 4.4vh, 38px); padding: 8px 54px 6px; }
+  .title-card .row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 6px; }
+  .title-card small { opacity: .8; font-weight: 500; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; margin-top: 4px; }
+  .links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; font-size: 14px; font-weight: 600; }
+  .links a { color: #cfe0ff; text-decoration: none; border-bottom: 1px solid rgba(207,224,255,.4); }
+  .ad-screen .house { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .ad-screen .house img { width: 112px; height: 112px; border-radius: 26px; box-shadow: 0 0 0 4px #ffcf3a, 0 18px 50px rgba(255,207,58,.25); }
+  .ad-screen .btn-alt[disabled] { opacity: .55; }
+  .ad-tag { top: calc(14px + env(safe-area-inset-top)) !important; }
+  #ios-tip { position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 60; display: none; align-items: center; gap: 12px;
+    padding: 12px 14px; border-radius: 16px; background: rgba(10,14,36,.94); color: #eef2ff; font: 14px/1.35 system-ui, sans-serif; box-shadow: 0 10px 40px rgba(0,0,0,.5), 0 0 0 1px rgba(77,163,255,.35); }
+  #ios-tip b { color: #ffcf3a; }
+  #ios-tip svg { flex: none; width: 26px; height: 26px; color: #4da3ff; }
+  #ios-tip button { flex: none; margin-left: auto; background: none; border: 0; color: #9aa8cc; font-size: 22px; padding: 4px 6px; box-shadow: none; }
+  @media (prefers-reduced-motion: reduce) { .card { animation: none; } button { transition: none; } }
+</style>
+
+<div class="stage" id="stage">
+  <canvas id="game" aria-label="Wobble Rescue"></canvas>
+
+  <div class="hud-top">
+    <button class="btn-round" id="btn-menu" aria-label="Elegir nivel" title="Niveles">
+      <svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg>
+    </button>
+    <div class="pill"><span id="lvl-title">Nivel 1</span><small id="lvl-name"></small><span class="star-count"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3 6.1 20.6l1.3-6.6L2.5 9.4l6.6-.8z" fill="#ffcf3a" stroke="#c9930f" stroke-width="1.4" stroke-linejoin="round"/></svg><span id="star-count">0/3</span></span></div>
+    <button class="btn-round" id="btn-reset" aria-label="Reiniciar nivel" title="Reiniciar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.6-5.9"/><path d="M20 4v5h-5"/></svg>
+    </button>
+  </div>
+
+  <div class="hud-hint"><div class="hint" id="hint"></div></div>
+  <div class="banner" id="banner" hidden><strong id="banner-title"></strong><span id="banner-name"></span></div>
+
+  <div class="hud-bottom"><button class="btn-go" id="btn-play">¡Probar!</button></div>
+  <button class="btn-round btn-hint" id="btn-hint" aria-label="Pista">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.3 1.1 2.2h5c0-.9.4-1.6 1.1-2.2A6 6 0 0 0 12 3z"/></svg>
+  </button>
+  <div class="toast" id="toast" hidden></div>
+
+  <div class="badge" id="badge">Prototipo · física Box2D</div>
+
+  <div class="overlay" id="result" hidden>
+    <div class="card">
+      <h2 id="result-title">¡Rescatado!</h2>
+      <div class="stars" id="stars"></div>
+      <p id="result-detail"></p>
+      <div class="card-actions">
+        <button class="btn-alt" id="btn-again">Otra vez</button>
+        <button class="btn-alt" id="btn-skip" hidden>Saltar nivel</button>
+        <button class="btn-go" id="btn-result">Siguiente</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay finale" id="finale" hidden>
+    <div class="card">
+      <h2 id="finale-title">¡Gran Fiesta!</h2>
+      <p id="finale-body"></p>
+      <div class="card-actions"><button class="btn-go" id="finale-again">Volver a jugar</button></div>
+    </div>
+  </div>
+
+  <div class="overlay" id="offer" hidden>
+    <div class="card">
+      <h2 id="offer-title"></h2>
+      <p id="offer-body"></p>
+      <div class="card-actions">
+        <button class="btn-alt" id="offer-no"></button>
+        <button class="btn-go" id="offer-yes"></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="ad-screen" id="ad" hidden>
+    <span class="ad-tag" id="ad-tag">Visual Rocket Flyer</span>
+    <div class="house" id="ad-house"><img id="ad-img" src="" alt=""></div>
+    <h2 id="ad-title"></h2>
+    <p id="ad-body"></p>
+    <button class="btn-alt" id="ad-close"></button>
+  </div>
+
+  <div class="overlay title" id="title" hidden>
+    <div class="title-card">
+      <img class="bloop" src="bloop_victory.png" alt="Bloop">
+      <h1>Wobble<b>Rescue</b></h1>
+      <p id="title-tagline"></p>
+      <button class="btn-go" id="title-play">¡Jugar!</button>
+      <div class="row"><button class="btn-alt" id="title-lang">Idioma</button></div>
+      <small>Visual Rocket Flyer Games</small>
+    </div>
+  </div>
+
+  <div class="overlay" id="picker" hidden>
+    <div class="card">
+      <div class="picker-head"><button class="btn-round" id="picker-prev" aria-label="Mundo anterior">&#9664;</button><h2 id="picker-title">Pradera</h2><button class="btn-round" id="picker-next" aria-label="Mundo siguiente">&#9654;</button></div>
+      <p id="picker-sub">Mundo 1 · rescata a Bloop</p>
+      <div class="levels" id="level-grid"></div>
+      <div class="card-actions">
+        <button class="btn-alt" id="btn-music">Música: sí</button>
+        <button class="btn-alt" id="btn-sfx">Efectos: sí</button>
+      </div>
+      <button class="btn-alt" id="btn-lang">Idioma: Español</button>
+      <button class="btn-alt" id="btn-close-picker">Volver</button>
+      <div class="links"><a href="/wobble-rescue/" id="link-site">visualrocketflyers.com</a><a href="https://play.google.com/store/apps/details?id=com.visualrocketflyer.wobblerescue" target="_blank" rel="noopener" id="link-play" hidden>Google Play</a></div>
+    </div>
+  </div>
+</div>
+
+<div id="ios-tip" role="note">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v12"/><path d="m7 8 5-5 5 5"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>
+  <span id="ios-tip-text"></span>
+  <button aria-label="Cerrar">×</button>
+</div>
+<script src="planck.min.js"></script>
+<script>
+(async () => {
+  const pl = window.planck;
+  const Vec2 = pl.Vec2;
+  const DEG = Math.PI / 180;
+
+  // ---- Reglas comunes (idénticas a SimulationController en Unity) ----
+  const FLOOR_TOP = -8.5;
+  const BOMB_TOUCH = 0.95, BOMB_CHAIN_STEPS = 6, STORM_TOUCH = 0.45;
+  let shakeUntil = 0;
+  const PORTAL_R = 0.6, PORTAL_EXIT = 0.85, PORTAL_MIN_SPEED = 3, PORTAL_COOLDOWN = 15;
+  const KILL_Y = -12, KILL_X = 8, MAX_SIM = 10, STILL_GRACE = 3, STILL_FAIL = 1.5;
+  const DT = 0.02;
+  const CAMERA_Y = -1.6;
+  const GRIPPY = 1;
+  const COLORS = { stone: '#8a8c99', wood: '#b98146', ice: '#bfe8ff', grass: '#6fba55' };
+
+  // Reintenta: algunos antivirus cortan conexiones locales de vez en cuando.
+  const getJson = async (url) => {
+    for (let i = 0; ; i++) {
+      try { return await (await fetch(url, { cache: 'no-cache' })).json(); }
+      catch (e) { if (i >= 4) throw e; await new Promise((r) => setTimeout(r, 300 * (i + 1))); }
+    }
+  };
+  const LEVELS = (await getJson('levels.json')).levels;
+
+  // ---- Idiomas: mismo strings.json que Unity. Primero el del navegador, luego el que elija el jugador. ----
+  const LANGS = ['es', 'en', 'pt'];
+  const STRINGS = Object.fromEntries((await getJson('strings.json')).entries.map((e) => [e.key, e]));
+  const detectLang = () => {
+    const prefs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'en'];
+    for (const p of prefs) { const code = String(p).slice(0, 2).toLowerCase(); if (code === 'es' || code === 'pt') return code; if (code === 'en') return 'en'; }
+    return 'en';
+  };
+  let lang;
+  try { lang = localStorage.getItem('wobble-lang') || localStorage.getItem('vrf_lang'); } catch { lang = null; }
+  if (!LANGS.includes(lang)) lang = detectLang();
+  const t = (key, ...args) => {
+    const e = STRINGS[key];
+    if (!e) return key;
+    const text = e[lang] || e.es;
+    return text.replace(/\{(\d+)\}/g, (_, i) => args[+i]);
+  };
+  const levelText = (def, field) => (STRINGS[`level.${def.id}.${field}`] ? t(`level.${def.id}.${field}`) : def[field]);
+
+  const canvas = document.getElementById('game');
+  const ctx = canvas.getContext('2d');
+  const $ = (id) => document.getElementById(id);
+  const ui = {
+    play: $('btn-play'), reset: $('btn-reset'), menu: $('btn-menu'), hint: $('hint'),
+    title: $('lvl-title'), name: $('lvl-name'),
+    result: $('result'), resultTitle: $('result-title'), detail: $('result-detail'), stars: $('stars'),
+    resultBtn: $('btn-result'), again: $('btn-again'),
+    picker: $('picker'), grid: $('level-grid'), closePicker: $('btn-close-picker'),
+  };
+
+  // ---- Sonido: los mismos WAV que usa Unity (Tools/generate_audio.py). Arranca con el primer toque. ----
+  const sound = (() => {
+    const names = ['sfx_spring', 'sfx_bounce', 'sfx_thud', 'sfx_click', 'sfx_pick', 'sfx_drop', 'sfx_whoosh', 'sfx_win', 'sfx_fail', 'sfx_star', 'sfx_pop', 'sfx_puff', 'sfx_clank', 'sfx_warp', 'sfx_boom', 'sfx_zap', 'music_pradera', 'music_taller', 'music_fabrica', 'music_cielo', 'music_mina', 'music_portal', 'music_volcan', 'music_castillo', 'music_fiesta'];
+    const TRACKS = ['music_pradera', 'music_taller', 'music_fabrica', 'music_cielo', 'music_mina', 'music_portal', 'music_volcan', 'music_castillo'];
+    let track = 'music_pradera';
+    const read = (key) => { try { return localStorage.getItem(key) !== '0'; } catch { return true; } };
+    const save = (key, on) => { try { localStorage.setItem(key, on ? '1' : '0'); } catch {} };
+    let ctx = null, sfxGain, musicGain, musicNode = null;
+    const buffers = {}, last = {};
+    const state = { music: read('wobble-music'), sfx: read('wobble-sfx'), silent: false };
+
+    // Duración real de cada pista (el MP3 puede traer relleno al final): el bucle no hace "clic".
+    const LOOP = { music_castillo: 20, music_cielo: 20.869569, music_fabrica: 16, music_fiesta: 15, music_mina: 19.2, music_portal: 17.142857, music_pradera: 17.142857, music_taller: 18.461542, music_volcan: 16.271202 };
+    const loading = {};
+    function load(n) {
+      if (buffers[n]) return Promise.resolve();
+      if (loading[n]) return loading[n];
+      return (loading[n] = (async () => {
+        for (let attempt = 0; attempt < 3 && !buffers[n]; attempt++) {
+          try {
+            const data = await (await fetch(`audio/${n}.${n.startsWith('music') ? 'mp3' : 'wav'}`)).arrayBuffer();
+            buffers[n] = await new Promise((ok, ko) => ctx.decodeAudioData(data, ok, ko));
+          } catch {}
+        }
+        loading[n] = null;
+      })());
+    }
+    let adPaused = false;
+    async function start() {
+      if (ctx) { if (ctx.state !== 'running' && !document.hidden && !adPaused) ctx.resume().catch(() => {}); return; }
+      const Ctx = window.AudioContext || window.webkitAudioContext;
+      if (!Ctx) return;
+      try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch {}
+      ctx = new Ctx();
+      if (ctx.state !== 'running') ctx.resume().catch(() => {});
+      sfxGain = ctx.createGain(); sfxGain.gain.value = 0.9; sfxGain.connect(ctx.destination);
+      musicGain = ctx.createGain(); musicGain.gain.value = 0.4; musicGain.connect(ctx.destination);
+      // En segundo plano o durante un anuncio real, silencio total.
+      document.addEventListener('visibilitychange', () => { if (document.hidden) ctx.suspend().catch(() => {}); else if (!adPaused) ctx.resume().catch(() => {}); });
+      window.addEventListener('vrf-ad-start', () => { adPaused = true; ctx.suspend().catch(() => {}); });
+      window.addEventListener('vrf-ad-end', () => { adPaused = false; ctx.resume().catch(() => {}); });
+      applyMusic();
+      await Promise.all(names.filter((n) => n.startsWith('sfx')).map(load));
+    }
+    function applyMusic() {
+      if (!ctx) return;
+      if (state.music && !musicNode) {
+        if (!buffers[track]) { const want = track; load(want).then(() => { if (track === want) applyMusic(); }); return; }
+        musicNode = ctx.createBufferSource();
+        musicNode.buffer = buffers[track];
+        musicNode.loop = true;
+        if (LOOP[track] && LOOP[track] < musicNode.buffer.duration) musicNode.loopEnd = LOOP[track];
+        musicNode.connect(musicGain);
+        musicNode.start();
+      } else if (!state.music && musicNode) {
+        musicNode.stop(); musicNode = null;
+      }
+    }
+    function play(name, volume = 1, rate = 1) {
+      if (!ctx || !state.sfx || state.silent || !buffers[name]) return;
+      const now = ctx.currentTime;
+      if (now - (last[name] ?? -1) < 0.05) return;   // varios choques a la vez no deben zumbar
+      last[name] = now;
+      const src = ctx.createBufferSource();
+      src.buffer = buffers[name];
+      src.playbackRate.value = rate;
+      const g = ctx.createGain(); g.gain.value = volume;
+      src.connect(g).connect(sfxGain);
+      src.start();
+    }
+    return {
+      start, play, state,
+      setMusic(on) { state.music = on; save('wobble-music', on); applyMusic(); },
+      /// Cambia a la música del mundo (1 = Pradera, 2 = Taller) si no es la que ya suena.
+      setWorld(n) {
+        const next = n === 'fiesta' ? 'music_fiesta' : TRACKS[Math.min(TRACKS.length, Math.max(1, n)) - 1];
+        if (next === track) return;
+        track = next;
+        if (musicNode) { musicNode.stop(); musicNode = null; }
+        applyMusic();
+      },
+      setSfx(on) { state.sfx = on; save('wobble-sfx', on); },
+    };
+  })();
+  for (const ev of ['pointerdown', 'touchend', 'click']) window.addEventListener(ev, () => sound.start(), { capture: true });
+
+  const poses = {};
+  for (const name of ['idle', 'anticipation', 'airborne', 'victory', 'fail']) {
+    const img = new Image();
+    img.src = `bloop_${name}.png`;
+    poses[name] = img;
+  }
+
+  // ---- Progreso (solo en este navegador) ----
+  let progress = {};
+  try { progress = JSON.parse(localStorage.getItem('wobble-progress') || '{}'); } catch { progress = {}; }
+  const saveProgress = () => {
+    try {
+      localStorage.setItem('wobble-progress', JSON.stringify(progress));
+      localStorage.setItem('wobble-done', JSON.stringify(done));
+    } catch {}
+  };
+  let skipped = {};
+  try { skipped = JSON.parse(localStorage.getItem('wobble-skipped') || '{}'); } catch { skipped = {}; }
+  // Completar desbloquea el siguiente aunque no se recoja ninguna estrella (igual que en Unity).
+  let done = {};
+  try { done = JSON.parse(localStorage.getItem('wobble-done') || '{}'); } catch { done = {}; }
+  const unlocked = (i) => i === 0 || !!done[LEVELS[i - 1].id] || !!skipped[LEVELS[i - 1].id];
+  const worldOf = (id) => id.split('-')[0];
+  const worldNum = (id) => parseInt(id.slice(1), 10) || 1;
+  /// Número del nivel dentro de su mundo (el nivel 16 del juego es el 1 del Taller).
+  const localNumber = (i) => i - LEVELS.findIndex((l) => worldNum(l.id) === worldNum(LEVELS[i].id)) + 1;
+  const lastOfWorld = (i) => i === LEVELS.length - 1 || worldNum(LEVELS[i + 1].id) !== worldNum(LEVELS[i].id);
+  let pickerWorld = 1;
+  // Un salto por mundo, solo en niveles aún no superados (igual que ProgressionManager en Unity).
+  const canSkip = (i) => {
+    const id = LEVELS[i].id;
+    if (done[id] || skipped[id]) return false;
+    return !LEVELS.some((l) => worldOf(l.id) === worldOf(id) && skipped[l.id]);
+  };
+
+  // ---- Anuncios simulados: misma política que AdPolicy en Unity ----
+  const adPolicy = { firstLevelIndex: 3, winsBetween: 3, minSeconds: 90, wins: 0, lastAd: -Infinity };
+  const nowSec = () => performance.now() / 1000;
+  const adShown = () => { adPolicy.wins = 0; adPolicy.lastAd = nowSec(); };
+  const shouldInterstitial = (completedIndex) =>
+    completedIndex >= adPolicy.firstLevelIndex && adPolicy.wins >= adPolicy.winsBetween && nowSec() - adPolicy.lastAd >= adPolicy.minSeconds;
+  const revealedHints = new Set();
+  let adTimer = null;
+
+  // Anuncios web: AdSense para juegos HTML5 (vrf_ads.js). Mientras la cuenta no esté aprobada responde
+  // "unavailable" y, si era un premio, se muestra una tarjeta propia de otro juego de la casa y se entrega igual.
+  const HOUSE = {
+    es: [['tfc-icon.webp', 'Te falta calle!!', 'El juego de jerga venezolana. Gratis en visualrocketflyers.com'],
+         ['llanero-icon.webp', 'Llanero Adventure', 'Corre y salta por 15 destinos de Venezuela. Gratis en visualrocketflyers.com'],
+         'Tu premio llega en {0}…', '¡Recibir premio!'],
+    en: [['tfc-icon.webp', 'Te falta calle!!', 'The Venezuelan slang word game. Free at visualrocketflyers.com'],
+         ['llanero-icon.webp', 'Llanero Adventure', 'Run and jump across 15 places in Venezuela. Free at visualrocketflyers.com'],
+         'Your reward arrives in {0}…', 'Get reward!'],
+    pt: [['tfc-icon.webp', 'Te falta calle!!', 'O jogo das gírias venezuelanas. Grátis em visualrocketflyers.com'],
+         ['llanero-icon.webp', 'Llanero Adventure', 'Corra e pule por 15 destinos da Venezuela. Grátis em visualrocketflyers.com'],
+         'Seu prêmio chega em {0}…', 'Receber prêmio!'],
+  };
+  let houseTurn = 0;
+  function houseAd(seconds) {
+    return new Promise((resolve) => {
+      const screen = $('ad'), close = $('ad-close'), H = HOUSE[lang] || HOUSE.es;
+      const promo = H[houseTurn++ % 2];
+      $('ad-img').src = `/img/juegos/${promo[0]}`;
+      $('ad-title').textContent = promo[1];
+      $('ad-body').textContent = promo[2];
+      const endsAt = nowSec() + seconds;
+      const tick = () => {
+        const left = endsAt - nowSec();
+        close.disabled = left > 0;
+        close.textContent = left > 0 ? H[2].replace('{0}', Math.ceil(left)) : H[3];
+      };
+      tick();
+      adTimer = setInterval(tick, 200);
+      screen.hidden = false;
+      close.onclick = () => {
+        if (nowSec() < endsAt) return;
+        clearInterval(adTimer);
+        screen.hidden = true;
+        resolve(true);
+      };
+    });
+  }
+
+  /// Muestra un anuncio (premio o entre niveles). Devuelve true si corresponde entregar el premio.
+  async function showAd(rewarded) {
+    let r = 'unavailable';
+    try { if (window.vrfAds) r = await window.vrfAds[rewarded ? 'reward' : 'next'](rewarded ? 'wobble_reward' : 'wobble_next'); } catch {}
+    adShown();
+    if (r === 'viewed') return true;
+    if (r === 'dismissed') return false;
+    return rewarded ? houseAd(5) : true;
+  }
+
+  function offer(titleKey, bodyKey) {
+    return new Promise((resolve) => {
+      $('offer-title').textContent = t(titleKey);
+      $('offer-body').textContent = t(bodyKey);
+      $('offer-no').textContent = t('no_thanks');
+      $('offer-yes').textContent = t('watch_ad');
+      $('offer').hidden = false;
+      $('offer-no').onclick = () => { $('offer').hidden = true; resolve(false); };
+      $('offer-yes').onclick = () => { $('offer').hidden = true; resolve(true); };
+    });
+  }
+
+  let toastTimer = null;
+  function toast(key) {
+    const el = $('toast');
+    el.textContent = t(key);
+    el.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { el.hidden = true; }, 3500);
+  }
+
+  async function rewardedThen(titleKey, bodyKey, reward) {
+    if (!(await offer(titleKey, bodyKey))) return;
+    if (await showAd(true)) reward();
+    else toast('ad_not_completed');
+  }
+
+  // ---- Construcción del nivel desde datos ----
+  let world, L;   // L = nivel cargado: cuerpos, piezas y estado
+  const pending = [];
+
+  function buildLevel(index) {
+    const def = LEVELS[index];
+    world = new pl.World({ gravity: Vec2(0, -9.81) });
+    const ground = world.createBody();
+    const box = (body, hx, hy, cx, cy, angle, opts) =>
+      body.createFixture(pl.Box(hx, hy, Vec2(cx, cy), angle || 0), Object.assign({ friction: GRIPPY }, opts));
+    box(ground, 7, 3, 0, FLOOR_TOP - 3);
+    box(ground, 0.3, 15, -5.3, 0);
+    box(ground, 0.3, 15, 5.3, 0);
+
+    L = { index, def, pieces: [], resettables: [], draggables: [], springs: [], goals: [], balls: [], stars: [], extra: [], belts: [], toggles: [], fans: [], clouds: [], balloons: [], magnets: [], metals: [], portals: [], steps: 0, bombs: [], lavas: [], clock: 0, storms: [], bloop: null, fails: 0 };
+
+    for (const p of def.pieces) {
+      const piece = { def: p, type: p.type };
+      if (p.type === 'block') {
+        piece.body = world.createBody({ type: 'static', position: Vec2(p.x, p.y), angle: (p.angle || 0) * DEG });
+        box(piece.body, p.w / 2, p.h / 2, 0, 0, 0, { friction: p.friction ?? GRIPPY });
+        if (p.rotate || p.drag) L.resettables.push(piece.body);   // vuelve a su sitio al reiniciar
+      } else if (p.type === 'seesaw') {
+        const half = p.w / 2;
+        piece.body = world.createBody({ type: 'dynamic', position: Vec2(p.x, p.y), angle: p.angle * DEG });
+        box(piece.body, half, 0.15, 0, 0, 0, { density: 0.5 });
+        piece.lipX = p.angle >= 0 ? -half + 0.1 : half - 0.1;   // tope en el extremo bajo
+        box(piece.body, 0.1, 0.25, piece.lipX, 0.35, 0, { density: 0.5 });
+        world.createJoint(pl.RevoluteJoint({ collideConnected: true }, ground, piece.body, Vec2(p.x, p.y)));
+        L.resettables.push(piece.body);
+      } else if (p.type === 'bloop') {
+        piece.body = world.createBody({ type: 'dynamic', position: Vec2(p.x, p.y), fixedRotation: true, bullet: true });
+        piece.body.createFixture(pl.Circle(0.5), { density: 1, friction: GRIPPY });
+        L.bloop = piece.body;
+        L.resettables.push(piece.body);
+      } else if (p.type === 'ball') {
+        piece.r = p.r ?? 0.45;
+        piece.body = world.createBody({ type: 'dynamic', position: Vec2(p.x, p.y), bullet: true });
+        piece.body.createFixture(pl.Circle(piece.r), { density: p.density ?? 6, friction: 0.4, restitution: 0.1 });
+        L.resettables.push(piece.body);
+        L.balls.push(piece.body);
+        if (p.look === 'iron') L.metals.push(piece.body);
+      } else if (p.type === 'spring') {
+        piece.body = world.createBody({ type: 'static', position: Vec2(p.x, p.y), angle: (p.angle || 0) * DEG });
+        box(piece.body, 0.6, 0.35, 0, 0.35, 0);
+        piece.pad = piece.body.createFixture(pl.Box(0.6, 0.15, Vec2(0, 0.85), 0), { isSensor: true });
+        piece.speed = p.speed ?? 15;
+        piece.squash = 0;
+        L.springs.push(piece);
+        L.resettables.push(piece.body);
+      } else if (p.type === 'goal') {
+        piece.r = p.r ?? 0.9;
+        piece.body = world.createBody({ position: Vec2(p.x, p.y) });
+        piece.sensor = piece.body.createFixture(pl.Circle(piece.r), { isSensor: true });
+        L.goals.push(piece);
+      } else if (p.type === 'star') {
+        piece.body = world.createBody({ position: Vec2(p.x, p.y) });
+        piece.sensor = piece.body.createFixture(pl.Circle(0.38), { isSensor: true });
+        piece.collected = false;
+        L.stars.push(piece);
+      } else if (p.type === 'crate') {
+        // Caja de madera: cuerpo dinámico pesado (empuja, hace de contrapeso).
+        piece.body = world.createBody({ type: 'dynamic', position: Vec2(p.x, p.y), angle: (p.angle || 0) * DEG });
+        box(piece.body, p.w / 2, p.h / 2, 0, 0, 0, { density: p.density ?? 2, friction: 0.6 });
+        L.resettables.push(piece.body);
+        L.balls.push(piece.body);
+      } else if (p.type === 'belt') {
+        // Cinta transportadora: lo que va encima se lleva hacia `speed` (u/s, + a la derecha).
+        piece.body = world.createBody({ type: 'static', position: Vec2(p.x, p.y) });
+        piece.fixture = box(piece.body, p.w / 2, 0.15, 0, 0, 0, { friction: 0.8 });
+        piece.speed = p.speed ?? 2.5;
+        L.belts.push(piece);
+        if (p.toggle) {
+          piece.toggle = true;
+          L.toggles.push(piece);
+          L.extra.push({ save: () => piece.speed, load: (v) => { piece.speed = v; } });
+        }
+      } else if (p.type === 'fan') {
+        // Ventilador: sopla a lo largo de su eje (local +y) en una franja de ancho `w` y largo `range`.
+        piece.body = world.createBody({ type: 'static', position: Vec2(p.x, p.y), angle: (p.angle || 0) * DEG });
+        box(piece.body, 0.7, 0.4, 0, 0.4, 0);
+        piece.range = p.range ?? 5; piece.power = p.power ?? 18; piece.width = 1.4;
+        piece.on = p.on ?? true;
+        piece.spin = 0;
+        L.fans.push(piece);
+        L.resettables.push(piece.body);
+        if (p.toggle) {
+          piece.toggle = true;
+          L.toggles.push(piece);
+          L.extra.push({ save: () => (piece.on ? 1 : 0), load: (v) => { piece.on = !!v; } });
+        }
+      } else if (p.type === 'cloud') {
+        // Nube saltarina: sólida; lo que cae encima rebota hacia arriba con `speed` (conserva la velocidad horizontal).
+        piece.body = world.createBody({ type: 'static', position: Vec2(p.x, p.y) });
+        box(piece.body, p.w / 2, 0.22, 0, 0, 0, { friction: 0 });
+        piece.pad = piece.body.createFixture(pl.Box(p.w / 2 - 0.05, 0.1, Vec2(0, 0.3), 0), { isSensor: true });
+        piece.speed = p.speed ?? 11;
+        piece.squash = 0;
+        L.clouds.push(piece);
+        L.resettables.push(piece.body);
+      } else if (p.type === 'balloon') {
+        // Globo: Bloop lo revienta al tocarlo y sale impulsado hacia arriba (una sola vez por intento).
+        piece.r = p.r ?? 0.55;
+        piece.body = world.createBody({ type: 'static', position: Vec2(p.x, p.y) });
+        piece.sensor = piece.body.createFixture(pl.Circle(piece.r), { isSensor: true });
+        piece.speed = p.speed ?? 9;
+        piece.popped = false;
+        piece.color = p.color || ['red', 'yellow', 'teal', 'pink'][L.balloons.length % 4];
+        L.balloons.push(piece);
+        L.resettables.push(piece.body);
+        L.extra.push({ save: () => 0, load: () => { piece.popped = false; } });
+      } else if (p.type === 'magnet') {
+        // Imán: atrae lo metálico (vagonetas y bolas de hierro) hacia sus polos, más fuerte cuanto más cerca.
+        piece.body = world.createBody({ type: 'static', position: Vec2(p.x, p.y), angle: (p.angle || 0) * DEG });
+        box(piece.body, 0.5, 0.45, 0, 0.05, 0);
+        piece.range = p.range ?? 4.5; piece.power = p.power ?? 30;
+        piece.on = p.on ?? true;
+        L.magnets.push(piece);
+        L.resettables.push(piece.body);
+        if (p.toggle) {
+          piece.toggle = true;
+          L.toggles.push(piece);
+          L.extra.push({ save: () => (piece.on ? 1 : 0), load: (v) => { piece.on = !!v; } });
+        }
+      } else if (p.type === 'cart') {
+        // Vagoneta: tina metálica con ruedas sin fricción; Bloop puede viajar dentro.
+        piece.body = world.createBody({ type: 'dynamic', position: Vec2(p.x, p.y), angle: (p.angle || 0) * DEG, angularDamping: 4 });
+        const metal = { density: p.density ?? 5, friction: 0 };   // los costados resbalan contra las paredes
+        box(piece.body, 0.64, 0.08, 0, -0.33, 0, { density: p.density ?? 5, friction: 0.5 });
+        box(piece.body, 0.06, 0.3, -0.7, -0.05, 0, metal);
+        box(piece.body, 0.06, 0.3, 0.7, -0.05, 0, metal);
+        for (const wx of [-0.37, 0.37]) piece.body.createFixture(pl.Circle(Vec2(wx, -0.46), 0.19), { density: 1, friction: 0 });
+        L.resettables.push(piece.body);
+        L.balls.push(piece.body);
+        L.metals.push(piece.body);
+      } else if (p.type === 'portal') {
+        // Portal: lo que entra por uno sale por su pareja (mismo `pair`), disparado por la boca (+y local).
+        piece.body = world.createBody({ type: 'static', position: Vec2(p.x, p.y), angle: (p.angle || 0) * DEG });
+        piece.body.createFixture(pl.Circle(PORTAL_R), { isSensor: true });
+        piece.pair = p.pair ?? 1;
+        piece.color = p.color || 'blue';
+        piece.minSpeed = p.speed ?? PORTAL_MIN_SPEED;   // rapidez mínima de salida por este portal
+        piece.on = p.on ?? true;   // cerrado: no transporta (ni de entrada ni de salida)
+        L.portals.push(piece);
+        if (p.toggle) {
+          piece.toggle = true;
+          L.toggles.push(piece);
+          L.extra.push({ save: () => (piece.on ? 1 : 0), load: (v) => { piece.on = !!v; } });
+        }
+        L.resettables.push(piece.body);
+      } else if (p.type === 'bomb') {
+        // Bomba de confeti: estalla al cumplirse su mecha (`fuse` s desde ¡Probar!) o, si fuse = 0, al tocarla
+        // algo que se mueve; empuja hacia fuera todo lo dinámico dentro de `radius`.
+        piece.body = world.createBody({ type: 'static', position: Vec2(p.x, p.y) });
+        piece.body.createFixture(pl.Circle(0.45), { isSensor: true });
+        piece.fuse = p.fuse ?? 2; piece.radius = p.radius ?? 3; piece.power = p.power ?? 12;
+        piece.on = p.on ?? true;
+        piece.exploded = false;
+        L.bombs.push(piece);
+        L.resettables.push(piece.body);
+        L.extra.push({ save: () => (piece.on ? 1 : 0), load: (v) => { piece.on = !!v; piece.exploded = false; piece.chainAt = 0; } });
+        if (p.toggle) { piece.toggle = true; L.toggles.push(piece); }
+      } else if (p.type === 'lava') {
+        // Lava: sólida, y si Bloop la toca el intento termina.
+        piece.body = world.createBody({ type: 'static', position: Vec2(p.x, p.y), angle: (p.angle || 0) * DEG });
+        piece.fixture = box(piece.body, p.w / 2, p.h / 2, 0, 0, 0);
+        L.lavas.push(piece);
+      } else if (p.type === 'storm') {
+        // Nube del Gruñubarrón: va y viene entre (x, y) y (x2, y2) con un periodo fijo; si toca a Bloop, se acabó.
+        piece.from = Vec2(p.x, p.y); piece.to = Vec2(p.x2 ?? p.x, p.y2 ?? p.y);
+        piece.period = p.period ?? 4; piece.r = p.r ?? 0.75;
+        piece.pos = piece.from;
+        L.storms.push(piece);
+      } else if (p.type === 'pendulum') {
+        // Péndulo: bola colgada de una cuerda rígida desde (x, y); `angle` en grados desde la vertical (+ a la derecha).
+        piece.r = p.r ?? 0.45;
+        piece.length = p.length;
+        piece.anchor = Vec2(p.x, p.y);
+        const a = (p.angle || 0) * DEG;
+        piece.body = world.createBody({ type: 'dynamic', position: Vec2(p.x + Math.sin(a) * p.length, p.y - Math.cos(a) * p.length), bullet: true });
+        piece.body.createFixture(pl.Circle(piece.r), { density: p.density ?? 6, friction: 0.4, restitution: 0.1 });
+        piece.makeJoint = () => {
+          if (piece.joint) world.destroyJoint(piece.joint);
+          piece.joint = world.createJoint(pl.RevoluteJoint({}, ground, piece.body, piece.anchor));
+        };
+        piece.makeJoint();
+        L.resettables.push(piece.body);
+        L.balls.push(piece.body);
+        L.extra.push({ save: () => piece.anchor.x, load: (x) => { piece.anchor = Vec2(x, piece.anchor.y); piece.makeJoint(); } });
+        L.metals.push(piece.body);   // la bola del péndulo es de hierro
+      }
+      if (p.drag) {
+        piece.drag = p.drag;
+        L.draggables.push(piece);
+      } else if (p.rotate) {
+        piece.rotate = p.rotate;
+        L.draggables.push(piece);
+      }
+      if (p.id) piece.id = p.id;
+      L.pieces.push(piece);
+    }
+
+    world.on('begin-contact', (contact) => {
+      const a = contact.getFixtureA(), b = contact.getFixtureB();
+      for (const [sensor, other] of [[a, b], [b, a]]) {
+        const spring = L.springs.find((s) => s.pad === sensor);
+        if (spring && other.getBody().isDynamic()) pending.push(['spring', other.getBody(), spring]);
+        if (L.goals.some((g) => g.sensor === sensor) && other.getBody() === L.bloop) pending.push(['goal']);
+        const cloud = L.clouds.find((s) => s.pad === sensor);
+        if (cloud && other.getBody().isDynamic()) pending.push(['cloud', other.getBody(), cloud]);
+        const balloon = L.balloons.find((s) => s.sensor === sensor);
+        if (balloon && other.getBody() === L.bloop) pending.push(['pop', null, balloon]);
+        const star = L.stars.find((s) => s.sensor === sensor);
+        if (star && other.getBody() === L.bloop) pending.push(['star', null, star]);
+      }
+      if (a.isSensor() || b.isSensor()) return;
+      const ba = a.getBody(), bb = b.getBody();
+      for (const lava of L.lavas) if ((lava.fixture === a && bb === L.bloop) || (lava.fixture === b && ba === L.bloop)) pending.push(['lava']);
+      const speed = Vec2.distance(ba.getLinearVelocity(), bb.getLinearVelocity());
+      if (speed < 1.5) return;
+      for (const body of [ba, bb]) {
+        if (body === L.bloop) pending.push(['impact', body, speed, 'sfx_bounce']);
+        else if (L.metals.includes(body)) pending.push(['impact', body, speed, 'sfx_clank']);
+        else if (L.balls.includes(body)) pending.push(['impact', body, speed, 'sfx_thud']);
+      }
+    });
+
+    L.hint = revealedHints.has(def.id);   // pista ya pagada: gratis el resto de la sesión
+    L.initial = snap();
+    L.attemptSnap = L.initial;
+    L.state = 'prep'; L.attempts = 0;
+    pending.length = 0;
+    finishedPose = null; launchUntil = 0;
+  }
+
+  const snap = () => {
+    const s = L.resettables.map((b) => ({ p: b.getPosition().clone(), a: b.getAngle() }));
+    s.extra = L.extra.map((e) => e.save());
+    return s;
+  };
+  function restore(s) {
+    L.resettables.forEach((b, i) => {
+      b.setTransform(s[i].p, s[i].a);
+      b.setLinearVelocity(Vec2(0, 0));
+      b.setAngularVelocity(0);
+      b.setAwake(true);
+    });
+    // Después de los cuerpos: la cuerda del péndulo se rehace con la bola ya en su sitio.
+    L.extra.forEach((e, i) => e.load(s.extra[i]));
+    pending.length = 0;
+    finishedPose = null; launchUntil = 0;
+    for (const s of L.springs) s.squash = 0;
+    for (const s of L.stars) s.collected = false;
+    L.clock = 0;   // las mechas vuelven a mostrar su tiempo completo
+  }
+  const collectedStars = () => L.stars.filter((s) => s.collected).length;
+
+  // ---- Estado del puzzle ----
+  let simTime = 0, stillTime = 0, accumulator = 0, launchUntil = 0, finishedPose = null;
+
+  function setState(next) {
+    if (next !== L.state) {
+      if (next === 'sim') sound.play('sfx_whoosh', 0.8);
+      else if (next === 'win') sound.play('sfx_win');
+      else if (next === 'fail') sound.play('sfx_fail', 0.8);
+    }
+    const entering = next !== L.state;
+    if (next === 'win' && L.state === 'sim') {
+      adPolicy.wins++;
+      const bp = L.bloop.getPosition();
+      fx.burst('confetti', bp.x, bp.y + 1, 40);
+    }
+    if (next === 'fail' && L.state === 'sim') L.fails++;
+    L.state = next;
+    ui.play.hidden = next !== 'prep';
+    $('btn-hint').hidden = !(next === 'prep' && L.def.solution && L.def.solution.length);
+    // Saltar nivel: desde el segundo fallo en este nivel («Reiniciar» no borra la cuenta).
+    $('btn-skip').hidden = !(next === 'fail' && L.fails >= 2 && L.index < LEVELS.length - 1 && canSkip(L.index));
+    ui.hint.parentElement.hidden = !(next === 'prep' && L.attempts === 0);
+    ui.result.hidden = !(next === 'win' || next === 'fail');
+    if (next === 'win') {
+      const stars = collectedStars();
+      progress[L.def.id] = Math.max(progress[L.def.id] || 0, stars);
+      done[L.def.id] = 1;
+      saveProgress();
+      const last = L.index === LEVELS.length - 1;
+      ui.resultTitle.textContent = t(lastOfWorld(L.index) ? 'world_done' : 'rescued');
+      if (entering) ui.stars.innerHTML = [0, 1, 2].map((i) => `<span class="star-pop" style="animation-delay:${0.25 + i * 0.28}s">${starSvg(i < stars)}</span>`).join('');
+      ui.stars.hidden = false;
+      ui.detail.textContent = t('stars_collected', stars, L.stars.length);
+      ui.again.hidden = false;
+      ui.resultBtn.textContent = t(last ? 'finale_go' : 'next');
+    } else if (next === 'fail') {
+      ui.resultTitle.textContent = t('oops');
+      ui.stars.hidden = true;
+      ui.detail.textContent = t('fail_detail');
+      ui.again.hidden = true;
+      ui.resultBtn.textContent = t('retry');
+    }
+  }
+
+  function starSvg(on, size) {
+    return `<svg viewBox="0 0 24 24"${size ? ` width="${size}" height="${size}"` : ''}><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3 6.1 20.6l1.3-6.6L2.5 9.4l6.6-.8z" fill="${on ? '#ffcf3a' : '#4a5480'}" stroke="${on ? '#c9930f' : '#353d63'}" stroke-width="1.4" stroke-linejoin="round"/></svg>`;
+  }
+
+  function loadLevel(index) {
+    buildLevel(index);
+    try { localStorage.setItem('wobble-last', String(index)); } catch {}
+    applyLanguage();
+    // Cartel de entrada «Nivel N · nombre»: se reinicia la animación quitando y poniendo el elemento.
+    const banner = $('banner');
+    $('banner-title').textContent = t('level_title', localNumber(index));
+    sound.setWorld(worldNum(LEVELS[index].id));
+    $('banner-name').textContent = levelText(L.def, 'name');
+    banner.hidden = true;
+    void banner.offsetWidth;
+    banner.hidden = false;
+    clearTimeout(loadLevel.bannerTimer);
+    loadLevel.bannerTimer = setTimeout(() => { banner.hidden = true; }, 1850);
+  }
+
+  /// Vuelve a escribir todos los textos visibles en el idioma actual.
+  function applyLanguage() {
+    document.documentElement.lang = lang;
+    ui.title.textContent = t('level_title', localNumber(L.index));
+    ui.name.textContent = levelText(L.def, 'name');
+    ui.hint.textContent = levelText(L.def, 'hint') || '';
+    ui.play.textContent = t('play');
+    ui.again.textContent = t('again');
+    ui.closePicker.textContent = t('back');
+
+    $('btn-lang').textContent = t('language');
+    $('badge').textContent = t('prototype');
+    $('btn-skip').textContent = t('skip_level');
+    $('btn-hint').setAttribute('aria-label', t('hint'));
+    $('btn-hint').title = t('hint');
+    ui.menu.setAttribute('aria-label', t('choose_level'));
+    ui.reset.setAttribute('aria-label', t('reset'));
+    ui.reset.title = t('reset');
+    ui.menu.title = t('levels');
+    if (typeof audioLabels === 'function') audioLabels();
+    if (!ui.picker.hidden) openPicker(pickerWorld);
+    setState(L.state);
+  }
+
+  function play() {
+    if (L.state !== 'prep') return;
+    L.attempts++;
+    L.attemptSnap = snap();
+    simTime = 0; stillTime = 0; accumulator = 0; L.clock = 0;
+    setState('sim');
+  }
+  const retry = () => { restore(L.attemptSnap); setState('prep'); };
+  const resetLevel = () => { L.attempts = 0; restore(L.initial); setState('prep'); };
+
+  /// Cintas: después de cada paso, lo que está encima se acerca a la velocidad de la cinta.
+  function driveBelts() {
+    for (const belt of L.belts) {
+      const top = belt.body.getPosition().y;
+      // Lista de contactos actual (no eventos): vale también para lo que empieza encima de la cinta.
+      for (let ce = belt.body.getContactList(); ce; ce = ce.next) {
+        if (!ce.contact.isTouching()) continue;
+        const b = ce.other;
+        if (!b.isDynamic() || b.getPosition().y < top) continue;
+        const v = b.getLinearVelocity();
+        b.setLinearVelocity(Vec2(v.x + (belt.speed - v.x) * Math.min(1, DT * 10), v.y));
+      }
+    }
+  }
+
+  /// Ventiladores: empujan cada cuerpo dinámico dentro de su franja (más fuerte cerca de la boca) con algo de freno de aire.
+  function driveFans() {
+    for (const fan of L.fans) {
+      if (!fan.on) continue;
+      const a = fan.body.getAngle(), dir = Vec2(-Math.sin(a), Math.cos(a));
+      for (let b = world.getBodyList(); b; b = b.getNext()) {
+        if (!b.isDynamic()) continue;
+        const lp = fan.body.getLocalPoint(b.getPosition());
+        const along = lp.y - 0.8;
+        if (along < 0 || along > fan.range || Math.abs(lp.x) > fan.width / 2) continue;
+        const k = fan.power * (1 - 0.5 * along / fan.range);
+        const v = b.getLinearVelocity(), m = b.getMass();
+        b.applyForceToCenter(Vec2((dir.x * k - v.x * 0.8) * m, (dir.y * k - v.y * 0.8) * m), true);
+      }
+    }
+  }
+
+  /// Imanes: tiran de cada cuerpo metálico hacia sus polos (punto local (0, -0.55)) dentro de su alcance.
+  function driveMagnets() {
+    for (const mag of L.magnets) {
+      if (!mag.on) continue;
+      const pole = mag.body.getWorldPoint(Vec2(0, -0.55));
+      for (const b of L.metals) {
+        const d = Vec2.sub(pole, b.getPosition()), dist = d.length();
+        if (dist > mag.range || dist < 0.05) continue;
+        const k = mag.power * (1 - 0.6 * dist / mag.range) / dist, v = b.getLinearVelocity();
+        const ax = d.x * k - v.x * 0.3, ay = d.y * k - v.y * 0.3;
+        b.applyForceToCenter(Vec2(ax * b.getMass(), ay * b.getMass()), true);
+        // Lo que va montado encima (Bloop en la vagoneta) recibe la misma aceleración: viajan juntos.
+        for (let ce = b.getContactList(); ce; ce = ce.next) {
+          const o = ce.other;
+          if (!ce.contact.isTouching() || !o.isDynamic() || L.metals.includes(o) || o.getPosition().y < b.getPosition().y) continue;
+          o.applyForceToCenter(Vec2(ax * o.getMass(), ay * o.getMass()), true);
+        }
+      }
+    }
+  }
+
+  /// Portales: un cuerpo cuyo centro entra en un portal reaparece en su pareja, saliendo por la boca
+  /// con la misma rapidez (mínimo PORTAL_MIN_SPEED). Una espera corta evita que rebote entre los dos.
+  function drivePortals() {
+    L.steps++;
+    for (let b = world.getBodyList(); b; b = b.getNext()) {
+      if (!b.isDynamic() || (b.portalReady || 0) > L.steps) continue;
+      for (const from of L.portals) {
+        if (!from.on || Vec2.distance(b.getPosition(), from.body.getPosition()) >= PORTAL_R) continue;
+        const to = L.portals.find((q) => q !== from && q.pair === from.pair);
+        if (!to || !to.on) continue;
+        const a = to.body.getAngle(), n = Vec2(-Math.sin(a), Math.cos(a));
+        const speed = Math.max(to.minSpeed, b.getLinearVelocity().length());
+        const tp = to.body.getPosition();
+        b.setTransform(Vec2(tp.x + n.x * PORTAL_EXIT, tp.y + n.y * PORTAL_EXIT), b.getAngle());
+        b.setLinearVelocity(Vec2(n.x * speed, n.y * speed));
+        b.portalReady = L.steps + PORTAL_COOLDOWN;
+        pending.push(['warp', b, from, to]);
+        break;
+      }
+    }
+  }
+
+  /// Bombas: cuenta la mecha en pasos (o espera un toque) y estalla una sola vez por intento.
+  function driveBombs() {
+    L.clock++;
+    for (const bomb of L.bombs) {
+      if (!bomb.on || bomb.exploded) continue;
+      const bp = bomb.body.getPosition();
+      let fire = (bomb.fuse > 0 && L.clock * DT >= bomb.fuse - 1e-6) || (bomb.chainAt && L.clock >= bomb.chainAt);
+      if (bomb.fuse <= 0) {
+        for (let b = world.getBodyList(); b && !fire; b = b.getNext()) if (b.isDynamic() && Vec2.distance(b.getPosition(), bp) < BOMB_TOUCH) fire = true;
+      }
+      if (!fire) continue;
+      bomb.exploded = true;
+      // Reacción en cadena: las bombas armadas dentro del radio estallan poco después.
+      for (const other of L.bombs) {
+        if (other !== bomb && other.on && !other.exploded && !other.chainAt && Vec2.distance(other.body.getPosition(), bp) < bomb.radius) other.chainAt = L.clock + BOMB_CHAIN_STEPS;
+      }
+      for (let b = world.getBodyList(); b; b = b.getNext()) {
+        if (!b.isDynamic()) continue;
+        const d = Vec2.sub(b.getPosition(), bp), dist = d.length();
+        if (dist >= bomb.radius || dist < 1e-4) continue;
+        const k = bomb.power * (1 - 0.5 * dist / bomb.radius) / dist, v = b.getLinearVelocity();
+        b.setLinearVelocity(Vec2(v.x + d.x * k, v.y + d.y * k));
+        b.setAwake(true);
+      }
+      pending.push(['boom', null, bomb]);
+    }
+  }
+
+  /// Posición de una nube de tormenta en el instante t (s desde ¡Probar!): vaivén suave.
+  const stormAt = (s, time) => {
+    const k = 0.5 - 0.5 * Math.cos(2 * Math.PI * time / s.period);
+    return Vec2(s.from.x + (s.to.x - s.from.x) * k, s.from.y + (s.to.y - s.from.y) * k);
+  };
+  function driveStorms() {
+    for (const s of L.storms) {
+      s.pos = stormAt(s, L.clock * DT);
+      if (L.state === 'sim' && Vec2.distance(s.pos, L.bloop.getPosition()) < s.r + STORM_TOUCH) pending.push(['zap', null, s]);
+    }
+  }
+
+  function step() {
+    world.step(DT, 8, 3);
+    drivePortals();
+    driveBombs();
+    driveStorms();
+    driveBelts();
+    driveFans();
+    driveMagnets();
+    for (const [kind, body, spring, sfx] of pending.splice(0)) {
+      if (kind === 'impact') {
+        sound.play(sfx, Math.min(1, spring / 9), 0.92 + Math.random() * 0.16);
+        if (spring > 3) { const bp = body.getPosition(); fx.burst('dust', bp.x, bp.y - (body === L.bloop ? 0.45 : 0.3), 3 + Math.round(Math.min(1, spring / 9) * 5)); }
+      } else if (kind === 'star') {
+        if (L.state === 'sim' && !spring.collected) {
+          spring.collected = true;
+          sound.play('sfx_star');
+          const sp = spring.body.getPosition();
+          fx.burst('spark', sp.x, sp.y, 10, '#ffd23f');
+        }
+      } else if (kind === 'spring') {
+        sound.play('sfx_spring');
+        { const sp = spring.body.getWorldPoint(Vec2(0, 0.9)); fx.burst('spark', sp.x, sp.y, 6, '#fff3a0'); }
+        const a = spring.body.getAngle();
+        body.setLinearVelocity(Vec2(-Math.sin(a) * spring.speed, Math.cos(a) * spring.speed));
+        spring.squash = 0.15;
+        if (body === L.bloop) launchUntil = performance.now() + 120;
+      } else if (kind === 'boom') {
+        sound.play('sfx_boom');
+        const bp = spring.body.getPosition();
+        fx.burst('confetti', bp.x, bp.y, 60);
+        fx.burst('spark', bp.x, bp.y, 16, '#ffd23f');
+        shakeUntil = performance.now() + 250;
+      } else if (kind === 'zap' && L.state === 'sim') {
+        sound.play('sfx_zap');
+        const p = L.bloop.getPosition();
+        fx.burst('spark', p.x, p.y, 16, '#ffe35a');
+        shakeUntil = performance.now() + 200;
+        return fail();
+      } else if (kind === 'lava' && L.state === 'sim') {
+        const p = L.bloop.getPosition();
+        fx.burst('spark', p.x, p.y - 0.4, 14, '#ff8c42');
+        return fail();
+      } else if (kind === 'warp') {
+        sound.play('sfx_warp', 0.8);
+        const fp = spring.body.getPosition(), tp = sfx.body.getPosition();
+        fx.burst('spark', fp.x, fp.y, 8, spring.color === 'orange' ? '#ffb060' : '#7fd0ff');
+        fx.burst('spark', tp.x, tp.y, 10, sfx.color === 'orange' ? '#ffb060' : '#7fd0ff');
+        if (body === L.bloop) launchUntil = performance.now() + 120;
+      } else if (kind === 'cloud') {
+        const v = body.getLinearVelocity();
+        if (v.y > 0.5) continue;   // solo rebota lo que cae
+        body.setLinearVelocity(Vec2(v.x, spring.speed));
+        sound.play('sfx_puff');
+        spring.squash = 0.2;
+        if (body === L.bloop) launchUntil = performance.now() + 120;
+      } else if (kind === 'pop') {
+        if (spring.popped || L.state !== 'sim') continue;
+        spring.popped = true;
+        const v = L.bloop.getLinearVelocity();
+        L.bloop.setLinearVelocity(Vec2(v.x, spring.speed));
+        sound.play('sfx_pop');
+        const bp = spring.body.getPosition();
+        fx.burst('confetti', bp.x, bp.y, 14);
+        fx.burst('spark', bp.x, bp.y, 8, '#ffffff');
+      } else if (kind === 'goal' && L.state === 'sim') {
+        finishedPose = 'victory';
+        setState('win');
+      }
+    }
+    if (L.state !== 'sim') return;
+    simTime += DT;
+    const p = L.bloop.getPosition();
+    if (p.y < KILL_Y || Math.abs(p.x) > KILL_X || simTime > MAX_SIM) return fail();
+    if (simTime > STILL_GRACE && L.bloop.getLinearVelocity().lengthSquared() < 0.01) {
+      stillTime += DT;
+      if (stillTime > STILL_FAIL) fail();
+    } else stillTime = 0;
+  }
+  function fail() { finishedPose = 'fail'; setState('fail'); }
+
+  // ---- Entrada: arrastrar piezas ----
+  let view = { scale: 1, half: 10 };
+  let dragging = null, grabDx = 0, grabX = 0, grabAngle = 0;
+  const ROTATE_DEG_PER_UNIT = 25;   // arrastrar a la derecha gira en sentido horario
+  const toWorld = (ev) => {
+    const r = canvas.getBoundingClientRect();
+    const sx = (ev.clientX - r.left) * (canvas.width / r.width);
+    const sy = (ev.clientY - r.top) * (canvas.height / r.height);
+    return Vec2((sx - canvas.width / 2) / view.scale, (canvas.height / 2 - sy) / view.scale + CAMERA_Y);
+  };
+  const hitPiece = (w) => L.draggables.find((d) => {
+    const p = d.body.getPosition();
+    if (d.type === 'spring') return Math.abs(w.x - p.x) < 1.1 && w.y > p.y - 0.4 && w.y < p.y + 1.6;
+    if (d.type === 'block') {
+      const l = d.body.getLocalPoint(w);
+      return Math.abs(l.x) < d.def.w / 2 + 0.3 && Math.abs(l.y) < d.def.h / 2 + 0.6;
+    }
+    if (d.type === 'magnet') return Vec2.distance(w, p) < 1.0;
+    if (d.type === 'portal') return Vec2.distance(w, p) < 1.0;
+    if (d.type === 'bomb') return Vec2.distance(w, p) < 0.9;
+    if (d.type === 'cart') { const l = d.body.getLocalPoint(w); return Math.abs(l.x) < 1.0 && Math.abs(l.y + 0.1) < 0.8; }
+    if (d.type === 'fan') { const l = d.body.getLocalPoint(w); return Math.abs(l.x) < 1 && l.y > -0.4 && l.y < 1.4; }
+    if (d.type === 'cloud') return Math.abs(w.x - p.x) < d.def.w / 2 + 0.3 && Math.abs(w.y - p.y) < 0.7;
+    if (d.type === 'pendulum') return Vec2.distance(w, p) < d.r + 0.6 || Vec2.distance(w, d.anchor) < 0.7;
+    if (d.type === 'crate') {
+      const l = d.body.getLocalPoint(w);
+      return Math.abs(l.x) < d.def.w / 2 + 0.4 && Math.abs(l.y) < d.def.h / 2 + 0.4;
+    }
+    return Vec2.distance(w, p) < (d.r || 0.5) + 0.6;
+  });
+  /// Arrastre horizontal dentro del riel. El péndulo mueve su anclaje y la bola a la vez.
+  const movePiece = (piece, x) => {
+    const d = piece.drag;
+    const nx = Math.min(d.xMax, Math.max(d.xMin, x));
+    if (piece.type === 'pendulum') {
+      const dx = nx - piece.anchor.x;
+      const bp = piece.body.getPosition();
+      piece.body.setTransform(Vec2(bp.x + dx, bp.y), piece.body.getAngle());
+      piece.anchor = Vec2(nx, piece.anchor.y);
+      piece.makeJoint();
+      return;
+    }
+    const pos = piece.body.getPosition();
+    piece.body.setTransform(Vec2(nx, pos.y), piece.body.getAngle());
+  };
+  /// Giro dentro de los límites (grados absolutos, antihorario positivo).
+  const rotatePiece = (piece, deg) => {
+    const r = piece.rotate;
+    const a = Math.min(r.max, Math.max(r.min, deg));
+    piece.body.setTransform(piece.body.getPosition(), a * DEG);
+  };
+  const placePiece = (piece, place) => {
+    if (place.dir !== undefined && piece.toggle && (piece.type === 'fan' || piece.type === 'magnet' || piece.type === 'portal' || piece.type === 'bomb')) piece.on = place.dir > 0;
+    else if (place.dir !== undefined && piece.toggle) piece.speed = Math.abs(piece.speed) * Math.sign(place.dir);
+    else if (place.angle !== undefined && piece.rotate) rotatePiece(piece, place.angle);
+    else if (place.x !== undefined && piece.drag) movePiece(piece, place.x);
+  };
+  canvas.addEventListener('pointerdown', (ev) => {
+    if (L.state !== 'prep') return;
+    const w = toWorld(ev);
+    // Cintas con interruptor: tocar invierte el sentido (no se arrastran).
+    const toggle = L.toggles.find((g) => {
+      const p = g.body.getPosition();
+      if (g.type === 'fan') { const l = g.body.getLocalPoint(w); return Math.abs(l.x) < 0.95 && l.y > -0.3 && l.y < 1.3; }
+      if (g.type === 'magnet' || g.type === 'portal' || g.type === 'bomb') return Vec2.distance(w, p) < 0.95;
+      return Math.abs(w.x - p.x) < g.def.w / 2 + 0.2 && Math.abs(w.y - p.y) < 0.9;
+    });
+    if (toggle) {
+      if (toggle.type === 'fan' || toggle.type === 'magnet' || toggle.type === 'portal' || toggle.type === 'bomb') toggle.on = !toggle.on; else toggle.speed = -toggle.speed;
+      sound.play('sfx_pick'); toggle.flash = performance.now(); return;
+    }
+    const piece = hitPiece(w);
+    if (!piece) return;
+    dragging = piece;
+    grabDx = (piece.type === 'pendulum' ? piece.anchor.x : piece.body.getPosition().x) - w.x;
+    grabX = w.x; grabAngle = piece.body.getAngle() / DEG;
+    sound.play('sfx_pick');
+    canvas.setPointerCapture(ev.pointerId);
+    canvas.classList.add('grabbing');
+  });
+  canvas.addEventListener('pointermove', (ev) => {
+    const w = toWorld(ev);
+    if (dragging && dragging.rotate) rotatePiece(dragging, grabAngle - (w.x - grabX) * ROTATE_DEG_PER_UNIT);
+    else if (dragging) movePiece(dragging, w.x + grabDx);
+    canvas.classList.toggle('can-grab', L.state === 'prep' && !!hitPiece(w));
+  });
+  const endDrag = () => {
+    if (dragging) sound.play('sfx_drop');
+    dragging = null; canvas.classList.remove('grabbing');
+  };
+  canvas.addEventListener('pointerup', endDrag);
+  canvas.addEventListener('pointercancel', endDrag);
+
+  function openPicker(world) {
+    const worlds = Math.max(...LEVELS.map((l) => worldNum(l.id)));
+    pickerWorld = Math.min(worlds, Math.max(1, world || pickerWorld));
+    $('picker-title').textContent = t(`world_${pickerWorld}`);
+    $('picker-sub').textContent = t(`world_${pickerWorld}_sub`);
+    $('picker-prev').disabled = pickerWorld === 1;
+    $('picker-next').disabled = pickerWorld === worlds;
+    ui.grid.innerHTML = LEVELS.map((lvl, i) => {
+      if (worldNum(lvl.id) !== pickerWorld) return '';
+      const stars = progress[lvl.id] || 0;
+      const open = unlocked(i);
+      const n = localNumber(i);
+      return `<button class="lvl" data-i="${i}" ${open ? '' : 'disabled'} aria-label="${t('level_title', n)}${open ? '' : ` (${t('locked')})`}">${n}<span class="mini">${[0, 1, 2].map((s) => starSvg(s < stars)).join('')}</span></button>`;
+    }).join('');
+    ui.picker.hidden = false;
+  }
+  $('picker-prev').addEventListener('click', () => openPicker(pickerWorld - 1));
+  $('picker-next').addEventListener('click', () => openPicker(pickerWorld + 1));
+  ui.grid.addEventListener('click', (ev) => {
+    const btn = ev.target.closest('.lvl');
+    if (!btn || btn.disabled) return;
+    ui.picker.hidden = true;
+    loadLevel(Number(btn.dataset.i));
+  });
+  ui.closePicker.addEventListener('click', () => { ui.picker.hidden = true; });
+  const musicBtn = $('btn-music'), sfxBtn = $('btn-sfx');
+  const audioLabels = () => {
+    musicBtn.textContent = t(sound.state.music ? 'music_on' : 'music_off');
+    sfxBtn.textContent = t(sound.state.sfx ? 'sfx_on' : 'sfx_off');
+  };
+  $('btn-lang').addEventListener('click', () => {
+    lang = LANGS[(LANGS.indexOf(lang) + 1) % LANGS.length];
+    try { localStorage.setItem('wobble-lang', lang); } catch {}
+    applyLanguage();
+  });
+  musicBtn.addEventListener('click', () => { sound.setMusic(!sound.state.music); audioLabels(); });
+  sfxBtn.addEventListener('click', () => { sound.setSfx(!sound.state.sfx); audioLabels(); });
+  audioLabels();
+  document.addEventListener('click', (ev) => { if (ev.target.closest('button')) sound.play('sfx_click', 0.7); });
+  ui.menu.addEventListener('click', () => openPicker(worldNum(L.def.id)));
+  ui.play.addEventListener('click', play);
+  ui.reset.addEventListener('click', () => (L.state === 'prep' ? resetLevel() : retry()));
+  ui.again.addEventListener('click', resetLevel);
+  ui.resultBtn.addEventListener('click', async () => {
+    if (L.state === 'fail') return retry();
+    if (L.index < LEVELS.length - 1) {
+      const next = L.index + 1;
+      if (shouldInterstitial(L.index)) await showAd(false);
+      loadLevel(next);
+    } else { resetLevel(); showFinale(); }
+  });
+  $('btn-hint').addEventListener('click', () => {
+    if (revealedHints.has(L.def.id)) { L.hint = true; return; }
+    rewardedThen('hint_title', 'hint_body', () => { revealedHints.add(L.def.id); L.hint = true; });
+  });
+  $('btn-skip').addEventListener('click', () => {
+    rewardedThen('skip_title', 'skip_body', () => {
+      skipped[L.def.id] = 1;
+      try { localStorage.setItem('wobble-skipped', JSON.stringify(skipped)); } catch {}
+      loadLevel(L.index + 1);
+    });
+  });
+
+  // ---- Dibujo ----
+  function resize() {
+    const r = canvas.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.max(1, Math.round(r.width * dpr));
+    canvas.height = Math.max(1, Math.round(r.height * dpr));
+    view.half = Math.max(10, 4.9 / (canvas.width / canvas.height));
+    view.scale = canvas.height / (2 * view.half);
+  }
+  new ResizeObserver(resize).observe(canvas);
+
+  const c = ctx;
+  const disc = (x, y, r, color) => { c.beginPath(); c.arc(x, y, r, 0, Math.PI * 2); c.fillStyle = color; c.fill(); };
+
+  // Sprites del mundo (los mismos PNG que usa Unity, generados con Tools/generate_art.py).
+  const ART = {};
+  for (const n of ['sky', 'cloud_a', 'cloud_b', 'cloud_c', 'island_a', 'island_b', 'hills', 'ground', 'block_stone', 'block_wood',
+    'block_ice', 'boulder', 'spring_plate', 'spring_base', 'spring_coil', 'portal_arch', 'portal_swirl', 'star', 'arrow', 'dot',
+    'fulcrum', 'fx_puff', 'fx_spark', 'fx_confetti', 'rotate_icon', 'workshop_wall', 'workshop_floor', 'block_plank', 'block_post',
+    'crate', 'iron_ball', 'belt', 'toggle_icon', 'factory_wall', 'factory_floor', 'block_metal', 'gear',
+    'sky_sunset', 'cloud_floor', 'cloud_pad', 'block_sky', 'balloon_red', 'balloon_yellow', 'balloon_teal', 'balloon_pink', 'fan_base', 'fan_blades', 'hot_air',
+    'mine_wall', 'mine_floor', 'block_rock', 'magnet', 'mine_cart', 'crystal',
+    'void_wall', 'void_floor', 'block_void', 'portal_blue', 'portal_orange', 'portal_green', 'portal_pink',
+    'volcano_wall', 'volcano_floor', 'block_basalt', 'lava', 'confetti_bomb',
+    'castle_wall', 'castle_floor', 'block_castle', 'storm_angry', 'storm_happy', 'wobbly_pip', 'wobbly_lumi', 'wobbly_zig', 'party_banner']) {
+    const img = new Image();
+    let tries = 0;
+    img.onerror = () => { if (++tries < 3) setTimeout(() => { img.src = `art/${n}.png?r=${tries}`; }, 400 * tries); };
+    img.src = `art/${n}.png`;
+    ART[n] = img;
+  }
+  const ready = (img) => img.complete && img.naturalWidth > 0;
+
+  /// Dibuja un sprite centrado en (x, y) con tamaño w×h en unidades del mundo (el lienzo tiene la y invertida).
+  function sprite(img, x, y, w, h, angle = 0, alpha = 1) {
+    if (!ready(img)) return;
+    c.save(); c.translate(x, y); if (angle) c.rotate(angle); c.scale(1, -1);
+    if (alpha !== 1) c.globalAlpha = alpha;
+    c.drawImage(img, -w / 2, -h / 2, w, h);
+    c.restore();
+  }
+
+  /// Bloque 9-slice: bordes de 24 px (0.125 u) que no se deforman al estirar.
+  function sliced(img, x, y, w, h, angle = 0, tint = null) {
+    if (!ready(img)) return;
+    const n = img.naturalWidth, b = n / 4, bw = Math.min(0.125, w / 2), bh = Math.min(0.125, h / 2);
+    c.save(); c.translate(x, y); if (angle) c.rotate(angle); c.scale(1, -1);
+    const xs = [-w / 2, -w / 2 + bw, w / 2 - bw, w / 2], ys = [-h / 2, -h / 2 + bh, h / 2 - bh, h / 2];
+    const sx = [0, b, n - b, n];
+    for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) {
+      const dw = xs[i + 1] - xs[i], dh = ys[j + 1] - ys[j];
+      if (dw <= 0 || dh <= 0) continue;
+      c.drawImage(img, sx[i], sx[j], sx[i + 1] - sx[i], sx[j + 1] - sx[j], xs[i], ys[j], dw + 0.002, dh + 0.002);
+    }
+    if (tint) { c.globalCompositeOperation = 'source-atop'; c.fillStyle = tint; c.fillRect(-w / 2, -h / 2, w, h); }
+    c.restore();
+  }
+
+  // ---- Partículas: polvo, destellos y confeti (solo visuales) ----
+  const fx = (() => {
+    const list = [];
+    const CONFETTI = ['#ffd23f', '#ff7aa8', '#3dcab5', '#8088ff', '#ff8c42'];
+    return {
+      burst(kind, x, y, count, color) {
+        if (sound.state.silent) return;   // los barridos de prueba no generan partículas
+        for (let i = 0; i < count; i++) {
+          const a = Math.random() * Math.PI * 2;
+          const p = { kind, x, y, age: 0, rot: Math.random() * 6.28, spin: 0, color: color || '#ffffff' };
+          if (kind === 'dust') Object.assign(p, { vx: Math.cos(a) * (0.6 + Math.random()), vy: Math.abs(Math.sin(a)) * (0.3 + Math.random()), g: 0.5, life: 0.35 + Math.random() * 0.25, s0: 0.25 + Math.random() * 0.15, s1: 0.6 });
+          else if (kind === 'spark') Object.assign(p, { vx: Math.cos(a) * (1.5 + Math.random() * 2), vy: Math.sin(a) * (1.5 + Math.random() * 2), g: 1, life: 0.35 + Math.random() * 0.25, s0: 0.3, s1: 0.03, spin: (Math.random() - 0.5) * 12 });
+          else Object.assign(p, { vx: (Math.random() - 0.5) * 6, vy: 4 + Math.random() * 4, g: 7, life: 1.4 + Math.random() * 0.8, s0: 0.22, s1: 0.22, spin: (Math.random() - 0.5) * 18, color: CONFETTI[i % CONFETTI.length] });
+          list.push(p);
+        }
+      },
+      draw(dt) {
+        for (let i = list.length - 1; i >= 0; i--) {
+          const p = list[i];
+          p.age += dt;
+          if (p.age >= p.life) { list.splice(i, 1); continue; }
+          const k = p.age / p.life;
+          p.vy -= p.g * dt; p.x += p.vx * dt; p.y += p.vy * dt; p.rot += p.spin * dt;
+          const s = p.s0 + (p.s1 - p.s0) * k;
+          c.save(); c.globalAlpha = 1 - k * k;
+          if (p.kind === 'confetti') { c.translate(p.x, p.y); c.rotate(p.rot); c.fillStyle = p.color; c.fillRect(-s / 2, -s / 4, s, s / 2); }
+          else if (p.kind === 'spark') { c.restore(); sprite(ART.fx_spark, p.x, p.y, s, s, p.rot, 1 - k * k); continue; }
+          else { c.restore(); sprite(ART.fx_puff, p.x, p.y, s, s, 0, (1 - k * k) * 0.8); continue; }
+          c.restore();
+        }
+      },
+    };
+  })();
+
+  // Nubes que se desplazan e islas que flotan (fondo con profundidad).
+  const CLOUDS = [['cloud_a', -3.5, 7.2, 0.7, 0.25], ['cloud_b', 2.8, 4.0, 0.55, 0.18], ['cloud_c', -1.0, -0.6, 0.5, 0.32], ['cloud_b', 4.5, 9.4, 0.45, 0.14]];
+  const ISLANDS = [['island_a', -2.9, 5.6, 0.55, 0.15], ['island_b', -3.7, 0.2, 0.4, 0.12], ['island_a', 1.2, 8.4, 0.3, 0.1]];
+
+  // Cielo: globos de fondo que suben en bucle y un globo aerostático que cruza despacio.
+  const SKY_BALLOONS = [[-4.2, 0.0, 0.5, 'red'], [-2.6, 0.35, 0.35, 'teal'], [-0.4, 0.7, 0.42, 'yellow'], [1.8, 0.15, 0.32, 'pink'], [3.9, 0.55, 0.48, 'teal'], [2.9, 0.85, 0.3, 'red'], [-3.4, 0.6, 0.28, 'yellow']];
+
+  const VOID_RINGS = [[-3.2, 5.5, 1.6, 0.3], [3.4, -0.5, 1.2, -0.45], [-2.6, -4.8, 0.9, 0.6], [2.8, 8.2, 1.0, -0.25]];
+  const MINE_CRYSTALS = [[-4.1, -6.9, 1.0, 0], [4.2, -5.4, 0.8, 1.7], [-3.6, 3.4, 0.7, 3.1], [3.7, 7.2, 0.9, 4.4], [0.4, 9.6, 0.6, 2.2]];
+
+  function drawBackground(now) {
+    const t = now / 1000;
+    if (finaleOn) { drawFinale(now); return; }
+    if (worldNum(L.def.id) === 8) {
+      // Castillo: muro de piedra, antorchas que parpadean y nubarrones que pasan por detrás.
+      sprite(ART.castle_wall, 0, CAMERA_Y + 0.5, 11 * 1.2, 22 * 1.2);
+      c.save(); c.globalAlpha = 0.12 + 0.05 * Math.sin(t * 9); c.fillStyle = '#ffb050'; c.fillRect(-8, CAMERA_Y - 14, 16, 28); c.restore();
+      for (const [x0, y, s, speed] of [[-4, 7.5, 0.7, 0.3], [3, 3.5, 0.5, -0.22], [0, -1.5, 0.45, 0.18]]) {
+        let x = x0 + t * speed; x = ((x + 9) % 18 + 18) % 18 - 9;
+        sprite(ART.storm_angry, x, y, 3.2 * s, 2.4 * s, 0, 0.3);
+      }
+      return;
+    }
+    if (worldNum(L.def.id) === 7) {
+      // Volcán: cielo rojizo, confeti que llueve de los cráteres y brasas que suben.
+      sprite(ART.volcano_wall, 0, CAMERA_Y + 0.5, 11 * 1.2, 22 * 1.2);
+      c.save(); c.globalAlpha = 0.15; c.fillStyle = '#200810'; c.fillRect(-8, CAMERA_Y - 14, 16, 28); c.restore();
+      const COLS = ['#ffd23f', '#ff7aa8', '#3dcab5', '#8088ff', '#ff8c42'];
+      for (let i = 0; i < 18; i++) {
+        const k = ((t * 0.12 + i / 18) % 1);
+        const x = -4.6 + ((i * 1.93) % 9.2) + Math.sin(t * 1.5 + i) * 0.3, y = 11 - k * 22;
+        c.save(); c.translate(x, y); c.rotate(t * 3 + i); c.globalAlpha = 0.7; c.fillStyle = COLS[i % 5]; c.fillRect(-0.09, -0.045, 0.18, 0.09); c.restore();
+      }
+      for (let i = 0; i < 8; i++) {
+        const k = ((t * 0.2 + i / 8) % 1);
+        sprite(ART.fx_spark, -4 + ((i * 1.31) % 8), -8.5 + k * 9, 0.18, 0.18, t * 4 + i, 0.6 * (1 - k));
+      }
+      return;
+    }
+    if (worldNum(L.def.id) === 6) {
+      // Portal: espacio con nebulosas, anillos que giran despacio y estrellas que titilan.
+      sprite(ART.void_wall, 0, CAMERA_Y + 0.5, 11 * 1.2, 22 * 1.2);
+      for (const [x, y, s, sp] of VOID_RINGS) {
+        c.save(); c.translate(x, y); c.rotate(t * sp); c.scale(1, 0.45);
+        c.strokeStyle = 'rgba(160,140,255,0.35)'; c.lineWidth = 0.08;
+        c.beginPath(); c.arc(0, 0, s, 0, Math.PI * 1.6); c.stroke(); c.restore();
+      }
+      for (let i = 0; i < 12; i++) {
+        const tw = 0.4 + 0.6 * Math.abs(Math.sin(t * 1.3 + i * 2.1));
+        sprite(ART.fx_spark, -4.5 + ((i * 2.37) % 9), -9 + ((i * 3.71) % 20), 0.25, 0.25, t + i, tw * 0.8);
+      }
+      return;
+    }
+    if (worldNum(L.def.id) === 5) {
+      // Mina: cueva con vetas, cristales que laten, faroles que oscilan y polvo que cae.
+      sprite(ART.mine_wall, 0, CAMERA_Y + 0.5, 11 * 1.2, 22 * 1.2);
+      c.save(); c.globalAlpha = 0.22; c.fillStyle = '#0c0814'; c.fillRect(-8, CAMERA_Y - 14, 16, 28); c.restore();
+      for (const [x, y, s, ph] of MINE_CRYSTALS) {
+        const glowA = 0.35 + 0.25 * Math.sin(t * 1.6 + ph);
+        const grad = c.createRadialGradient(x, y + s * 0.2, 0, x, y + s * 0.2, s * 1.1);
+        grad.addColorStop(0, 'rgba(143,227,255,0.7)'); grad.addColorStop(1, 'rgba(143,227,255,0)');
+        c.save(); c.globalAlpha = glowA; c.fillStyle = grad; c.beginPath(); c.arc(x, y + s * 0.2, s * 1.1, 0, Math.PI * 2); c.fill(); c.restore();
+        sprite(ART.crystal, x, y, s, s, 0, 0.9);
+      }
+      for (let i = 0; i < 8; i++) {
+        const k = ((t * 0.12 + i / 8) % 1);
+        sprite(ART.fx_puff, -4 + ((i * 1.37) % 8), 10 - k * 20, 0.12, 0.12, 0, 0.4 * Math.sin(k * Math.PI));
+      }
+      return;
+    }
+    if (worldNum(L.def.id) === 4) {
+      sprite(ART.sky_sunset, 0, CAMERA_Y + 0.5, 11 * 1.2, 22 * 1.2);
+      { const x = -7 + ((t * 0.18) % 14); sprite(ART.hot_air, x, 6.5 + Math.sin(t * 0.6) * 0.3, 2.1, 2.94, Math.sin(t * 0.5) * 0.04, 0.9); }
+      for (const [x0, ph, s, col] of SKY_BALLOONS) {
+        const k = ((t * 0.035 * (1.4 - s) + ph) % 1);
+        sprite(ART['balloon_' + col], x0 + Math.sin(t * 0.8 + ph * 9) * 0.3, -12 + k * 26, 1.6 * s, 2.4 * s, Math.sin(t + ph * 5) * 0.08, 0.55);
+      }
+      for (const [n, x0, y, s, speed] of CLOUDS) {
+        let x = x0 + t * speed * 1.4;
+        x = ((x + 9) % 18 + 18) % 18 - 9;
+        sprite(ART[n], x, y - 1.5, 5.12 * s, 2.56 * s, 0, 0.6);
+      }
+      return;
+    }
+    if (worldNum(L.def.id) === 3) {
+      // Fábrica: paneles morados, engranajes que giran y nubes de vapor que suben.
+      sprite(ART.factory_wall, 0, CAMERA_Y + 0.5, 11 * 1.2, 22 * 1.2);
+      c.save(); c.globalAlpha = 0.18; c.fillStyle = '#140c2a'; c.fillRect(-8, CAMERA_Y - 14, 16, 28); c.restore();
+      for (const [x, y, s, dir] of [[-3.6, 6.0, 2.6, 1], [-1.9, 4.6, 1.5, -1.7], [3.7, -1.0, 2.2, -1], [2.4, -2.4, 1.2, 1.8]])
+        sprite(ART.gear, x, y, s, s, t * 0.5 * dir, 0.85);
+      for (let i = 0; i < 6; i++) {
+        const k = ((t * 0.25 + i / 6) % 1);
+        sprite(ART.fx_puff, (i % 2 ? 3.4 : -3.2) + Math.sin(t + i) * 0.3, -6 + k * 9, 0.6 + k * 1.4, 0.6 + k * 1.4, 0, 0.35 * (1 - k));
+      }
+      return;
+    }
+    if (worldNum(L.def.id) === 2) {
+      // Taller: pared de tablones y motas de serrín flotando en la luz.
+      sprite(ART.workshop_wall, 0, CAMERA_Y + 0.5, 11 * 1.2, 22 * 1.2);
+      c.save(); c.globalAlpha = 0.28; c.fillStyle = '#2a1608'; c.fillRect(-8, CAMERA_Y - 14, 16, 28); c.restore();   // atenúa el fondo: lo jugable destaca
+      for (let i = 0; i < 7; i++) {
+        let x = -3.5 + i * 1.15 + t * (0.08 + (i % 3) * 0.04);
+        x = ((x + 9) % 18 + 18) % 18 - 9;
+        sprite(ART.fx_puff, x, -2 + (i % 3) * 2.6 + Math.sin(t + i) * 0.25, 0.18 + (i % 2) * 0.1, 0.18 + (i % 2) * 0.1, 0, 0.35);
+      }
+      return;
+    }
+    const top = CAMERA_Y + view.half, h = view.half * 2;
+    const halfW = view.half * canvas.width / canvas.height;
+    sprite(ART.sky, 0, CAMERA_Y, halfW * 2 + 1, h + 1);
+    for (const [n, x, y, s, bob] of ISLANDS) sprite(ART[n], x, y + Math.sin(t + x * 1.3 + y) * bob, 5.12 * s, 4.2 * s, 0, 0.8);
+    for (const [n, x0, y, s, speed] of CLOUDS) {
+      let x = x0 + t * speed;
+      x = ((x + 9) % 18 + 18) % 18 - 9;
+      sprite(ART[n], x, y, 5.12 * s, 2.56 * s, 0, 0.92);
+    }
+    sprite(ART.hills, 0, FLOOR_TOP + 1.3, 10.24 * 1.45, 3 * 1.45);
+    void top;
+  }
+
+  function dragArrows(x, y, spread, now) {
+    const sway = Math.sin(now / 200) * 0.07;
+    sprite(ART.arrow, x - spread - sway, y, 0.38, 0.38, Math.PI / 2);
+    sprite(ART.arrow, x + spread + sway, y, 0.38, 0.38, -Math.PI / 2);
+  }
+
+  let lastDraw = 0;
+  function draw(now) {
+    const dt = Math.min(0.05, (now - (lastDraw || now)) / 1000);
+    lastDraw = now;
+    c.fillStyle = '#46a1e8';
+    c.fillRect(0, 0, canvas.width, canvas.height);
+    c.save();
+    c.translate(canvas.width / 2, canvas.height / 2);
+    c.scale(view.scale, -view.scale);
+    c.translate(0, -CAMERA_Y);
+    if (performance.now() < shakeUntil) c.translate(Math.sin(now / 15) * 0.08, Math.cos(now / 19) * 0.08);   // temblor de la explosión
+
+    drawBackground(now);
+    if (finaleOn) { fx.draw(dt); c.restore(); return; }   // la fiesta ocupa toda la escena
+    const wn = worldNum(L.def.id);
+    const floorArt = [ART.ground, ART.workshop_floor, ART.factory_floor, ART.cloud_floor, ART.mine_floor, ART.void_floor, ART.volcano_floor, ART.castle_floor][wn - 1] || ART.ground;
+    const wallArt = [ART.block_stone, ART.block_post, ART.block_metal, ART.block_sky, ART.block_rock, ART.block_void, ART.block_basalt, ART.block_castle][wn - 1] || ART.block_stone;
+    sprite(floorArt, 0, FLOOR_TOP - 3, 14, 6);
+    sliced(wallArt, -5.3, 0, 0.6, 30);
+    sliced(wallArt, 5.3, 0, 0.6, 30);
+
+    // rieles punteados de las piezas arrastrables
+    if (L.state === 'prep') {
+      for (const d of L.draggables) {
+        if (!d.drag) continue;
+        const y = d.type === 'spring' ? FLOOR_TOP + 0.05 : d.body.getPosition().y;
+        const pad = d.type === 'spring' ? 0.6 : d.type === 'block' ? d.def.w / 2 * Math.abs(Math.cos(d.body.getAngle())) : d.r;
+        for (let x = d.drag.xMin - pad; x <= d.drag.xMax + pad + 0.001; x += 0.35) sprite(ART.dot, x, y, 0.09, 0.09, 0, 0.75);
+      }
+    }
+
+    // los imanes van delante: no deben quedar tapados por la meta
+    for (const piece of L.pieces) if (piece.type !== 'magnet') drawPiece(piece, now);
+    for (const piece of L.magnets) drawPiece(piece, now);
+
+    // Piezas giratorias: aro con flechas que se mece, y brillo amarillo como las arrastrables.
+    if (L.state === 'prep') {
+      for (const d of L.draggables) {
+        if (!d.rotate || dragging === d) continue;
+        const p = d.type === 'spring' ? d.body.getWorldPoint(Vec2(0, 0.5)) : d.body.getPosition();
+        const rock = Math.sin(now / 260) * 0.35;
+        c.save(); c.translate(p.x, p.y); c.rotate(rock);
+        c.strokeStyle = 'rgba(255,255,255,0.95)'; c.lineWidth = 0.08; c.lineCap = 'round';
+        for (const side of [0, Math.PI]) {
+          c.beginPath(); c.arc(0, 0, 0.75, side + 0.35, side + 1.3); c.stroke();
+          const ex = Math.cos(side + 1.3) * 0.75, ey = Math.sin(side + 1.3) * 0.75;
+          c.save(); c.translate(ex, ey); c.rotate(side + 1.3 + Math.PI / 2);
+          c.fillStyle = 'rgba(255,255,255,0.95)'; c.beginPath(); c.moveTo(0.16, 0); c.lineTo(-0.08, 0.12); c.lineTo(-0.08, -0.12); c.closePath(); c.fill();
+          c.restore();
+        }
+        c.restore();
+      }
+    }
+
+    // Pista del Wobbly sabio: flecha y aro donde va cada pieza.
+    if (L.hint && L.def.solution) {
+      const pulse = 1 + 0.08 * Math.sin(now / 160);
+      for (const s of L.def.solution) {
+        const piece = L.pieces.find((p) => p.id === s.id);
+        if (!piece) continue;
+        const bp = piece.body.getPosition(), y = bp.y;
+        if (s.dir !== undefined) {
+          // Cinta: flecha con el sentido correcto. Ventilador: aro verde (encendido) o rojo (apagado).
+          if (piece.type === 'fan' || piece.type === 'magnet' || piece.type === 'portal') { c.globalAlpha = 0.4; disc(bp.x, y + (piece.type === 'fan' ? 0.5 : 0), 1.1 * pulse, s.dir > 0 ? '#53d18a' : '#ff6b6b'); c.globalAlpha = 1; }
+          else sprite(ART.arrow, bp.x, y + 0.95, 0.6 * pulse, 0.6 * pulse, s.dir > 0 ? -Math.PI / 2 : Math.PI / 2);
+          continue;
+        }
+        if (s.angle !== undefined) {
+          // Pieza giratoria: silueta amarilla con el ángulo correcto.
+          c.save(); c.globalAlpha = 0.45 + 0.15 * Math.sin(now / 160);
+          if (piece.type === 'spring') { c.translate(bp.x, bp.y); c.rotate(s.angle * DEG); c.fillStyle = '#ffd23f'; c.fillRect(-0.65, 0, 1.3, 1.05); }
+          else if (piece.type === 'portal' || piece.type === 'fan') { c.translate(bp.x, bp.y); c.rotate(s.angle * DEG); c.restore(); sprite(ART.arrow, bp.x - Math.sin(s.angle * DEG) * 1.6, bp.y + Math.cos(s.angle * DEG) * 1.6, 0.6 * pulse, 0.6 * pulse, s.angle * DEG); continue; }
+          else sliced(ART.block_wood, bp.x, bp.y, piece.def.w, piece.def.h, s.angle * DEG, '#ffd23f');
+          c.restore();
+          continue;
+        }
+        c.globalAlpha = 0.35; disc(s.x, y + 0.4, 0.75 * pulse, '#ffd23f'); c.globalAlpha = 1;
+        sprite(ART.arrow, s.x, y + 1.9, 0.6 * pulse, 0.6 * pulse, Math.PI);
+      }
+    }
+
+    const b = L.bloop, p = b.getPosition(), v = b.getLinearVelocity();
+    let pose = 'idle', stretch = 1;
+    if (finishedPose) pose = finishedPose;
+    else {
+      if (performance.now() < launchUntil) pose = 'anticipation';
+      else if (Math.abs(v.y) > 3) pose = 'airborne';
+      stretch = Math.min(1.2, 1 + Math.abs(v.y) * 0.015);
+      if (v.x * v.x + v.y * v.y < 0.25) stretch *= 1 + Math.sin(now / 312) * 0.035;   // respira en reposo
+    }
+    const img = poses[pose], size = 512 / 340;
+    if (img.complete && img.naturalWidth) {
+      c.save(); c.translate(p.x, p.y + 0.05); c.scale(1 / stretch, -stretch);
+      c.drawImage(img, -size / 2, -size / 2, size, size); c.restore();
+    } else disc(p.x, p.y, 0.5, '#36a6f0');
+
+    fx.draw(dt);
+    c.restore();
+    const counter = $('star-count');
+    if (counter) counter.textContent = `${collectedStars()}/${L.stars.length}`;
+  }
+
+  /// Icono de interruptor de los portales que se abren o cierran tocándolos.
+  function drawPortalIcon(piece, pos, now) {
+    if (!piece.toggle || L.state !== 'prep') return;
+    const bounce = performance.now() - (piece.flash || 0) < 200 ? 1.25 : 1;
+    const ix = pos.x + 0.95, iy = pos.y + 0.5;
+    disc(ix, iy, 0.3 * bounce, '#26345c');
+    disc(ix, iy, 0.24 * bounce, piece.on ? '#53d18a' : '#ff6b6b');
+    c.save(); c.strokeStyle = '#fff'; c.lineWidth = 0.05; c.lineCap = 'round';
+    c.beginPath(); c.arc(ix, iy, 0.12 * bounce, Math.PI / 2 + 0.6, Math.PI / 2 - 0.6 + Math.PI * 2); c.stroke();
+    c.beginPath(); c.moveTo(ix, iy + 0.16 * bounce); c.lineTo(ix, iy + 0.02); c.stroke(); c.restore();
+  }
+
+  // ---- Gran Fiesta: escena final con todos los Wobblies y el Gruñubarrón contento ----
+  let finaleOn = false, finaleStart = 0, nextBurst = 0;
+  function showFinale() {
+    finaleOn = true; finaleStart = performance.now(); nextBurst = 0;
+    sound.setWorld('fiesta');
+    $('finale-title').textContent = t('finale_title');
+    $('finale-body').textContent = t('finale_body');
+    $('finale-again').textContent = t('finale_again');
+    $('finale').hidden = false;
+    ui.play.hidden = true; $('btn-hint').hidden = true; ui.hint.parentElement.hidden = true;
+  }
+  $('finale-again').addEventListener('click', () => {
+    finaleOn = false; $('finale').hidden = true;
+    sound.setWorld(worldNum(L.def.id)); setState(L.state); openPicker(1);
+  });
+  function drawFinale(now) {
+    const t = (now - finaleStart) / 1000;
+    sprite(ART.castle_wall, 0, CAMERA_Y + 0.5, 11 * 1.2, 22 * 1.2);
+    c.save(); c.globalAlpha = 0.25; c.fillStyle = '#ffd890'; c.fillRect(-8, CAMERA_Y - 14, 16, 28); c.restore();
+    sprite(ART.party_banner, 0, 7.0 + Math.sin(t) * 0.1, 10.5, 1.64);
+    sprite(ART.party_banner, 0, 4.9 + Math.sin(t + 1) * 0.1, 10.5, 1.64);
+    sprite(ART.storm_happy, 0, 2.2 + Math.sin(t * 1.5) * 0.25, 4.0, 3.0, Math.sin(t * 2) * 0.06);
+    const dancers = [['wobbly_pip', -3.3], ['bloop', -1.1], ['wobbly_lumi', 1.1], ['wobbly_zig', 3.3]];
+    dancers.forEach(([n, x], i) => {
+      const hop = Math.abs(Math.sin(t * 3 + i * 0.8)) * 0.9;
+      const squash = 1 + Math.sin(t * 6 + i) * 0.06;
+      if (n === 'bloop') {
+        const img = poses.victory, size = 2.4;
+        if (img.complete && img.naturalWidth) { c.save(); c.translate(x, -1.6 + hop); c.scale(1 / squash, -squash); c.drawImage(img, -size / 2, -size / 2, size, size); c.restore(); }
+      } else sprite(ART[n], x, -1.75 + hop, 2.4 / squash, 2.4 * squash, Math.sin(t * 3 + i) * 0.1);
+    });
+    if (t > nextBurst) { nextBurst = t + 0.7; fx.burst('confetti', -4 + Math.random() * 8, 8, 30); }
+  }
+
+  function drawPiece(piece, now) {
+    const d = piece.def, body = piece.body;
+    const pos = body ? body.getPosition() : null;
+    const isDrag = !!piece.drag && L.state === 'prep';
+    const look = { ice: ART.block_ice, wood: ART.block_wood, plank: ART.block_plank, metal: ART.block_metal, sky: ART.block_sky, rock: ART.block_rock, void: ART.block_void, basalt: ART.block_basalt, castle: ART.block_castle }[d.look] || ART.block_stone;
+    if (piece.type === 'block') {
+      if (piece.drag || piece.rotate) sliced(look, pos.x, pos.y, d.w + 0.22, d.h + 0.22, body.getAngle(), dragging === piece ? '#fff3b0' : '#ffd040');
+      sliced(look, pos.x, pos.y, d.w, d.h, body.getAngle());
+      if (isDrag && dragging !== piece) dragArrows(pos.x, pos.y, d.w / 2 * Math.abs(Math.cos(body.getAngle())) + 0.35, now);
+    } else if (piece.type === 'seesaw') {
+      const fh = d.y - FLOOR_TOP;
+      sprite(ART.fulcrum, d.x, FLOOR_TOP + fh / 2, 0.9, fh);
+      c.save(); c.translate(pos.x, pos.y); c.rotate(body.getAngle());
+      sliced(ART.block_wood, 0, 0, d.w, 0.3);
+      sliced(ART.block_wood, piece.lipX, 0.35, 0.2, 0.5);
+      c.restore();
+      disc(pos.x, pos.y, 0.13, '#3d4a73');
+    } else if (piece.type === 'ball') {
+      if (isDrag) disc(pos.x, pos.y, piece.r + 0.13, dragging === piece ? '#fff3b0' : '#ffd040');
+      sprite(d.look === 'iron' ? ART.iron_ball : ART.boulder, pos.x, pos.y, piece.r * 2, piece.r * 2, body.getAngle());
+      if (isDrag && dragging !== piece) dragArrows(pos.x, pos.y, piece.r + 0.35, now);
+    } else if (piece.type === 'spring') {
+      if (piece.squash > 0) piece.squash = Math.max(0, piece.squash - 1 / 60);
+      const squash = 0.25 * Math.sin((piece.squash / 0.15) * Math.PI);
+      c.save(); c.translate(pos.x, pos.y); c.rotate(body.getAngle());
+      if (piece.drag || piece.rotate) {
+        c.save(); c.globalAlpha = dragging === piece ? 0.75 : 0.5; c.fillStyle = '#ffd040';
+        c.beginPath(); c.ellipse(0, 0.45, 0.95, 0.68, 0, 0, Math.PI * 2); c.fill(); c.restore();
+      }
+      sprite(ART.spring_coil, 0, 0.5 - squash / 2, 0.75, 0.5 - squash);
+      sprite(ART.spring_base, 0, 0.14, 1.2, 0.28);
+      sprite(ART.spring_plate, 0, 0.86 - squash, 1.3, 0.32);
+      if (d.angle) sprite(ART.arrow, 0, 1.45, 0.45, 0.45, 0, 0.9);
+      c.restore();
+      if (isDrag && dragging !== piece) dragArrows(pos.x, pos.y + 0.45, 0.95, now);
+    } else if (piece.type === 'goal') {
+      const k = piece.r / 0.9, pulse = (1 + 0.035 * Math.sin(now / 300)) * k;
+      sprite(ART.portal_arch, pos.x, pos.y + 0.2 * k, 1.95 * pulse, 2.44 * pulse);
+      sprite(ART.portal_swirl, pos.x, pos.y, 1.25 * 0.95 * pulse, 1.25 * 0.95 * pulse, -now / 1000 * 2.1);
+    } else if (piece.type === 'belt') {
+      const w = d.w, dir = Math.sign(piece.speed) || 1;
+      if (piece.toggle && L.state === 'prep') {
+        c.save(); c.globalAlpha = 0.45 + 0.2 * Math.sin(now / 200); c.fillStyle = '#ffd040';
+        c.fillRect(pos.x - w / 2 - 0.12, pos.y - 0.27, w + 0.24, 0.54); c.restore();
+      }
+      if (ready(ART.belt)) sliced(ART.belt, pos.x, pos.y, w, 0.3);
+      else { c.fillStyle = '#2f3447'; c.fillRect(pos.x - w / 2, pos.y - 0.15, w, 0.3); }
+      for (let x = pos.x - w / 2 + 0.15; x <= pos.x + w / 2 - 0.1; x += 0.5) disc(x, pos.y, 0.09, '#9aa3bd');
+      // flechas que corren en el sentido de la cinta
+      const phase = ((now / 1000) * Math.abs(piece.speed) * 0.5) % 0.6;
+      c.save(); c.beginPath(); c.rect(pos.x - w / 2, pos.y - 0.2, w, 0.4); c.clip();
+      c.fillStyle = 'rgba(255,214,64,0.95)';
+      for (let k = -1; k < w / 0.6 + 1; k++) {
+        const x = pos.x - w / 2 + (dir > 0 ? phase : 0.6 - phase) + k * 0.6;
+        c.beginPath(); c.moveTo(x + dir * 0.12, pos.y + 0.03); c.lineTo(x - dir * 0.06, pos.y + 0.12); c.lineTo(x - dir * 0.06, pos.y - 0.06); c.closePath(); c.fill();
+      }
+      c.restore();
+      if (piece.toggle && L.state === 'prep') {
+        const bounce = performance.now() - (piece.flash || 0) < 200 ? 1.25 : 1;
+        sprite(ART.toggle_icon || ART.rotate_icon, pos.x, pos.y + 0.75, 0.7 * bounce, 0.7 * bounce);
+      }
+    } else if (piece.type === 'storm') {
+      const sp = L.state === 'prep' ? piece.from : piece.pos;
+      if (L.state === 'prep' && (piece.to.x !== piece.from.x || piece.to.y !== piece.from.y)) {
+        c.save(); c.globalAlpha = 0.35; c.strokeStyle = '#c8d0ff'; c.lineWidth = 0.06; c.setLineDash([0.2, 0.2]);
+        c.beginPath(); c.moveTo(piece.from.x, piece.from.y); c.lineTo(piece.to.x, piece.to.y); c.stroke(); c.restore();
+        sprite(ART.storm_angry, piece.to.x, piece.to.y, piece.r * 2.5, piece.r * 1.9, 0, 0.25);
+      }
+      const bob = Math.sin(now / 300) * 0.06;
+      sprite(ART.storm_angry, sp.x, sp.y + bob, piece.r * 2.5, piece.r * 1.9, Math.sin(now / 500) * 0.05);
+      if (Math.sin(now / 90 + sp.x) > 0.93) { c.save(); c.strokeStyle = '#ffe35a'; c.lineWidth = 0.07; c.beginPath(); c.moveTo(sp.x, sp.y - 0.6); c.lineTo(sp.x + 0.2, sp.y - 1.0); c.lineTo(sp.x - 0.1, sp.y - 1.1); c.lineTo(sp.x + 0.15, sp.y - 1.6); c.stroke(); c.restore(); }
+    } else if (piece.type === 'bomb') {
+      if (piece.exploded) return;
+      const left = Math.max(0, piece.fuse - L.clock * DT);
+      const urgent = L.state === 'sim' && piece.on && piece.fuse > 0 && left < 0.6;
+      const wob = urgent ? Math.sin(now / 30) * 0.08 : Math.sin(now / 400) * 0.03;
+      if ((piece.drag || piece.toggle) && L.state === 'prep') { c.save(); c.globalAlpha = dragging === piece ? 0.75 : 0.45 + (piece.toggle ? 0.15 * Math.sin(now / 200) : 0); disc(pos.x, pos.y, 0.75, '#ffd040'); c.restore(); }
+      if (L.state === 'prep' && piece.on) { c.save(); c.globalAlpha = 0.18; c.strokeStyle = '#ffd23f'; c.lineWidth = 0.05; c.setLineDash([0.15, 0.15]); c.beginPath(); c.arc(pos.x, pos.y, piece.radius, 0, Math.PI * 2); c.stroke(); c.restore(); }
+      const s = urgent ? 1.0 + Math.sin(now / 50) * 0.06 : 0.95;
+      sprite(ART.confetti_bomb, pos.x, pos.y + 0.12, s, s, wob, piece.on ? 1 : 0.5);
+      if (piece.on) sprite(ART.fx_spark, pos.x + 0.2, pos.y + 0.6, 0.3 + Math.random() * 0.12, 0.3, now / 80);
+      // mecha restante (o «!» si estalla al tocarla)
+      c.save(); c.scale(1, -1); c.font = 'bold 0.34px Fredoka, sans-serif'; c.textAlign = 'center'; c.fillStyle = '#fff'; c.strokeStyle = '#26345c'; c.lineWidth = 0.08;
+      const label = piece.fuse > 0 ? left.toFixed(1) + 's' : '¡!';
+      c.strokeText(label, pos.x, -pos.y + 0.05); c.fillText(label, pos.x, -pos.y + 0.05); c.restore();
+      if (piece.toggle && L.state === 'prep') drawPortalIcon(piece, pos, now);
+      if (isDrag && dragging !== piece) dragArrows(pos.x, pos.y, 0.8, now);
+    } else if (piece.type === 'lava') {
+      sliced(ART.lava, pos.x, pos.y, d.w, d.h, body.getAngle());
+      for (let i = 0; i < Math.max(1, Math.floor(d.w)); i++) {
+        const k = ((now / 1000 * 0.8 + i * 0.37) % 1);
+        sprite(ART.fx_puff, pos.x - d.w / 2 + (i + 0.5) * d.w / Math.max(1, Math.floor(d.w)), pos.y + d.h / 2 + k * 0.5, 0.25, 0.25, 0, 0.5 * (1 - k));
+      }
+    } else if (piece.type === 'portal') {
+      const ang = body.getAngle(), orange = piece.color === 'orange';
+      const glowOn = (piece.drag || piece.rotate) && L.state === 'prep';
+      if (glowOn) { c.save(); c.globalAlpha = dragging === piece ? 0.75 : 0.45; disc(pos.x, pos.y, 1.05, '#ffd040'); c.restore(); }
+      c.save(); c.translate(pos.x, pos.y); c.rotate(ang);
+      sprite(ART['portal_' + piece.color] || ART.portal_blue, 0, 0, 1.7, 1.06, 0, piece.on ? 1 : 0.35);
+      if (!piece.on) { c.restore(); drawPortalIcon(piece, pos, now); return; }
+      // remolino interior que gira
+      c.save(); c.scale(1, 0.5); c.globalCompositeOperation = 'lighter';
+      sprite(ART.portal_swirl, 0, 0, 0.95, 0.95, (orange ? 1 : -1) * now / 1000 * 3, 0.55);
+      c.restore();
+      // chispas que orbitan
+      for (let i = 0; i < 4; i++) {
+        const a2 = now / 1000 * 2 + i * Math.PI / 2;
+        sprite(ART.fx_spark, Math.cos(a2) * 0.8, Math.sin(a2) * 0.42, 0.18, 0.18, a2, 0.8);
+      }
+      c.restore();
+      drawPortalIcon(piece, pos, now);
+      if (isDrag && dragging !== piece) dragArrows(pos.x, pos.y, 1.0, now);
+    } else if (piece.type === 'magnet') {
+      const ang = body.getAngle();
+      const pole = body.getWorldPoint(Vec2(0, -0.55));
+      if (piece.on) {
+        // líneas de campo: anillos que se cierran hacia los polos
+        c.save(); c.strokeStyle = '#7fd8ff'; c.lineWidth = 0.05;
+        for (let i = 0; i < 3; i++) {
+          const k = 1 - ((now / 1000 * 0.8 + i / 3) % 1);
+          c.globalAlpha = 0.5 * (1 - k);
+          c.beginPath(); c.arc(pole.x, pole.y, 0.3 + k * (piece.range - 0.3), 0, Math.PI * 2); c.stroke();
+        }
+        c.restore();
+      }
+      const glowOn = (piece.drag || piece.toggle) && L.state === 'prep';
+      if (glowOn) { c.save(); c.globalAlpha = (dragging === piece ? 0.75 : 0.5) + (piece.toggle ? 0.15 * Math.sin(now / 200) : 0); disc(pos.x, pos.y, 0.85, '#ffd040'); c.restore(); }
+      const buzz = piece.on ? Math.sin(now / 25) * 0.015 : 0;
+      sprite(ART.magnet, pos.x + buzz, pos.y, 1.2, 1.2, ang, piece.on ? 1 : 0.75);
+      if (piece.toggle && L.state === 'prep') {
+        const bounce = performance.now() - (piece.flash || 0) < 200 ? 1.25 : 1;
+        const ix = pos.x + 0.85, iy = pos.y + 0.55;
+        disc(ix, iy, 0.3 * bounce, '#26345c');
+        disc(ix, iy, 0.24 * bounce, piece.on ? '#53d18a' : '#ff6b6b');
+        c.save(); c.strokeStyle = '#fff'; c.lineWidth = 0.05; c.lineCap = 'round';
+        c.beginPath(); c.arc(ix, iy, 0.12 * bounce, Math.PI / 2 + 0.6, Math.PI / 2 - 0.6 + Math.PI * 2); c.stroke();
+        c.beginPath(); c.moveTo(ix, iy + 0.16 * bounce); c.lineTo(ix, iy + 0.02); c.stroke(); c.restore();
+      }
+      if (isDrag && dragging !== piece) dragArrows(pos.x, pos.y, 0.85, now);
+    } else if (piece.type === 'cart') {
+      c.save(); c.translate(pos.x, pos.y); c.rotate(body.getAngle());
+      if (isDrag) { c.save(); c.globalAlpha = dragging === piece ? 0.75 : 0.5; c.fillStyle = '#ffd040'; c.fillRect(-0.95, -0.75, 1.9, 1.2); c.restore(); }
+      sprite(ART.mine_cart, 0, -0.12, 1.62, 1.215);
+      c.restore();
+      if (isDrag && dragging !== piece) dragArrows(pos.x, pos.y - 0.1, 1.15, now);
+    } else if (piece.type === 'fan') {
+      const ang = body.getAngle(), dirX = -Math.sin(ang), dirY = Math.cos(ang);
+      if (piece.on) {
+        // corrientes de viento: trazos claros que avanzan por la franja
+        c.save(); c.translate(pos.x, pos.y); c.rotate(ang);
+        c.strokeStyle = 'rgba(255,255,255,0.55)'; c.lineCap = 'round'; c.lineWidth = 0.06;
+        for (let i = 0; i < 9; i++) {
+          const k = ((now / 1000) * 1.1 + i * 0.37) % 1;
+          const lx = (((i * 0.61) % 1) - 0.5) * piece.width * 0.85 + Math.sin(now / 300 + i) * 0.08;
+          const ly = 0.9 + k * piece.range;
+          c.globalAlpha = Math.sin(k * Math.PI) * 0.8;
+          c.beginPath(); c.moveTo(lx, ly); c.lineTo(lx, ly + 0.55); c.stroke();
+        }
+        c.restore();
+        piece.spin += 0.5;
+      }
+      const glowOn = (piece.drag || piece.rotate || piece.toggle) && L.state === 'prep';
+      c.save(); c.translate(pos.x, pos.y); c.rotate(ang);
+      if (glowOn) { c.save(); c.globalAlpha = (dragging === piece ? 0.75 : 0.5) + (piece.toggle ? 0.15 * Math.sin(now / 200) : 0); c.fillStyle = '#ffd040'; c.beginPath(); c.ellipse(0, 0.45, 1.0, 0.72, 0, 0, Math.PI * 2); c.fill(); c.restore(); }
+      sprite(ART.fan_base, 0, 0.5, 1.5, 1.0);
+      sprite(ART.fan_blades, 0, 0.62, 0.62, 0.62, piece.spin, piece.on ? 1 : 0.6);
+      c.restore();
+      if (piece.toggle && L.state === 'prep') {
+        const bounce = performance.now() - (piece.flash || 0) < 200 ? 1.25 : 1;
+        // icono al costado de la carcasa (a la derecha de los verticales, debajo de los que soplan a la derecha)
+        const ix = pos.x + dirX * 0.4 + dirY * 1.05, iy = pos.y + dirY * 0.4 - dirX * 1.05;
+        disc(ix, iy, 0.3 * bounce, '#26345c');
+        disc(ix, iy, 0.24 * bounce, piece.on ? '#53d18a' : '#ff6b6b');
+        c.save(); c.strokeStyle = '#fff'; c.lineWidth = 0.05; c.lineCap = 'round';
+        c.beginPath(); c.arc(ix, iy, 0.12 * bounce, Math.PI / 2 + 0.6, Math.PI / 2 - 0.6 + Math.PI * 2); c.stroke();
+        c.beginPath(); c.moveTo(ix, iy + 0.16 * bounce); c.lineTo(ix, iy + 0.02); c.stroke(); c.restore();
+      }
+      if (isDrag && dragging !== piece) dragArrows(pos.x, pos.y + 0.45, 1.05, now);
+    } else if (piece.type === 'cloud') {
+      if (piece.squash > 0) piece.squash = Math.max(0, piece.squash - 1 / 60);
+      const sq = 0.18 * Math.sin((piece.squash / 0.2) * Math.PI);
+      const w = d.w + 0.4, h = 0.95;
+      if (isDrag) { c.save(); c.globalAlpha = dragging === piece ? 0.75 : 0.5; c.fillStyle = '#ffd040'; c.beginPath(); c.ellipse(pos.x, pos.y + 0.1, w / 2 + 0.15, 0.6, 0, 0, Math.PI * 2); c.fill(); c.restore(); }
+      sprite(ART.cloud_pad, pos.x, pos.y + 0.12 - sq / 2, w * (1 + sq * 0.5), h * (1 - sq));
+      if (isDrag && dragging !== piece) dragArrows(pos.x, pos.y + 0.1, w / 2 + 0.2, now);
+    } else if (piece.type === 'balloon') {
+      if (piece.popped) return;
+      const bob = Math.sin(now / 600 + pos.x * 2) * 0.08, r = piece.r;
+      if (isDrag) disc(pos.x, pos.y + bob, r + 0.15, dragging === piece ? '#fff3b0' : '#ffd040');
+      sprite(ART['balloon_' + piece.color] || ART.balloon_red, pos.x, pos.y - r * 0.45 + bob, r * 2.1, r * 3.15, Math.sin(now / 700 + pos.y) * 0.06);
+      if (isDrag && dragging !== piece) dragArrows(pos.x, pos.y + bob, r + 0.35, now);
+    } else if (piece.type === 'crate') {
+      if (isDrag) sliced(ART.crate || ART.block_wood, pos.x, pos.y, d.w + 0.22, d.h + 0.22, body.getAngle(), dragging === piece ? '#fff3b0' : '#ffd040');
+      sliced(ready(ART.crate) ? ART.crate : ART.block_wood, pos.x, pos.y, d.w, d.h, body.getAngle());
+      if (isDrag && dragging !== piece) dragArrows(pos.x, pos.y, d.w / 2 + 0.35, now);
+    } else if (piece.type === 'pendulum') {
+      const a = piece.anchor;
+      if (piece.drag) sliced(ART.block_post, (piece.drag.xMin + piece.drag.xMax) / 2, a.y + 0.12, piece.drag.xMax - piece.drag.xMin + 1.2, 0.24);
+      else sliced(ART.block_post, a.x, a.y + 0.12, 1.2, 0.24);
+      c.save(); c.strokeStyle = '#7a5530'; c.lineWidth = 0.07; c.beginPath(); c.moveTo(a.x, a.y); c.lineTo(pos.x, pos.y); c.stroke(); c.restore();
+      disc(a.x, a.y, 0.12, '#3d4a73');
+      if (isDrag) disc(pos.x, pos.y, piece.r + 0.13, dragging === piece ? '#fff3b0' : '#ffd040');
+      sprite(ART.iron_ball, pos.x, pos.y, piece.r * 2, piece.r * 2, body.getAngle());
+      if (isDrag && dragging !== piece) dragArrows(a.x, a.y - 0.05, 0.45, now);
+    } else if (piece.type === 'star') {
+      if (piece.collected) return;
+      const t = now / 1000 * 2.4 + pos.x;
+      const s = 0.8 * (1 + Math.sin(t * 1.7) * 0.06);
+      sprite(ART.star, pos.x, pos.y + Math.sin(t) * 0.06, s, s, Math.sin(t * 0.8) * 0.14);
+    }
+  }
+
+  let last = 0;
+  function frame(now) {
+    if (L.state !== 'prep') {
+      accumulator += Math.min(0.1, (now - (last || now)) / 1000);
+      while (accumulator >= DT) { step(); accumulator -= DT; }
+    }
+    last = now;
+    draw(now);
+    requestAnimationFrame(frame);
+  }
+
+  // Ganchos de prueba: colocan piezas y simulan sin esperar al reloj.
+  window.wobbleTest = {
+    levels: LEVELS,
+    finale() { showFinale(); },
+    run(index, placements, trace) {
+      sound.state.silent = true;
+      setTimeout(() => { sound.state.silent = false; }, 0);
+      loadLevel(index);
+      for (const [id, pos] of Object.entries(placements || {})) placePiece(L.pieces.find((p) => p.id === id), pos);
+      play();
+      const path = [];
+      let t = 0;
+      for (; t < 12 && L.state === 'sim'; t += DT) {
+        step();
+        if (trace && Math.round(t / DT) % 10 === 0) { const p = L.bloop.getPosition(); path.push(`${t.toFixed(1)}:(${p.x.toFixed(2)},${p.y.toFixed(2)})`); }
+      }
+      const end = L.bloop.getPosition();
+      const result = { state: L.state, stars: collectedStars(), end: `(${end.x.toFixed(2)},${end.y.toFixed(2)})`, t: t.toFixed(2), path: path.join(' ') };
+      resetLevel();
+      return result;
+    },
+    probe(index, placements, seconds, fn, stride = 10) {
+      sound.state.silent = true;
+      setTimeout(() => { sound.state.silent = false; }, 0);
+      loadLevel(index);
+      for (const [id, pos] of Object.entries(placements || {})) placePiece(L.pieces.find((p) => p.id === id), pos);
+      play();
+      const rows = [];
+      for (let t = 0; t < seconds && L.state === 'sim'; t += DT) { step(); if (Math.round(t / DT) % stride === 0) rows.push(fn(L, t)); }
+      resetLevel();
+      return rows.join(' ');
+    },
+    solve(index) {
+      const placements = Object.fromEntries(LEVELS[index].solution.map((s) => [s.id, { x: s.x, angle: s.angle, dir: s.dir }]));
+      const r = this.run(index, placements);
+      return `${r.state}:${r.stars}`;
+    },
+  };
+
+  let start = 0;
+  try { start = Math.min(LEVELS.length - 1, Math.max(0, Number(localStorage.getItem('wobble-last')) || 0)); } catch {}
+  if (!unlocked(start)) start = 0;
+  loadLevel(start);
+  resize();
+  requestAnimationFrame(frame);
+
+  // Portada: la primera pantalla. El toque en «¡Jugar!» también enciende el audio (iPhone lo exige).
+  const titleTexts = () => {
+    $('title-tagline').textContent = t('title_tagline');
+    $('title-play').textContent = t('title_play');
+    $('title-lang').textContent = t('language');
+    const tip = { es: 'Para guardar tu progreso, toca <b>Compartir</b> y luego <b>Agregar a pantalla de inicio</b>.',
+      en: 'To keep your progress, tap <b>Share</b> and then <b>Add to Home Screen</b>.',
+      pt: 'Para salvar seu progresso, toque em <b>Compartilhar</b> e depois em <b>Adicionar à Tela de Início</b>.' };
+    $('ios-tip-text').innerHTML = tip[lang] || tip.es;
+    $('link-site').href = lang === 'es' ? '/wobble-rescue/' : `/${lang}/wobble-rescue/`;
+  };
+  titleTexts();
+  $('title').hidden = false;
+  $('stage').classList.add('titling');
+  $('title-lang').addEventListener('click', () => { $('btn-lang').click(); titleTexts(); });
+  $('btn-lang').addEventListener('click', titleTexts);
+  $('title-play').addEventListener('click', () => {
+    sound.start();
+    $('title').hidden = true;
+    $('stage').classList.remove('titling');
+    loadLevel(L.index);   // vuelve a mostrar el cartel del nivel
+  });
+  if (/Android/i.test(navigator.userAgent)) $('link-play').hidden = false;
+
+  const loader = $('vrf-loader');
+  loader.style.opacity = '0';
+  setTimeout(() => loader.remove(), 450);
+
+  (function iosTip() {
+    const ios = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    const standalone = window.navigator.standalone || matchMedia('(display-mode: standalone)').matches;
+    if (!ios || standalone) return;
+    const key = 'vrf_ios_tip_wobble', today = new Date().toDateString();
+    try { if (localStorage.getItem(key) === today) return; } catch {}
+    const tip = $('ios-tip');
+    const hide = () => { tip.style.display = 'none'; try { localStorage.setItem(key, today); } catch {} };
+    tip.querySelector('button').onclick = hide;
+    setTimeout(() => { tip.style.display = 'flex'; setTimeout(hide, 12000); }, 3000);
+  })();
+})();
+</script>
+
+<script>
+  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+    window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+  }
+</script>
+</body>
+</html>

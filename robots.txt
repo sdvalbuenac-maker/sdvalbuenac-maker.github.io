@@ -1,4 +1,6 @@
 User-agent: *
+Disallow: /llanero-adventure/jugar/
+Disallow: /wobble-rescue/jugar/
 Allow: /
 
 Sitemap: https://visualrocketflyers.com/sitemap.xml

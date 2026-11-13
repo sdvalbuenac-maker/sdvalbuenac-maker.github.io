@@ -1,0 +1,1834 @@
+{
+  "entries": [
+    {
+      "key": "level_title",
+      "es": "Nivel {0}",
+      "en": "Level {0}",
+      "pt": "Fase {0}"
+    },
+    {
+      "key": "play",
+      "es": "¡Probar!",
+      "en": "Try it!",
+      "pt": "Testar!"
+    },
+    {
+      "key": "levels",
+      "es": "Niveles",
+      "en": "Levels",
+      "pt": "Fases"
+    },
+    {
+      "key": "reset",
+      "es": "Reiniciar",
+      "en": "Restart",
+      "pt": "Reiniciar"
+    },
+    {
+      "key": "rescued",
+      "es": "¡Rescatado!",
+      "en": "Rescued!",
+      "pt": "Resgatado!"
+    },
+    {
+      "key": "world_done",
+      "es": "¡Mundo completado!",
+      "en": "World complete!",
+      "pt": "Mundo concluído!"
+    },
+    {
+      "key": "stars_attempts",
+      "es": "Estrellas: {0} de 3 · intentos: {1}",
+      "en": "Stars: {0} of 3 · attempts: {1}",
+      "pt": "Estrelas: {0} de 3 · tentativas: {1}"
+    },
+    {
+      "key": "stars_collected",
+      "es": "Estrellas: {0} de {1}",
+      "en": "Stars: {0} of {1}",
+      "pt": "Estrelas: {0} de {1}"
+    },
+    {
+      "key": "first_try",
+      "es": "A la primera. ¡Perfecto!",
+      "en": "First try. Perfect!",
+      "pt": "De primeira. Perfeito!"
+    },
+    {
+      "key": "in_attempts",
+      "es": "Lo lograste en {0} intentos",
+      "en": "You did it in {0} attempts",
+      "pt": "Você conseguiu em {0} tentativas"
+    },
+    {
+      "key": "oops",
+      "es": "¡Uy!",
+      "en": "Oops!",
+      "pt": "Ops!"
+    },
+    {
+      "key": "fail_detail",
+      "es": "Fíjate dónde cae Bloop y prueba otra vez",
+      "en": "Watch where Bloop lands and try again",
+      "pt": "Veja onde o Bloop cai e tente de novo"
+    },
+    {
+      "key": "next",
+      "es": "Siguiente",
+      "en": "Next",
+      "pt": "Próxima"
+    },
+    {
+      "key": "again",
+      "es": "Otra vez",
+      "en": "Again",
+      "pt": "De novo"
+    },
+    {
+      "key": "retry",
+      "es": "Reintentar",
+      "en": "Retry",
+      "pt": "Tentar de novo"
+    },
+    {
+      "key": "back",
+      "es": "Volver",
+      "en": "Back",
+      "pt": "Voltar"
+    },
+    {
+      "key": "locked",
+      "es": "bloqueado",
+      "en": "locked",
+      "pt": "bloqueada"
+    },
+    {
+      "key": "world_1",
+      "es": "Pradera",
+      "en": "Meadow",
+      "pt": "Pradaria"
+    },
+    {
+      "key": "world_1_sub",
+      "es": "Mundo 1 · rescata a Bloop",
+      "en": "World 1 · rescue Bloop",
+      "pt": "Mundo 1 · resgate o Bloop"
+    },
+    {
+      "key": "music_on",
+      "es": "Música: sí",
+      "en": "Music: on",
+      "pt": "Música: sim"
+    },
+    {
+      "key": "music_off",
+      "es": "Música: no",
+      "en": "Music: off",
+      "pt": "Música: não"
+    },
+    {
+      "key": "sfx_on",
+      "es": "Efectos: sí",
+      "en": "Sound: on",
+      "pt": "Efeitos: sim"
+    },
+    {
+      "key": "sfx_off",
+      "es": "Efectos: no",
+      "en": "Sound: off",
+      "pt": "Efeitos: não"
+    },
+    {
+      "key": "language",
+      "es": "Idioma: Español",
+      "en": "Language: English",
+      "pt": "Idioma: Português"
+    },
+    {
+      "key": "goal",
+      "es": "META",
+      "en": "GOAL",
+      "pt": "META"
+    },
+    {
+      "key": "prototype",
+      "es": "Prototipo · física Box2D",
+      "en": "Prototype · Box2D physics",
+      "pt": "Protótipo · física Box2D"
+    },
+    {
+      "key": "choose_level",
+      "es": "Elegir nivel",
+      "en": "Choose level",
+      "pt": "Escolher fase"
+    },
+    {
+      "key": "hint",
+      "es": "Pista",
+      "en": "Hint",
+      "pt": "Dica"
+    },
+    {
+      "key": "hint_title",
+      "es": "Pista del Wobbly sabio",
+      "en": "Wise Wobbly's hint",
+      "pt": "Dica do Wobbly sábio"
+    },
+    {
+      "key": "hint_body",
+      "es": "Mira un anuncio corto y te muestro dónde va cada pieza.",
+      "en": "Watch a short ad and I'll show you where each piece goes.",
+      "pt": "Assista a um anúncio curto e eu mostro onde vai cada peça."
+    },
+    {
+      "key": "watch_ad",
+      "es": "Ver anuncio",
+      "en": "Watch ad",
+      "pt": "Ver anúncio"
+    },
+    {
+      "key": "no_thanks",
+      "es": "No, gracias",
+      "en": "No, thanks",
+      "pt": "Não, obrigado"
+    },
+    {
+      "key": "skip_level",
+      "es": "Saltar nivel",
+      "en": "Skip level",
+      "pt": "Pular fase"
+    },
+    {
+      "key": "skip_title",
+      "es": "¿Saltar este nivel?",
+      "en": "Skip this level?",
+      "pt": "Pular esta fase?"
+    },
+    {
+      "key": "skip_body",
+      "es": "Mira un anuncio y pasa al siguiente. Solo 1 salto por mundo.",
+      "en": "Watch an ad to move on. Only 1 skip per world.",
+      "pt": "Assista a um anúncio e avance. Só 1 pulo por mundo."
+    },
+    {
+      "key": "ad_test",
+      "es": "Anuncio de prueba",
+      "en": "Test ad",
+      "pt": "Anúncio de teste"
+    },
+    {
+      "key": "ad_test_body",
+      "es": "Aquí aparecerá un anuncio real de AdMob",
+      "en": "A real AdMob ad will appear here",
+      "pt": "Aqui aparecerá um anúncio real do AdMob"
+    },
+    {
+      "key": "ad_closes_in",
+      "es": "Se cierra en {0}",
+      "en": "Closes in {0}",
+      "pt": "Fecha em {0}"
+    },
+    {
+      "key": "close",
+      "es": "Cerrar",
+      "en": "Close",
+      "pt": "Fechar"
+    },
+    {
+      "key": "ad_unavailable",
+      "es": "No hay anuncios disponibles ahora. Prueba en un momento.",
+      "en": "No ads available right now. Try again in a moment.",
+      "pt": "Nenhum anúncio disponível agora. Tente daqui a pouco."
+    },
+    {
+      "key": "ad_not_completed",
+      "es": "Cerraste el anuncio antes de tiempo, así que no hay recompensa.",
+      "en": "You closed the ad early, so there's no reward.",
+      "pt": "Você fechou o anúncio antes do fim, então não há recompensa."
+    },
+    {
+      "key": "privacy",
+      "es": "Privacidad",
+      "en": "Privacy",
+      "pt": "Privacidade"
+    },
+    {
+      "key": "level.w1-01.name",
+      "es": "Palanca y resorte",
+      "en": "Lever and spring",
+      "pt": "Alavanca e mola"
+    },
+    {
+      "key": "level.w1-01.hint",
+      "es": "Arrastra el resorte amarillo y pulsa ¡Probar!",
+      "en": "Drag the yellow spring and press Try it!",
+      "pt": "Arraste a mola amarela e toque em Testar!"
+    },
+    {
+      "key": "level.w1-02.name",
+      "es": "Tobogán",
+      "en": "Slide",
+      "pt": "Escorregador"
+    },
+    {
+      "key": "level.w1-02.hint",
+      "es": "Bloop se desliza. ¿Dónde caerá?",
+      "en": "Bloop slides down. Where will Bloop land?",
+      "pt": "Bloop escorrega. Onde o Bloop vai cair?"
+    },
+    {
+      "key": "level.w1-03.name",
+      "es": "Resorte inclinado",
+      "en": "Tilted spring",
+      "pt": "Mola inclinada"
+    },
+    {
+      "key": "level.w1-03.hint",
+      "es": "Este resorte lanza en diagonal",
+      "en": "This spring launches diagonally",
+      "pt": "Esta mola lança na diagonal"
+    },
+    {
+      "key": "level.w1-04.name",
+      "es": "Mueve la pelota",
+      "en": "Move the ball",
+      "pt": "Mova a bola"
+    },
+    {
+      "key": "level.w1-04.hint",
+      "es": "Esta vez arrastra la pelota",
+      "en": "This time, drag the ball",
+      "pt": "Desta vez, arraste a bola"
+    },
+    {
+      "key": "level.w1-05.name",
+      "es": "Todo junto",
+      "en": "All together",
+      "pt": "Tudo junto"
+    },
+    {
+      "key": "level.w1-05.hint",
+      "es": "Mueve la pelota y el resorte",
+      "en": "Move the ball and the spring",
+      "pt": "Mova a bola e a mola"
+    },
+    {
+      "key": "level.w1-06.name",
+      "es": "Contra la pared",
+      "en": "Against the wall",
+      "pt": "Contra a parede"
+    },
+    {
+      "key": "level.w1-06.hint",
+      "es": "Bloop sale disparado. ¿Dónde lo atrapas?",
+      "en": "Bloop flies off. Where should the spring go?",
+      "pt": "Bloop sai voando. Onde vai a mola?"
+    },
+    {
+      "key": "level.w1-07.name",
+      "es": "Rampa móvil",
+      "en": "Moving ramp",
+      "pt": "Rampa móvel"
+    },
+    {
+      "key": "level.w1-07.hint",
+      "es": "Arrastra la rampa de hielo",
+      "en": "Drag the ice ramp",
+      "pt": "Arraste a rampa de gelo"
+    },
+    {
+      "key": "level.w1-08.name",
+      "es": "Empujón",
+      "en": "Push",
+      "pt": "Empurrão"
+    },
+    {
+      "key": "level.w1-08.hint",
+      "es": "Suelta la pelota donde pueda empujar a Bloop",
+      "en": "Drop the ball where it can push Bloop",
+      "pt": "Solte a bola onde ela possa empurrar o Bloop"
+    },
+    {
+      "key": "level.w1-09.name",
+      "es": "Rampa y resorte",
+      "en": "Ramp and spring",
+      "pt": "Rampa e mola"
+    },
+    {
+      "key": "level.w1-09.hint",
+      "es": "Dos piezas: primero la rampa, luego el resorte",
+      "en": "Two pieces: first the ramp, then the spring",
+      "pt": "Duas peças: primeiro a rampa, depois a mola"
+    },
+    {
+      "key": "level.w1-10.name",
+      "es": "El muro",
+      "en": "The wall",
+      "pt": "O muro"
+    },
+    {
+      "key": "level.w1-10.hint",
+      "es": "Pasa a Bloop por encima del muro",
+      "en": "Get Bloop over the wall",
+      "pt": "Passe o Bloop por cima do muro"
+    },
+    {
+      "key": "level.w1-11.name",
+      "es": "Palanca y diagonal",
+      "en": "Lever and diagonal",
+      "pt": "Alavanca e diagonal"
+    },
+    {
+      "key": "level.w1-11.hint",
+      "es": "La pelota lanza a Bloop; el resorte lo manda arriba",
+      "en": "The ball launches Bloop; the spring sends Bloop up high",
+      "pt": "A bola lança o Bloop; a mola o manda para cima"
+    },
+    {
+      "key": "level.w1-12.name",
+      "es": "Puntería",
+      "en": "Aim",
+      "pt": "Pontaria"
+    },
+    {
+      "key": "level.w1-12.hint",
+      "es": "¿Más arriba o más abajo en la rampa?",
+      "en": "Higher or lower on the ramp?",
+      "pt": "Mais acima ou mais abaixo na rampa?"
+    },
+    {
+      "key": "level.w1-13.name",
+      "es": "Empujón y vuelo",
+      "en": "Push and fly",
+      "pt": "Empurrão e voo"
+    },
+    {
+      "key": "level.w1-13.hint",
+      "es": "Empuja a Bloop y lánzalo hasta la meta alta",
+      "en": "Push Bloop, then launch Bloop to the high goal",
+      "pt": "Empurre o Bloop e lance-o até a meta alta"
+    },
+    {
+      "key": "level.w1-14.name",
+      "es": "Bajo techo",
+      "en": "Under the roof",
+      "pt": "Sob o teto"
+    },
+    {
+      "key": "level.w1-14.hint",
+      "es": "Lanza a Bloop por debajo del techo",
+      "en": "Launch Bloop under the roof",
+      "pt": "Lance o Bloop por baixo do teto"
+    },
+    {
+      "key": "level.w1-15.name",
+      "es": "Gran rescate",
+      "en": "Great rescue",
+      "pt": "Grande resgate"
+    },
+    {
+      "key": "level.w1-15.hint",
+      "es": "Nivel jefe: pelota, resorte diagonal y resorte final",
+      "en": "Boss level: ball, diagonal spring and final spring",
+      "pt": "Fase chefe: bola, mola diagonal e mola final"
+    },
+    {
+      "key": "level.w2-01.name",
+      "es": "Gira el resorte",
+      "en": "Spin the spring",
+      "pt": "Gire a mola"
+    },
+    {
+      "key": "level.w2-01.hint",
+      "es": "Gira el resorte para apuntar a la meta",
+      "en": "Spin the spring to aim at the goal",
+      "pt": "Gire a mola para mirar na meta"
+    },
+    {
+      "key": "level.w2-02.name",
+      "es": "El péndulo",
+      "en": "The pendulum",
+      "pt": "O pêndulo"
+    },
+    {
+      "key": "level.w2-02.hint",
+      "es": "Mueve el péndulo para que empuje a Bloop",
+      "en": "Move the pendulum so it pushes Bloop",
+      "pt": "Mova o pêndulo para empurrar o Bloop"
+    },
+    {
+      "key": "level.w2-03.name",
+      "es": "Caja pesada",
+      "en": "Heavy crate",
+      "pt": "Caixa pesada"
+    },
+    {
+      "key": "level.w2-03.hint",
+      "es": "Suelta la caja sobre la palanca",
+      "en": "Drop the crate on the lever",
+      "pt": "Solte a caixa na alavanca"
+    },
+    {
+      "key": "level.w2-04.name",
+      "es": "Rampa giratoria",
+      "en": "Spinning ramp",
+      "pt": "Rampa giratória"
+    },
+    {
+      "key": "level.w2-04.hint",
+      "es": "Gira la rampa de hielo",
+      "en": "Spin the polished ramp",
+      "pt": "Gire a rampa encerada"
+    },
+    {
+      "key": "level.w2-05.name",
+      "es": "Péndulo y resorte",
+      "en": "Pendulum and spring",
+      "pt": "Pêndulo e mola"
+    },
+    {
+      "key": "level.w2-05.hint",
+      "es": "Dos piezas: el péndulo y el resorte",
+      "en": "Two pieces: the pendulum and the spring",
+      "pt": "Duas peças: o pêndulo e a mola"
+    },
+    {
+      "key": "level.w2-06.name",
+      "es": "Ángulo justo",
+      "en": "Just the right angle",
+      "pt": "Ângulo certo"
+    },
+    {
+      "key": "level.w2-06.hint",
+      "es": "Gira el resorte para pasar el muro",
+      "en": "Spin the spring to clear the wall",
+      "pt": "Gire a mola para passar o muro"
+    },
+    {
+      "key": "level.w2-07.name",
+      "es": "Péndulo y rampa",
+      "en": "Pendulum and ramp",
+      "pt": "Pêndulo e rampa"
+    },
+    {
+      "key": "level.w2-07.hint",
+      "es": "Empuja a Bloop y gira la rampa",
+      "en": "Push Bloop and spin the ramp",
+      "pt": "Empurre o Bloop e gire a rampa"
+    },
+    {
+      "key": "level.w2-08.name",
+      "es": "Rebote bajo",
+      "en": "Low bounce",
+      "pt": "Quique baixo"
+    },
+    {
+      "key": "level.w2-08.hint",
+      "es": "Pasa por debajo de la cornisa",
+      "en": "Go under the ledge",
+      "pt": "Passe por baixo da borda"
+    },
+    {
+      "key": "level.w2-09.name",
+      "es": "Caja y resorte",
+      "en": "Crate and spring",
+      "pt": "Caixa e mola"
+    },
+    {
+      "key": "level.w2-09.hint",
+      "es": "La caja lanza a Bloop; el resorte apunta",
+      "en": "The crate launches Bloop; the spring aims",
+      "pt": "A caixa lança o Bloop; a mola mira"
+    },
+    {
+      "key": "level.w2-10.name",
+      "es": "Dos giros",
+      "en": "Two spins",
+      "pt": "Dois giros"
+    },
+    {
+      "key": "level.w2-10.hint",
+      "es": "Gira la rampa y el resorte",
+      "en": "Spin the ramp and the spring",
+      "pt": "Gire a rampa e a mola"
+    },
+    {
+      "key": "level.w2-11.name",
+      "es": "Contrapeso",
+      "en": "Counterweight",
+      "pt": "Contrapeso"
+    },
+    {
+      "key": "level.w2-11.hint",
+      "es": "Ahora Bloop está al otro lado",
+      "en": "Now Bloop is on the other side",
+      "pt": "Agora o Bloop está do outro lado"
+    },
+    {
+      "key": "level.w2-12.name",
+      "es": "Rebote al revés",
+      "en": "Bounce in reverse",
+      "pt": "Quique ao contrário"
+    },
+    {
+      "key": "level.w2-12.hint",
+      "es": "El péndulo viene del otro lado",
+      "en": "The pendulum comes from the other side",
+      "pt": "O pêndulo vem do outro lado"
+    },
+    {
+      "key": "level.w2-13.name",
+      "es": "Tres en cadena",
+      "en": "Chain of three",
+      "pt": "Três em cadeia"
+    },
+    {
+      "key": "level.w2-13.hint",
+      "es": "Péndulo, rampa y resorte",
+      "en": "Pendulum, ramp and spring",
+      "pt": "Pêndulo, rampa e mola"
+    },
+    {
+      "key": "level.w2-14.name",
+      "es": "Dos giros al revés",
+      "en": "Two spins in reverse",
+      "pt": "Dois giros ao contrário"
+    },
+    {
+      "key": "level.w2-14.hint",
+      "es": "Ahora todo va al otro lado",
+      "en": "Now everything goes the other way",
+      "pt": "Agora tudo vai para o outro lado"
+    },
+    {
+      "key": "level.w2-15.name",
+      "es": "Gran taller",
+      "en": "Grand workshop",
+      "pt": "Grande oficina"
+    },
+    {
+      "key": "level.w2-15.hint",
+      "es": "Nivel jefe: péndulo, rampa y resorte giratorio",
+      "en": "Boss level: pendulum, ramp and spinning spring",
+      "pt": "Fase chefe: pêndulo, rampa e mola giratória"
+    },
+    {
+      "key": "world_2",
+      "es": "Taller de Madera",
+      "en": "Woodshop",
+      "pt": "Oficina de Madeira"
+    },
+    {
+      "key": "world_2_sub",
+      "es": "Mundo 2 · péndulos y giros",
+      "en": "World 2 · pendulums and spins",
+      "pt": "Mundo 2 · pêndulos e giros"
+    },
+    {
+      "key": "world_label",
+      "es": "Mundo {0}",
+      "en": "World {0}",
+      "pt": "Mundo {0}"
+    },
+    {
+      "key": "hint_rotate",
+      "es": "Arrastra a los lados para girar",
+      "en": "Drag sideways to rotate",
+      "pt": "Arraste para os lados para girar"
+    },
+    {
+      "key": "level.w3-01.name",
+      "es": "Cinta transportadora",
+      "en": "Conveyor belt",
+      "pt": "Esteira"
+    },
+    {
+      "key": "level.w3-01.hint",
+      "es": "Toca la cinta para cambiar su sentido",
+      "en": "Tap the belt to change its direction",
+      "pt": "Toque a esteira para mudar o sentido"
+    },
+    {
+      "key": "level.w3-02.name",
+      "es": "Cinta y resorte",
+      "en": "Belt and spring",
+      "pt": "Esteira e mola"
+    },
+    {
+      "key": "level.w3-02.hint",
+      "es": "Cambia la cinta y coloca el resorte",
+      "en": "Flip the belt and place the spring",
+      "pt": "Mude a esteira e posicione a mola"
+    },
+    {
+      "key": "level.w3-03.name",
+      "es": "Rampa de salida",
+      "en": "Launch ramp",
+      "pt": "Rampa de salto"
+    },
+    {
+      "key": "level.w3-03.hint",
+      "es": "La cinta toma impulso; la rampa lo lanza",
+      "en": "The belt builds speed; the ramp launches",
+      "pt": "A esteira dá impulso; a rampa lança"
+    },
+    {
+      "key": "level.w3-04.name",
+      "es": "Dos cintas",
+      "en": "Two belts",
+      "pt": "Duas esteiras"
+    },
+    {
+      "key": "level.w3-04.hint",
+      "es": "Cada cinta en su sentido",
+      "en": "Each belt in its own direction",
+      "pt": "Cada esteira no seu sentido"
+    },
+    {
+      "key": "level.w3-05.name",
+      "es": "Cinta y rampa",
+      "en": "Belt and ramp",
+      "pt": "Esteira e rampa"
+    },
+    {
+      "key": "level.w3-05.hint",
+      "es": "Cambia la cinta y gira la rampa",
+      "en": "Flip the belt and spin the ramp",
+      "pt": "Mude a esteira e gire a rampa"
+    },
+    {
+      "key": "level.w3-06.name",
+      "es": "Cinta y resorte giratorio",
+      "en": "Belt and spinning spring",
+      "pt": "Esteira e mola giratória"
+    },
+    {
+      "key": "level.w3-06.hint",
+      "es": "Apunta por debajo de la cinta",
+      "en": "Aim under the belt",
+      "pt": "Mire por baixo da esteira"
+    },
+    {
+      "key": "level.w3-07.name",
+      "es": "Tres cintas",
+      "en": "Three belts",
+      "pt": "Três esteiras"
+    },
+    {
+      "key": "level.w3-07.hint",
+      "es": "Tres cintas, tres sentidos",
+      "en": "Three belts, three directions",
+      "pt": "Três esteiras, três sentidos"
+    },
+    {
+      "key": "level.w3-08.name",
+      "es": "Péndulo y cinta",
+      "en": "Pendulum and belt",
+      "pt": "Pêndulo e esteira"
+    },
+    {
+      "key": "level.w3-08.hint",
+      "es": "El péndulo empuja, la cinta transporta",
+      "en": "The pendulum pushes, the belt carries",
+      "pt": "O pêndulo empurra, a esteira leva"
+    },
+    {
+      "key": "level.w3-09.name",
+      "es": "Cintas y resorte",
+      "en": "Belts and spring",
+      "pt": "Esteiras e mola"
+    },
+    {
+      "key": "level.w3-09.hint",
+      "es": "Dos cintas y el resorte en su sitio",
+      "en": "Two belts and the spring in place",
+      "pt": "Duas esteiras e a mola no lugar"
+    },
+    {
+      "key": "level.w3-10.name",
+      "es": "Rampa al revés",
+      "en": "Ramp in reverse",
+      "pt": "Rampa ao contrário"
+    },
+    {
+      "key": "level.w3-10.hint",
+      "es": "Ahora todo cae hacia el otro lado",
+      "en": "Now everything falls the other way",
+      "pt": "Agora tudo cai para o outro lado"
+    },
+    {
+      "key": "level.w3-11.name",
+      "es": "Resorte bajo al revés",
+      "en": "Low spring in reverse",
+      "pt": "Mola baixa ao contrário"
+    },
+    {
+      "key": "level.w3-11.hint",
+      "es": "Apunta por debajo, del otro lado",
+      "en": "Aim low, on the other side",
+      "pt": "Mire por baixo, do outro lado"
+    },
+    {
+      "key": "level.w3-12.name",
+      "es": "Salto y resorte",
+      "en": "Jump and spring",
+      "pt": "Salto e mola"
+    },
+    {
+      "key": "level.w3-12.hint",
+      "es": "Rampa, cinta y resorte",
+      "en": "Ramp, belt and spring",
+      "pt": "Rampa, esteira e mola"
+    },
+    {
+      "key": "level.w3-13.name",
+      "es": "Tres cintas al revés",
+      "en": "Three belts in reverse",
+      "pt": "Três esteiras ao contrário"
+    },
+    {
+      "key": "level.w3-13.hint",
+      "es": "Tres sentidos, ahora en espejo",
+      "en": "Three directions, now mirrored",
+      "pt": "Três sentidos, agora espelhados"
+    },
+    {
+      "key": "level.w3-14.name",
+      "es": "Cinta, rampa y resorte",
+      "en": "Belt, ramp and spring",
+      "pt": "Esteira, rampa e mola"
+    },
+    {
+      "key": "level.w3-14.hint",
+      "es": "Tres piezas en cadena",
+      "en": "Three pieces in a chain",
+      "pt": "Três peças em cadeia"
+    },
+    {
+      "key": "level.w3-15.name",
+      "es": "Gran fábrica",
+      "en": "Grand factory",
+      "pt": "Grande fábrica"
+    },
+    {
+      "key": "level.w3-15.hint",
+      "es": "Nivel jefe: tres cintas y un resorte giratorio",
+      "en": "Boss level: three belts and a spinning spring",
+      "pt": "Fase chefe: três esteiras e uma mola giratória"
+    },
+    {
+      "key": "world_3",
+      "es": "Fábrica de Muelles",
+      "en": "Spring Factory",
+      "pt": "Fábrica de Molas"
+    },
+    {
+      "key": "world_3_sub",
+      "es": "Mundo 3 · cintas e interruptores",
+      "en": "World 3 · belts and switches",
+      "pt": "Mundo 3 · esteiras e interruptores"
+    },
+    {
+      "key": "level.w4-01.name",
+      "es": "Primera brisa",
+      "en": "First breeze",
+      "pt": "Primeira brisa"
+    },
+    {
+      "key": "level.w4-01.hint",
+      "es": "Pon el ventilador debajo de la meta",
+      "en": "Put the fan under the goal",
+      "pt": "Coloque o ventilador embaixo da meta"
+    },
+    {
+      "key": "level.w4-02.name",
+      "es": "Nube saltarina",
+      "en": "Bouncy cloud",
+      "pt": "Nuvem saltitante"
+    },
+    {
+      "key": "level.w4-02.hint",
+      "es": "La nube hace rebotar a Bloop",
+      "en": "The cloud makes Bloop bounce",
+      "pt": "A nuvem faz o Bloop quicar"
+    },
+    {
+      "key": "level.w4-03.name",
+      "es": "¡Pop!",
+      "en": "Pop!",
+      "pt": "Pop!"
+    },
+    {
+      "key": "level.w4-03.hint",
+      "es": "Revienta el globo para saltar el muro",
+      "en": "Pop the balloon to jump the wall",
+      "pt": "Estoure o balão para pular o muro"
+    },
+    {
+      "key": "level.w4-04.name",
+      "es": "Interruptores de aire",
+      "en": "Air switches",
+      "pt": "Interruptores de ar"
+    },
+    {
+      "key": "level.w4-04.hint",
+      "es": "Toca los ventiladores para encenderlos o apagarlos",
+      "en": "Tap the fans to turn them on or off",
+      "pt": "Toque nos ventiladores para ligar ou desligar"
+    },
+    {
+      "key": "level.w4-05.name",
+      "es": "Viento cruzado",
+      "en": "Crosswind",
+      "pt": "Vento cruzado"
+    },
+    {
+      "key": "level.w4-05.hint",
+      "es": "Gira el ventilador para soplar hacia la meta",
+      "en": "Turn the fan to blow toward the goal",
+      "pt": "Gire o ventilador para soprar rumo à meta"
+    },
+    {
+      "key": "level.w4-06.name",
+      "es": "Escalera de nubes",
+      "en": "Cloud stairs",
+      "pt": "Escada de nuvens"
+    },
+    {
+      "key": "level.w4-06.hint",
+      "es": "Dos rebotes para llegar arriba",
+      "en": "Two bounces to reach the top",
+      "pt": "Dois quiques para chegar lá em cima"
+    },
+    {
+      "key": "level.w4-07.name",
+      "es": "Globos en fila",
+      "en": "Balloons in a row",
+      "pt": "Balões em fila"
+    },
+    {
+      "key": "level.w4-07.hint",
+      "es": "Un globo para cada muro",
+      "en": "One balloon for each wall",
+      "pt": "Um balão para cada muro"
+    },
+    {
+      "key": "level.w4-08.name",
+      "es": "Ascensor de aire",
+      "en": "Air elevator",
+      "pt": "Elevador de ar"
+    },
+    {
+      "key": "level.w4-08.hint",
+      "es": "Sube, empuja y rebota",
+      "en": "Rise, push and bounce",
+      "pt": "Suba, empurre e quique"
+    },
+    {
+      "key": "level.w4-09.name",
+      "es": "Soplido y globo",
+      "en": "Puff and pop",
+      "pt": "Sopro e balão"
+    },
+    {
+      "key": "level.w4-09.hint",
+      "es": "Apunta el viento hacia el globo",
+      "en": "Aim the wind at the balloon",
+      "pt": "Aponte o vento para o balão"
+    },
+    {
+      "key": "level.w4-10.name",
+      "es": "Laberinto de viento",
+      "en": "Wind maze",
+      "pt": "Labirinto de vento"
+    },
+    {
+      "key": "level.w4-10.hint",
+      "es": "Elige qué ventilador sopla",
+      "en": "Choose which fan blows",
+      "pt": "Escolha qual ventilador sopra"
+    },
+    {
+      "key": "level.w4-11.name",
+      "es": "Resorte y globo",
+      "en": "Spring and balloon",
+      "pt": "Mola e balão"
+    },
+    {
+      "key": "level.w4-11.hint",
+      "es": "El resorte te lanza, el globo te sube",
+      "en": "The spring launches you, the balloon lifts you",
+      "pt": "A mola te lança, o balão te sobe"
+    },
+    {
+      "key": "level.w4-12.name",
+      "es": "Tres interruptores",
+      "en": "Three switches",
+      "pt": "Três interruptores"
+    },
+    {
+      "key": "level.w4-12.hint",
+      "es": "Arriba, a la derecha y otra vez arriba",
+      "en": "Up, right and up again",
+      "pt": "Para cima, para a direita e para cima de novo"
+    },
+    {
+      "key": "level.w4-13.name",
+      "es": "Escalera de globos",
+      "en": "Balloon stairs",
+      "pt": "Escada de balões"
+    },
+    {
+      "key": "level.w4-13.hint",
+      "es": "Revienta tres globos seguidos",
+      "en": "Pop three balloons in a row",
+      "pt": "Estoure três balões seguidos"
+    },
+    {
+      "key": "level.w4-14.name",
+      "es": "Tormenta de piezas",
+      "en": "Storm of pieces",
+      "pt": "Tempestade de peças"
+    },
+    {
+      "key": "level.w4-14.hint",
+      "es": "Ventilador, nube y globo en cadena",
+      "en": "Fan, cloud and balloon in a chain",
+      "pt": "Ventilador, nuvem e balão em cadeia"
+    },
+    {
+      "key": "level.w4-15.name",
+      "es": "Gran tormenta",
+      "en": "Great storm",
+      "pt": "Grande tempestade"
+    },
+    {
+      "key": "level.w4-15.hint",
+      "es": "Nivel jefe: tres interruptores y un globo",
+      "en": "Boss level: three switches and a balloon",
+      "pt": "Fase chefe: três interruptores e um balão"
+    },
+    {
+      "key": "world_4",
+      "es": "Cielo de Globos",
+      "en": "Balloon Sky",
+      "pt": "Céu de Balões"
+    },
+    {
+      "key": "world_4_sub",
+      "es": "Mundo 4 · viento, nubes y globos",
+      "en": "World 4 · wind, clouds and balloons",
+      "pt": "Mundo 4 · vento, nuvens e balões"
+    },
+    {
+      "key": "level.w5-01.name",
+      "es": "Primer imán",
+      "en": "First magnet",
+      "pt": "Primeiro ímã"
+    },
+    {
+      "key": "level.w5-01.hint",
+      "es": "Pon el imán donde quieras que vaya la vagoneta",
+      "en": "Put the magnet where you want the cart to go",
+      "pt": "Coloque o ímã onde quer que o carrinho vá"
+    },
+    {
+      "key": "level.w5-02.name",
+      "es": "Ascensor magnético",
+      "en": "Magnetic lift",
+      "pt": "Elevador magnético"
+    },
+    {
+      "key": "level.w5-02.hint",
+      "es": "Enciende el imán para subir la vagoneta",
+      "en": "Turn on the magnet to lift the cart",
+      "pt": "Ligue o ímã para subir o carrinho"
+    },
+    {
+      "key": "level.w5-03.name",
+      "es": "Tira y afloja",
+      "en": "Tug of war",
+      "pt": "Cabo de guerra"
+    },
+    {
+      "key": "level.w5-03.hint",
+      "es": "Apaga un imán y enciende el otro",
+      "en": "Turn one magnet off and the other on",
+      "pt": "Desligue um ímã e ligue o outro"
+    },
+    {
+      "key": "level.w5-04.name",
+      "es": "Globo en la mina",
+      "en": "Balloon in the mine",
+      "pt": "Balão na mina"
+    },
+    {
+      "key": "level.w5-04.hint",
+      "es": "Bloop revienta el globo desde la vagoneta",
+      "en": "Bloop pops the balloon from the cart",
+      "pt": "O Bloop estoura o balão do carrinho"
+    },
+    {
+      "key": "level.w5-05.name",
+      "es": "Viento y acero",
+      "en": "Wind and steel",
+      "pt": "Vento e aço"
+    },
+    {
+      "key": "level.w5-05.hint",
+      "es": "El ventilador sube la vagoneta; el imán la lleva a la repisa",
+      "en": "The fan lifts the cart; the magnet pulls it to the ledge",
+      "pt": "O ventilador sobe o carrinho; o ímã o leva à prateleira"
+    },
+    {
+      "key": "level.w5-06.name",
+      "es": "Vagoneta al viento",
+      "en": "Cart in the wind",
+      "pt": "Carrinho ao vento"
+    },
+    {
+      "key": "level.w5-06.hint",
+      "es": "Gira el ventilador: el imán atrapa la vagoneta",
+      "en": "Turn the fan: the magnet catches the cart",
+      "pt": "Gire o ventilador: o ímã pega o carrinho"
+    },
+    {
+      "key": "level.w5-07.name",
+      "es": "Cinta minera",
+      "en": "Mine belt",
+      "pt": "Esteira da mina"
+    },
+    {
+      "key": "level.w5-07.hint",
+      "es": "Cambia la cinta y enciende el imán",
+      "en": "Flip the belt and turn on the magnet",
+      "pt": "Inverta a esteira e ligue o ímã"
+    },
+    {
+      "key": "level.w5-08.name",
+      "es": "Globos en la vía",
+      "en": "Balloons on the track",
+      "pt": "Balões no trilho"
+    },
+    {
+      "key": "level.w5-08.hint",
+      "es": "Un globo no basta: coloca el segundo",
+      "en": "One balloon is not enough: place the second",
+      "pt": "Um balão não basta: coloque o segundo"
+    },
+    {
+      "key": "level.w5-09.name",
+      "es": "Tres imanes",
+      "en": "Three magnets",
+      "pt": "Três ímãs"
+    },
+    {
+      "key": "level.w5-09.hint",
+      "es": "Elige bien qué imanes encender",
+      "en": "Choose wisely which magnets to turn on",
+      "pt": "Escolha bem quais ímãs ligar"
+    },
+    {
+      "key": "level.w5-10.name",
+      "es": "Viento y cinta",
+      "en": "Wind and belt",
+      "pt": "Vento e esteira"
+    },
+    {
+      "key": "level.w5-10.hint",
+      "es": "Sube con el viento y deja que el imán te lleve",
+      "en": "Rise with the wind and let the magnet carry you",
+      "pt": "Suba com o vento e deixe o ímã te levar"
+    },
+    {
+      "key": "level.w5-11.name",
+      "es": "Viento y globo",
+      "en": "Wind and balloon",
+      "pt": "Vento e balão"
+    },
+    {
+      "key": "level.w5-11.hint",
+      "es": "Apunta el ventilador y pon el globo en el camino",
+      "en": "Aim the fan and put the balloon in the way",
+      "pt": "Mire o ventilador e coloque o balão no caminho"
+    },
+    {
+      "key": "level.w5-12.name",
+      "es": "Cinta e imanes",
+      "en": "Belt and magnets",
+      "pt": "Esteira e ímãs"
+    },
+    {
+      "key": "level.w5-12.hint",
+      "es": "La cinta, el imán de la izquierda y el de arriba",
+      "en": "The belt, the left magnet and the top one",
+      "pt": "A esteira, o ímã da esquerda e o de cima"
+    },
+    {
+      "key": "level.w5-13.name",
+      "es": "Globos al viento",
+      "en": "Balloons in the wind",
+      "pt": "Balões ao vento"
+    },
+    {
+      "key": "level.w5-13.hint",
+      "es": "Apunta el ventilador y coloca el globo alto",
+      "en": "Aim the fan and place the high balloon",
+      "pt": "Mire o ventilador e coloque o balão alto"
+    },
+    {
+      "key": "level.w5-14.name",
+      "es": "Gran vía minera",
+      "en": "Great mine track",
+      "pt": "Grande via da mina"
+    },
+    {
+      "key": "level.w5-14.hint",
+      "es": "Cuidado: a veces hay que apagar el imán",
+      "en": "Careful: sometimes the magnet must be off",
+      "pt": "Cuidado: às vezes é preciso desligar o ímã"
+    },
+    {
+      "key": "level.w5-15.name",
+      "es": "Corazón de la mina",
+      "en": "Heart of the mine",
+      "pt": "Coração da mina"
+    },
+    {
+      "key": "level.w5-15.hint",
+      "es": "Nivel jefe: ventilador, cinta, imán y globo",
+      "en": "Boss level: fan, belt, magnet and balloon",
+      "pt": "Fase chefe: ventilador, esteira, ímã e balão"
+    },
+    {
+      "key": "world_5",
+      "es": "Mina Magnética",
+      "en": "Magnet Mine",
+      "pt": "Mina Magnética"
+    },
+    {
+      "key": "world_5_sub",
+      "es": "Mundo 5 · imanes y vagonetas",
+      "en": "World 5 · magnets and carts",
+      "pt": "Mundo 5 · ímãs e carrinhos"
+    },
+    {
+      "key": "level.w6-01.name",
+      "es": "Primer portal",
+      "en": "First portal",
+      "pt": "Primeiro portal"
+    },
+    {
+      "key": "level.w6-01.hint",
+      "es": "Pon el portal azul donde caerá Bloop",
+      "en": "Put the blue portal where Bloop will fall",
+      "pt": "Coloque o portal azul onde o Bloop vai cair"
+    },
+    {
+      "key": "level.w6-02.name",
+      "es": "Apunta la salida",
+      "en": "Aim the exit",
+      "pt": "Mire a saída"
+    },
+    {
+      "key": "level.w6-02.hint",
+      "es": "Gira el portal naranja para apuntar a la meta",
+      "en": "Turn the orange portal to aim at the goal",
+      "pt": "Gire o portal laranja para mirar na meta"
+    },
+    {
+      "key": "level.w6-03.name",
+      "es": "Dos parejas",
+      "en": "Two pairs",
+      "pt": "Dois pares"
+    },
+    {
+      "key": "level.w6-03.hint",
+      "es": "Azul con naranja, verde con rosa",
+      "en": "Blue with orange, green with pink",
+      "pt": "Azul com laranja, verde com rosa"
+    },
+    {
+      "key": "level.w6-04.name",
+      "es": "Resorte al portal",
+      "en": "Spring to the portal",
+      "pt": "Mola ao portal"
+    },
+    {
+      "key": "level.w6-04.hint",
+      "es": "Apunta el resorte hacia el portal azul",
+      "en": "Aim the spring at the blue portal",
+      "pt": "Mire a mola no portal azul"
+    },
+    {
+      "key": "level.w6-05.name",
+      "es": "Atrapa y apunta",
+      "en": "Catch and aim",
+      "pt": "Pegue e mire"
+    },
+    {
+      "key": "level.w6-05.hint",
+      "es": "Mueve el portal azul y gira el naranja",
+      "en": "Move the blue portal and turn the orange one",
+      "pt": "Mova o portal azul e gire o laranja"
+    },
+    {
+      "key": "level.w6-06.name",
+      "es": "Viento al portal",
+      "en": "Wind into the portal",
+      "pt": "Vento ao portal"
+    },
+    {
+      "key": "level.w6-06.hint",
+      "es": "Gira el ventilador para soplar a Bloop dentro del portal",
+      "en": "Turn the fan to blow Bloop into the portal",
+      "pt": "Gire o ventilador para soprar o Bloop no portal"
+    },
+    {
+      "key": "level.w6-07.name",
+      "es": "Cadena de portales",
+      "en": "Portal chain",
+      "pt": "Corrente de portais"
+    },
+    {
+      "key": "level.w6-07.hint",
+      "es": "Cuatro portales en cadena: gira el rosa",
+      "en": "Four portals in a chain: turn the pink one",
+      "pt": "Quatro portais em cadeia: gire o rosa"
+    },
+    {
+      "key": "level.w6-08.name",
+      "es": "¿Qué portal?",
+      "en": "Which portal?",
+      "pt": "Qual portal?"
+    },
+    {
+      "key": "level.w6-08.hint",
+      "es": "Cambia la cinta y apunta el portal naranja",
+      "en": "Flip the belt and aim the orange portal",
+      "pt": "Inverta a esteira e mire o portal laranja"
+    },
+    {
+      "key": "level.w6-09.name",
+      "es": "Globo en órbita",
+      "en": "Balloon in orbit",
+      "pt": "Balão em órbita"
+    },
+    {
+      "key": "level.w6-09.hint",
+      "es": "Mueve el portal azul y pon el globo sobre la salida",
+      "en": "Move the blue portal and put the balloon over the exit",
+      "pt": "Mova o portal azul e ponha o balão sobre a saída"
+    },
+    {
+      "key": "level.w6-10.name",
+      "es": "Cierra un portal",
+      "en": "Close a portal",
+      "pt": "Feche um portal"
+    },
+    {
+      "key": "level.w6-10.hint",
+      "es": "Toca el portal azul para cerrarlo",
+      "en": "Tap the blue portal to close it",
+      "pt": "Toque no portal azul para fechá-lo"
+    },
+    {
+      "key": "level.w6-11.name",
+      "es": "Cierra y apunta",
+      "en": "Close and aim",
+      "pt": "Feche e mire"
+    },
+    {
+      "key": "level.w6-11.hint",
+      "es": "Cierra el portal azul y gira el rosa",
+      "en": "Close the blue portal and turn the pink one",
+      "pt": "Feche o portal azul e gire o rosa"
+    },
+    {
+      "key": "level.w6-12.name",
+      "es": "Puertas cruzadas",
+      "en": "Crossed doors",
+      "pt": "Portas cruzadas"
+    },
+    {
+      "key": "level.w6-12.hint",
+      "es": "Cierra el azul y abre el verde",
+      "en": "Close the blue one and open the green one",
+      "pt": "Feche o azul e abra o verde"
+    },
+    {
+      "key": "level.w6-13.name",
+      "es": "Portal, globo y altura",
+      "en": "Portal, balloon and height",
+      "pt": "Portal, balão e altura"
+    },
+    {
+      "key": "level.w6-13.hint",
+      "es": "Atrapa, apunta y revienta el globo para llegar arriba",
+      "en": "Catch, aim and pop the balloon to reach the top",
+      "pt": "Pegue, mire e estoure o balão para chegar lá em cima"
+    },
+    {
+      "key": "level.w6-14.name",
+      "es": "Laberinto dimensional",
+      "en": "Dimensional maze",
+      "pt": "Labirinto dimensional"
+    },
+    {
+      "key": "level.w6-14.hint",
+      "es": "Cinta, dos puertas y un portal que apuntar",
+      "en": "Belt, two doors and a portal to aim",
+      "pt": "Esteira, duas portas e um portal para mirar"
+    },
+    {
+      "key": "level.w6-15.name",
+      "es": "Corazón dimensional",
+      "en": "Dimensional heart",
+      "pt": "Coração dimensional"
+    },
+    {
+      "key": "level.w6-15.hint",
+      "es": "Nivel jefe: apunta el viento, abre el portal y coloca el globo",
+      "en": "Boss level: aim the wind, open the portal and place the balloon",
+      "pt": "Fase chefe: mire o vento, abra o portal e coloque o balão"
+    },
+    {
+      "key": "world_6",
+      "es": "Dimensión Portal",
+      "en": "Portal Dimension",
+      "pt": "Dimensão Portal"
+    },
+    {
+      "key": "world_6_sub",
+      "es": "Mundo 6 · portales que teletransportan",
+      "en": "World 6 · teleporting portals",
+      "pt": "Mundo 6 · portais que teletransportam"
+    },
+    {
+      "key": "level.w7-01.name",
+      "es": "Primera bomba",
+      "en": "First bomb",
+      "pt": "Primeira bomba"
+    },
+    {
+      "key": "level.w7-01.hint",
+      "es": "Pon la bomba junto a Bloop: ¡pum!",
+      "en": "Put the bomb next to Bloop: boom!",
+      "pt": "Coloque a bomba ao lado do Bloop: bum!"
+    },
+    {
+      "key": "level.w7-02.name",
+      "es": "Bomba al toque",
+      "en": "Touch bomb",
+      "pt": "Bomba de toque"
+    },
+    {
+      "key": "level.w7-02.hint",
+      "es": "Esta bomba estalla cuando algo la toca",
+      "en": "This bomb goes off when something touches it",
+      "pt": "Esta bomba explode quando algo a toca"
+    },
+    {
+      "key": "level.w7-03.name",
+      "es": "Cuenta atrás",
+      "en": "Countdown",
+      "pt": "Contagem regressiva"
+    },
+    {
+      "key": "level.w7-03.hint",
+      "es": "La mecha decide cuándo estalla: colócala donde estará Bloop",
+      "en": "The fuse decides when it blows: place it where Bloop will be",
+      "pt": "O pavio decide quando explode: coloque onde o Bloop estará"
+    },
+    {
+      "key": "level.w7-04.name",
+      "es": "Desactívala",
+      "en": "Defuse it",
+      "pt": "Desative"
+    },
+    {
+      "key": "level.w7-04.hint",
+      "es": "Toca una bomba para desactivarla",
+      "en": "Tap a bomb to defuse it",
+      "pt": "Toque numa bomba para desativá-la"
+    },
+    {
+      "key": "level.w7-05.name",
+      "es": "Reacción en cadena",
+      "en": "Chain reaction",
+      "pt": "Reação em cadeia"
+    },
+    {
+      "key": "level.w7-05.hint",
+      "es": "La bomba de la mecha enciende a la otra si está cerca",
+      "en": "The fused bomb lights the other one if it is close",
+      "pt": "A bomba com pavio acende a outra se estiver perto"
+    },
+    {
+      "key": "level.w7-06.name",
+      "es": "Bomba al portal",
+      "en": "Bomb to the portal",
+      "pt": "Bomba ao portal"
+    },
+    {
+      "key": "level.w7-06.hint",
+      "es": "Que la explosión lance a Bloop dentro del portal",
+      "en": "Let the blast throw Bloop into the portal",
+      "pt": "Que a explosão lance o Bloop no portal"
+    },
+    {
+      "key": "level.w7-07.name",
+      "es": "Viento y pólvora",
+      "en": "Wind and powder",
+      "pt": "Vento e pólvora"
+    },
+    {
+      "key": "level.w7-07.hint",
+      "es": "El ventilador sube a Bloop; la bomba lo lanza a la repisa",
+      "en": "The fan lifts Bloop; the bomb throws him to the ledge",
+      "pt": "O ventilador sobe o Bloop; a bomba o lança à prateleira"
+    },
+    {
+      "key": "level.w7-08.name",
+      "es": "Cinta explosiva",
+      "en": "Explosive belt",
+      "pt": "Esteira explosiva"
+    },
+    {
+      "key": "level.w7-08.hint",
+      "es": "La cinta lleva a Bloop hasta la bomba; elige el sentido",
+      "en": "The belt carries Bloop to the bomb; choose the way",
+      "pt": "A esteira leva o Bloop até a bomba; escolha o sentido"
+    },
+    {
+      "key": "level.w7-09.name",
+      "es": "Tres mechas",
+      "en": "Three fuses",
+      "pt": "Três pavios"
+    },
+    {
+      "key": "level.w7-09.hint",
+      "es": "Desactiva solo la bomba que estorba",
+      "en": "Defuse only the bomb in the way",
+      "pt": "Desative só a bomba que atrapalha"
+    },
+    {
+      "key": "level.w7-10.name",
+      "es": "Bomba y globo",
+      "en": "Bomb and balloon",
+      "pt": "Bomba e balão"
+    },
+    {
+      "key": "level.w7-10.hint",
+      "es": "La bomba lanza a Bloop; el globo lo sube más",
+      "en": "The bomb throws Bloop; the balloon lifts him higher",
+      "pt": "A bomba lança o Bloop; o balão o sobe mais"
+    },
+    {
+      "key": "level.w7-11.name",
+      "es": "Mecha larga",
+      "en": "Long fuse",
+      "pt": "Pavio longo"
+    },
+    {
+      "key": "level.w7-11.hint",
+      "es": "Coloca la bomba del medio para que la cadena llegue a Bloop",
+      "en": "Place the middle bomb so the chain reaches Bloop",
+      "pt": "Coloque a bomba do meio para a cadeia chegar ao Bloop"
+    },
+    {
+      "key": "level.w7-12.name",
+      "es": "Bomba y portales",
+      "en": "Bomb and portals",
+      "pt": "Bomba e portais"
+    },
+    {
+      "key": "level.w7-12.hint",
+      "es": "Desactiva una bomba y gira la salida",
+      "en": "Defuse one bomb and turn the exit",
+      "pt": "Desative uma bomba e gire a saída"
+    },
+    {
+      "key": "level.w7-13.name",
+      "es": "Doble estallido",
+      "en": "Double blast",
+      "pt": "Explosão dupla"
+    },
+    {
+      "key": "level.w7-13.hint",
+      "es": "Una bomba lanza a Bloop y la otra, con su mecha, lo sube más",
+      "en": "One bomb throws Bloop and the other, with its fuse, lifts him higher",
+      "pt": "Uma bomba lança o Bloop e a outra, com seu pavio, o sobe mais"
+    },
+    {
+      "key": "level.w7-14.name",
+      "es": "Fiesta de mechas",
+      "en": "Fuse party",
+      "pt": "Festa de pavios"
+    },
+    {
+      "key": "level.w7-14.hint",
+      "es": "Enciende el ventilador, desactiva la trampa y coloca la bomba",
+      "en": "Turn on the fan, defuse the trap and place the bomb",
+      "pt": "Ligue o ventilador, desative a armadilha e coloque a bomba"
+    },
+    {
+      "key": "level.w7-15.name",
+      "es": "Gran erupción",
+      "en": "Great eruption",
+      "pt": "Grande erupção"
+    },
+    {
+      "key": "level.w7-15.hint",
+      "es": "Nivel jefe: bomba, portal, trampa y globo",
+      "en": "Boss level: bomb, portal, trap and balloon",
+      "pt": "Fase chefe: bomba, portal, armadilha e balão"
+    },
+    {
+      "key": "world_7",
+      "es": "Volcán Confeti",
+      "en": "Confetti Volcano",
+      "pt": "Vulcão Confete"
+    },
+    {
+      "key": "world_7_sub",
+      "es": "Mundo 7 · bombas de confeti y lava",
+      "en": "World 7 · confetti bombs and lava",
+      "pt": "Mundo 7 · bombas de confete e lava"
+    },
+    {
+      "key": "level.w8-01.name",
+      "es": "Puertas del castillo",
+      "en": "Castle gates",
+      "pt": "Portões do castelo"
+    },
+    {
+      "key": "level.w8-01.hint",
+      "es": "Atrapa a Bloop antes de que caiga sobre la nube",
+      "en": "Catch Bloop before he falls on the cloud",
+      "pt": "Pegue o Bloop antes que caia na nuvem"
+    },
+    {
+      "key": "level.w8-02.name",
+      "es": "Viento entre nubarrones",
+      "en": "Wind among storm clouds",
+      "pt": "Vento entre nuvens"
+    },
+    {
+      "key": "level.w8-02.hint",
+      "es": "Gira el ventilador y esquiva la nube del Gruñubarrón",
+      "en": "Turn the fan and dodge the villain cloud",
+      "pt": "Gire o ventilador e desvie da nuvem do vilão"
+    },
+    {
+      "key": "level.w8-03.name",
+      "es": "Pólvora en la muralla",
+      "en": "Powder on the wall",
+      "pt": "Pólvora na muralha"
+    },
+    {
+      "key": "level.w8-03.hint",
+      "es": "Coloca la bomba sin lanzar a Bloop contra la nube",
+      "en": "Place the bomb without throwing Bloop into the cloud",
+      "pt": "Coloque a bomba sem lançar o Bloop contra a nuvem"
+    },
+    {
+      "key": "level.w8-04.name",
+      "es": "Portales del torreón",
+      "en": "Tower portals",
+      "pt": "Portais da torre"
+    },
+    {
+      "key": "level.w8-04.hint",
+      "es": "Atrapa a Bloop y apunta lejos de la nube",
+      "en": "Catch Bloop and aim away from the cloud",
+      "pt": "Pegue o Bloop e mire longe da nuvem"
+    },
+    {
+      "key": "level.w8-05.name",
+      "es": "Vagoneta del sótano",
+      "en": "Basement cart",
+      "pt": "Carrinho do porão"
+    },
+    {
+      "key": "level.w8-05.hint",
+      "es": "Detén la vagoneta antes de la nube",
+      "en": "Stop the cart before the cloud",
+      "pt": "Pare o carrinho antes da nuvem"
+    },
+    {
+      "key": "level.w8-06.name",
+      "es": "Salto vigilado",
+      "en": "Guarded jump",
+      "pt": "Salto vigiado"
+    },
+    {
+      "key": "level.w8-06.hint",
+      "es": "Resorte y globo, esquivando la nube",
+      "en": "Spring and balloon, dodging the cloud",
+      "pt": "Mola e balão, desviando da nuvem"
+    },
+    {
+      "key": "level.w8-07.name",
+      "es": "Globos del patio",
+      "en": "Courtyard balloons",
+      "pt": "Balões do pátio"
+    },
+    {
+      "key": "level.w8-07.hint",
+      "es": "Coloca el segundo globo lejos de la nube",
+      "en": "Place the second balloon away from the cloud",
+      "pt": "Coloque o segundo balão longe da nuvem"
+    },
+    {
+      "key": "level.w8-08.name",
+      "es": "Explosión en la torre",
+      "en": "Blast in the tower",
+      "pt": "Explosão na torre"
+    },
+    {
+      "key": "level.w8-08.hint",
+      "es": "Bomba y globo bajo la mirada del villano",
+      "en": "Bomb and balloon under the villain eyes",
+      "pt": "Bomba e balão sob o olhar do vilão"
+    },
+    {
+      "key": "level.w8-09.name",
+      "es": "Portal del campanario",
+      "en": "Bell tower portal",
+      "pt": "Portal do campanário"
+    },
+    {
+      "key": "level.w8-09.hint",
+      "es": "Portal, salida y globo entre nubes",
+      "en": "Portal, exit and balloon among clouds",
+      "pt": "Portal, saída e balão entre nuvens"
+    },
+    {
+      "key": "level.w8-10.name",
+      "es": "Viento del salón",
+      "en": "Hall wind",
+      "pt": "Vento do salão"
+    },
+    {
+      "key": "level.w8-10.hint",
+      "es": "Ventilador, vagoneta y globo",
+      "en": "Fan, cart and balloon",
+      "pt": "Ventilador, carrinho e balão"
+    },
+    {
+      "key": "level.w8-11.name",
+      "es": "Tormenta de piezas",
+      "en": "Storm of pieces",
+      "pt": "Tempestade de peças"
+    },
+    {
+      "key": "level.w8-11.hint",
+      "es": "Ventilador, nube saltarina y globo",
+      "en": "Fan, bouncy cloud and balloon",
+      "pt": "Ventilador, nuvem saltitante e balão"
+    },
+    {
+      "key": "level.w8-12.name",
+      "es": "Laberinto del castillo",
+      "en": "Castle maze",
+      "pt": "Labirinto do castelo"
+    },
+    {
+      "key": "level.w8-12.hint",
+      "es": "Cinta, puertas y un portal que apuntar",
+      "en": "Belt, doors and a portal to aim",
+      "pt": "Esteira, portas e um portal para mirar"
+    },
+    {
+      "key": "level.w8-13.name",
+      "es": "Doble estallido real",
+      "en": "Royal double blast",
+      "pt": "Explosão dupla real"
+    },
+    {
+      "key": "level.w8-13.hint",
+      "es": "Dos bombas para subir a la torre",
+      "en": "Two bombs to climb the tower",
+      "pt": "Duas bombas para subir à torre"
+    },
+    {
+      "key": "level.w8-14.name",
+      "es": "Corazón del castillo",
+      "en": "Heart of the castle",
+      "pt": "Coração do castelo"
+    },
+    {
+      "key": "level.w8-14.hint",
+      "es": "Ventilador, cinta, imán y globo",
+      "en": "Fan, belt, magnet and balloon",
+      "pt": "Ventilador, esteira, ímã e balão"
+    },
+    {
+      "key": "level.w8-15.name",
+      "es": "El Gruñubarrón",
+      "en": "The Grumblecloud",
+      "pt": "O Resmungão"
+    },
+    {
+      "key": "level.w8-15.hint",
+      "es": "Jefe final: bomba, portal, trampa y globo… ¡sin tocar al Gruñubarrón!",
+      "en": "Final boss: bomb, portal, trap and balloon… without touching the Grumblecloud!",
+      "pt": "Chefe final: bomba, portal, armadilha e balão… sem tocar no Resmungão!"
+    },
+    {
+      "key": "world_8",
+      "es": "Castillo del Gruñubarrón",
+      "en": "Grumblecloud's Castle",
+      "pt": "Castelo do Resmungão"
+    },
+    {
+      "key": "finale_title",
+      "es": "¡Gran Fiesta!",
+      "en": "Grand Party!",
+      "pt": "Grande Festa!"
+    },
+    {
+      "key": "finale_body",
+      "es": "¡Rescataste a todos los Wobblies! Hasta el Gruñubarrón se unió a la fiesta.",
+      "en": "You rescued every Wobbly! Even the Grumblecloud joined the party.",
+      "pt": "Você resgatou todos os Wobblies! Até o Resmungão entrou na festa."
+    },
+    {
+      "key": "finale_again",
+      "es": "Volver a jugar",
+      "en": "Play again",
+      "pt": "Jogar de novo"
+    },
+    {
+      "key": "finale_go",
+      "es": "¡A la fiesta!",
+      "en": "To the party!",
+      "pt": "Para a festa!"
+    },
+    {
+      "key": "world_8_sub",
+      "es": "Mundo 8 · todo lo aprendido, y las nubes del villano",
+      "en": "World 8 · everything you learned, plus the villain clouds",
+      "pt": "Mundo 8 · tudo o que aprendeu, e as nuvens do vilão"
+    },
+    {
+      "key": "title_play",
+      "es": "¡Jugar!",
+      "en": "Play!",
+      "pt": "Jogar!"
+    },
+    {
+      "key": "title_tagline",
+      "es": "¡Rescata a los Wobblies!",
+      "en": "Rescue the Wobblies!",
+      "pt": "Resgate os Wobblies!"
+    },
+    {
+      "key": "language_pick",
+      "es": "Elige tu idioma",
+      "en": "Choose your language",
+      "pt": "Escolha seu idioma"
+    }
+  ]
+}
